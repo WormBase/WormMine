@@ -2,7 +2,7 @@
 <!DOCTYPE page [
 
 <!-- Relative path to the data directory, from basedir wormmine/integrate -->
-<!ENTITY datadir "../../datadir">
+<!ENTITY datadir "/mnt/data2/wormmine/datadirWS269">
 <!-- <!ENTITY datadir "/mnt/data/intermine_dev/datadir"> -->
 
 <!-- Species and their NCBI taxonomy IDs -->
@@ -31,7 +31,6 @@
 
 <project type="bio">
   <property name="target.model" value="genomic"/>
-  <property name="source.location" location="../bio/sources/"/>
   <property name="common.os.prefix" value="common"/>
   <property name="intermine.properties.file" value="wormmine.properties"/>
   <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
@@ -42,19 +41,18 @@
         <property name="src.data.dir" location="&datadir;/wormbase-acedb/species/XML" />
         <property name="mapping.file"
 			value="/home/nuin/properties/species_mapping.properties" />
-        <property name="key.file"
-            value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
-        <property name="source.class" value="Organism"/>   
+        <property name="source.class" value="Organism"/>
+	<property name="key.file"
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
         <property name="rejects.file" 
             value="&datadir;/wormbase-acedb/species/wormbase-acedb-species-rejects.xml"/>
         <property name="data.set" value="AceDB XML (Species)"/>
 
     </source>
 
- 	<source name="go" type="go" dump="true">
+<!-- 	<source name="go" type="go" dump="true">
 		<property name="src.data.file" location="&datadir;/go/gene_ontology.1_2.obo"/> 
-<!--		<property name="src.data.file" location="&datadir;/go/go-test.obo"/> -->
-	</source> 
+	</source> -->
 
 	 <source name="anatomy_ontology" type="anatomy_ontology">
             <property name="src.data.file" location="&datadir;/ontology/anatomy_ontology.obo"/>
@@ -68,8 +66,7 @@
 <!--	<source name="anat-annotation" type="anat-annotation" dump="false">
                 <property name="ontologyfile" location="&datadir;/ontology/anatomy_ontology.obo"/>
                 <property name="src.data.dir" location="&datadir;/anatomy_annotation"/>
-        </source>
--->
+        </source> -->
 
          <source name="disease_ontology" type="disease_ontology">
             <property name="src.data.file" location="&datadir;/ontology/disease_ontology.obo"/>
@@ -113,7 +110,7 @@
                 <property name="fasta.dataSetTitle"    value="WormBase C. elegans transcript sequence (Fasta)"/>
                 <property name="fasta.sequenceType"    value="dna"/>
                 <property name="fasta.includes"        value="*.fa*"/>
-                <property name="src.data.dir"          location="&datadir;/fasta/c_elegans/transcript" />
+                <property name="src.data.dir"          location="&datadir;/fasta/c_elegans/transcript/final" />
         </source>
 		
 	<source name="celegans-cds-fasta" type="fasta">
@@ -124,7 +121,7 @@
                 <property name="fasta.dataSetTitle"    value="WormBase C. elegans CDS sequence (Fasta)"/>
                 <property name="fasta.sequenceType"    value="dna"/>
                 <property name="fasta.includes"        value="*.fa*"/>
-                <property name="src.data.dir"          location="&datadir;/fasta/c_elegans/cds" />
+                <property name="src.data.dir"          location="&datadir;/fasta/c_elegans/cds/final" />
         </source>
 
 
@@ -140,8 +137,6 @@
 		<property name="fasta.sequenceType"    	value="protein"/>
 		<property name="src.data.dir"          	location="&datadir;/fasta/c_elegans/proteins/prepped" />
 		<property name="fasta.includes"        	value="*.fa*"/> 
-		<property name="fasta.loaderClassName"
-			value="org.intermine.bio.dataconversion.WormBaseProteinFastaLoaderTask"/>
 		<property name="fasta.PIDPrefix"		value="WP:"/>
 	</source>
 
@@ -159,7 +154,7 @@
 		Usually this source's keys.properties file.  Keys must end in ".key"
 		-->
 		<property name="key.file"
-			value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
+			    value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
 
 		<!--
 		This property specifies the intermine class type this source loads.
@@ -185,8 +180,7 @@
 			value="&datadir;/wormbase-acedb/transcript/mapping/transcript_mapping.properties" />
 
 		<property name="key.file"
-			value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
-
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
 		<property name="source.class" value="Transcript"/>
 
 		<property name="rejects.file"
@@ -204,8 +198,7 @@
 			value="&datadir;/wormbase-acedb/cds/mapping/cds_mapping.properties" />
 
 		<property name="key.file"
-			value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
-
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
 		<property name="source.class" value="CDS"/>
 
 		<property name="rejects.file"
@@ -219,8 +212,7 @@
 		<property name="mapping.file"
 				value = "&datadir;/wormbase-acedb/phenotype/mapping/phenotype_mapping.properties" />
 		<property name="key.file"
-			value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
-		<property name="source.class" value="Phenotype"/>
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />		<property name="source.class" value="Phenotype"/>
 		<property name="rejects.file"
 			value="&datadir;/wormbase-acedb/phenotype/wormbase-acedb-phenotype-rejects.xml"/>
 		<property name="data.set" value="AceDB XML (Phenotype)"/>
@@ -232,8 +224,7 @@
 		<property name="mapping.file"
 				value = "&datadir;/wormbase-acedb/expr_pattern/mapping/expr_pattern_mapping.properties" />
 		<property name="key.file"
-			value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
-		<property name="source.class" value="ExpressionPattern"/>
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />		<property name="source.class" value="ExpressionPattern"/>
 		<property name="rejects.file"
 			value="&datadir;/wormbase-acedb/expr_pattern/wormbase-acedb-expr_pattern-rejects.xml"/>
 		<property name="data.set" value="AceDB XML (Expression Pattern)"/>
@@ -245,7 +236,7 @@
 		<property name="mapping.file"
 				value = "&datadir;/wormbase-acedb/anatomy_term/mapping/anatomy_term_mapping.properties" />
 		<property name="key.file"
-			value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
 		<property name="source.class" value="AnatomyTerm"/>
 		<property name="rejects.file"
 			value="&datadir;/wormbase-acedb/anatomy_term/wormbase-acedb-anatomy_term-rejects.xml"/>
@@ -259,7 +250,7 @@
 		<property name="mapping.file"
 				value = "&datadir;/wormbase-acedb/life_stage/mapping/life_stage_mapping.properties" />
 		<property name="key.file"
-			value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
 		<property name="source.class" value="LifeStage"/>
 		<property name="rejects.file"
 			value="&datadir;/wormbase-acedb/life_stage/wormbase-acedb-life_stage-rejects.xml"/>
@@ -272,7 +263,7 @@
 		<property name="mapping.file"
 				value = "&datadir;/wormbase-acedb/expr_cluster/mapping/expr_cluster_mapping.properties" />
 		<property name="key.file"
-			value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
 		<property name="source.class" value="ExpressionCluster"/>
 		<property name="rejects.file"
 			value="&datadir;/wormbase-acedb/expr_cluster/wormbase-acedb-expr_cluster-rejects.xml"/>
@@ -284,7 +275,7 @@
 		<property name="mapping.file"
 				value="&datadir;/wormbase-acedb/protein/mapping/protein_mapping.properties" />
 		<property name="key.file"
-				value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
 		<property name="source.class" value="Protein"/>
 		<property name="rejects.file"
 				value="&datadir;/wormbase-acedb/protein/wormbase-acedb-protein-rejects.xml"/>
@@ -295,8 +286,8 @@
         <property name="src.data.dir" location="&datadir;/wormbase-acedb/strain/XML" />
         <property name="mapping.file"
                 value="&datadir;/wormbase-acedb/strain/mapping/strain_mapping.properties" />
-        <property name="key.file"
-            value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
+	<property name="key.file"
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
         <property name="source.class" value="Strain"/>
         <property name="rejects.file"
             value="&datadir;/wormbase-acedb/strain/wormbase-acedb-species-rejects.xml"/>
@@ -312,8 +303,7 @@
 			value="&datadir;/wormbase-acedb/variation/mapping/variation_mapping.properties" />
 
 		<property name="key.file"
-			value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
-
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
 		<property name="source.class" value="Allele"/>
 
 		<property name="rejects.file"
@@ -326,8 +316,8 @@
           <property name="src.data.dir" location="&datadir;/wormbase-acedb/RNAi/XML" />
           <property name="mapping.file"
               value="&datadir;/wormbase-acedb/RNAi/mapping/RNAi_mapping.properties" />
-          <property name="key.file"
-              value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
+	  <property name="key.file"
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
           <property name="source.class" value="RNAi"/>
           <property name="rejects.file"
               value="&datadir;/wormbase-acedb-RNAi-rejects.xml"/>
@@ -338,8 +328,8 @@
           <property name="src.data.dir" location="&datadir;/wormbase-acedb/gene_class/XML" />
           <property name="mapping.file"
               value="&datadir;/wormbase-acedb/gene_class/mapping/gene_class_mapping.properties" />
-          <property name="key.file"
-              value="../../bio/sources/wormbase-acedb/resources/wormbase-acedb_keys.properties"/>
+	  <property name="key.file"
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
           <property name="source.class" value="GeneClass"/>
           <property name="rejects.file"
               value="&datadir;/wormbase-acedb-gene-class-rejects.xml"/>
@@ -352,13 +342,13 @@
        <property name="panther.homologues" value="10090 9606 7955 7227 4932 10116"/>
     </source> 
 
-     <source name="ensembl-compara-human" type="ensembl-compara">
+<!--     <source name="ensembl-compara-human" type="ensembl-compara">
          <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
          <property name="ensemblcompara.organisms" value="6239"/>
          <property name="ensemblcompara.homologues" value="9606"/>
-     </source>
+     </source> 
 
-     <source name="ensembl-compara-zebra" type="ensembl-compara">
+    <source name="ensembl-compara-zebra" type="ensembl-compara">
          <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
          <property name="ensemblcompara.organisms" value="6239"/>
          <property name="ensemblcompara.homologues" value="7955"/>
@@ -388,7 +378,7 @@
          <property name="ensemblcompara.homologues" value="4932"/>
      </source>
 
-
+-->
 
 	<source name="entrez-organism" type="entrez-organism">
         <property name="src.data.file" location="&datadir;/entrez-organism/organisms.xml"/>
