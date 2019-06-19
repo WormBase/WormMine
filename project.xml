@@ -2,8 +2,8 @@
 <!DOCTYPE page [
 
 <!-- Relative path to the data directory, from basedir wormmine/integrate -->
-<!ENTITY datadir "/mnt/data2/wormmine/datadirWS269">
-<!-- <!ENTITY datadir "/mnt/data/intermine_dev/datadir"> -->
+<!ENTITY datadir "/mnt/data2/wormmine/datadirWS270">
+<!--<!ENTITY datadir "/mnt/data2/wormmine/datadir_small">-->
 
 <!-- Species and their NCBI taxonomy IDs -->
 <!ENTITY          a_suum_taxon_id   "6253">
@@ -49,9 +49,9 @@
 
     </source>
 
-<!-- 	<source name="go" type="go" dump="true">
+ 	<source name="go" type="go" dump="true">
 		<property name="src.data.file" location="&datadir;/go/gene_ontology.1_2.obo"/> 
-	</source> -->
+	</source>
 
 	 <source name="anatomy_ontology" type="anatomy_ontology">
             <property name="src.data.file" location="&datadir;/ontology/anatomy_ontology.obo"/>
@@ -376,7 +376,7 @@
          <property name="ensemblcompara.organisms" value="6239"/>
          <property name="ensemblcompara.homologues" value="4932"/>
      </source>
-
+-->
 
 	<source name="entrez-organism" type="entrez-organism">
         <property name="src.data.file" location="&datadir;/entrez-organism/organisms.xml"/>
