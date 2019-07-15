@@ -42,7 +42,6 @@
 <link type="text/css" href="${WEB_PROPERTIES['webapp.wormbase.url']}/css/main.min.css" rel="stylesheet" />
 
 
-
   <fmt:message key="${pageName}.title" var="pageNameTitle"/>
 
     <tiles:insert name="htmlHead.tile">
@@ -55,6 +54,26 @@
     </tiles:insert>
 
     <link rel="shortcut icon" type="image/x-icon" href="model/images/favicon.ico">
+
+
+<style type="text/css">
+
+    .bottom{
+
+       padding:0;
+       border: none;
+       background-color: #FFFFFF;
+       width: 250px;   
+background-color: transparent;  
+ }
+
+   .center{
+      width: 250px;
+   }
+
+</style>
+
+
 
   </head>
 
