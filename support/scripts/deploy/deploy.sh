@@ -7,7 +7,7 @@
 # TODO: not process XML files already processed
 
 #set the version to be accessed
-wbrel="WS269"
+wbrel="WS272"
 echo 'Release version' $wbrel
 
 
@@ -335,7 +335,7 @@ mkdir -vp $datadir/wormbase-acedb/protein/mapping
 if [ ! -f $datadir'/wormbase-acedb/protein/XML/purged_prepped_protein.xml' ];then
   cp -v $sourcedir/Protein.xml $acexmldir/protein/Protein.xml
   cp -v $intermine'/wormmine/support/properties_xpath/protein_mapping.properties' $datadir'/wormbase-acedb/protein/mapping'
-  # perl $testlab'/wb-acedb/prep_wb-acedb-protein.pl' $datadir'/wormbase-acedb/protein/Protein.xml' $datadir'/wormbase-acedb/protein/prepped_protein.xml'
+  perl $testlab'/wb-acedb/prep_wb-acedb-protein.pl' $datadir'/wormbase-acedb/protein/Protein.xml' $datadir'/wormbase-acedb/protein/prepped_protein.xml'
   perl $testlab'/wb-acedb/purge_protein.pl' $datadir'/wormbase-acedb/protein/prepped_protein.xml' $datadir/'wormbase-acedb/protein/XML/purged_prepped_protein.xml' $testlab'/wb-acedb/species_whitelist.txt' $datadir'/wormbase-acedb/protein/rejected_by_purge.xml'
   rm $datadir/wormbase-acedb/protein/prepped_protein.xml
 else

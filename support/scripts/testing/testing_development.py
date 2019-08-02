@@ -83,9 +83,10 @@ except:
 # ############################################### #
 
 query = service.new_query("Allele")
-query.add_view("primaryIdentifier", "symbol", "gene.primaryIdentifier",
-              "gene.secondaryIdentifier", "gene.symbol")
-query.add_constraint("symbol", "=", "gk962622", code = "A")
+query.add_view(
+    "primaryIdentifier", "genes.primaryIdentifier", "genes.secondaryIdentifier"
+)
+query.add_constraint("primaryIdentifier", "=", "WBVar01498288", code = "A")
 
 try:
     assert (len(query.rows()) == 75)
@@ -463,31 +464,31 @@ except:
 
 query = service.new_query("Organism")
 query.add_view("name", "taxonId")
-print('Query #36')
-result = {}
-for row in query.rows():
-    result[row["name"]] = row["taxonId"]
-
-for i in result:
-    print('\t' + i + '\t' + str(result[i]))
+#print('Query #36')
+#result = {}
+#for row in query.rows():
+#    result[row["name"]] = row["taxonId"]
+#
+#for i in result:
+#    print('\t' + i + '\t' + str(result[i]))
 
 # # ############################################### #
 
-query = service.new_query("Chromosome")
-query.add_view("primaryIdentifier", "organism.name")
-query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code = "A")
-print('Query #37')
-
-result = {}
-for row in query.rows():
-    result[row["primaryIdentifier"]] = row["organism.name"]
-
-for i in result:
-    try:
-        print('\t' + i + '\t' + str(result[i]))
-    except:
-        print('\t' + i)
-
+#query = service.new_query("Chromosome")
+#query.add_view("primaryIdentifier", "organism.name")
+#query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code = "A")
+#print('Query #37')
+#
+#result = {}
+#for row in query.rows():
+#    result[row["primaryIdentifier"]] = row["organism.name"]
+#
+#for i in result:
+#    try:
+#        print('\t' + i + '\t' + str(result[i]))
+#    except:
+#        print('\t' + i)
+#
 # # ############################################### #
 
 
