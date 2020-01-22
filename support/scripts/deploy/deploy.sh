@@ -7,7 +7,7 @@
 # TODO: not process XML files already processed
 
 #set the version to be accessed
-wbrel="WS272"
+wbrel="WS275"
 echo 'Release version' $wbrel
 
 
@@ -189,6 +189,7 @@ mkdir -vp $datadir"/ontology/"
 if [ ! -f $datadir/ontology/anatomy_ontology.obo ];then
   echo 'Transferring anatomy ontology file'
   wget -q --show-progress -O $datadir/ontology/anatomy_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/ONTOLOGY/anatomy_ontology."$wbrel".obo"
+  sed -i '/subset:/d' $datadir/ontology/anatomy_ontology.obo
 else
   echo 'anatomy ontolgy file found'
 fi

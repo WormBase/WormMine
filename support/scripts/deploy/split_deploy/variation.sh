@@ -6,14 +6,14 @@
 # TODO: not process XML files already processed
 
 #set the version to be accessed
-wbrel="WS265"
+wbrel="WS271"
 echo 'Release version' $wbrel
 
 
 declare -A species=(["c_elegans"]="PRJNA13758")
 echo 'Deploying ' $species
 echo
-sourcedir='/mnt/data2/acedb_dumps/WS265/WS265-test-data'
+sourcedir='/mnt/data2/acedb_dumps/WS271/WS271-test-data'
 #sourcedir='/mnt/data2/acedb_dumps/'$wbrel'' # <---- XML dump location
 
 
@@ -37,8 +37,8 @@ echo 'variation'
 mkdir -vp $datadir/wormbase-acedb/variation/XML
 mkdir -vp $datadir/wormbase-acedb/variation/mapping
 cp -v $sourcedir/Variation.xml $acexmldir/variation/Variation.xml
-cp -v $intermine'/wormmine/support/properties/variation_mapping.properties' $datadir'/wormbase-acedb/variation/mapping'
+cp -v $intermine'/wormmine/support/properties_xpath/variation_mapping.properties' $datadir'/wormbase-acedb/variation/mapping'
 perl $testlab'/wb-acedb/purify_variation.pl' $datadir'/wormbase-acedb/variation/Variation.xml' $datadir'/wormbase-acedb/variation/XML/prepped_variation.xml'
-sh $testlab'/wb-acedb/fix_elements_variation.sh' $acexmldir
+#sh $testlab'/wb-acedb/fix_elements_variation.sh' $acexmldir
 echo
 
