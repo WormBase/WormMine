@@ -10,3 +10,6 @@ intermine.log*
 
 # ignore dumps
 wormmine_dump.final*
+
+*.log
+*.final
