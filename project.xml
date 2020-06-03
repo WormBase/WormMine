@@ -494,6 +494,18 @@
           <property name="data.set" value="AceDB XML (SO term)"/>
       </source>
 
+       <source name="wb-acedb-wbprocess" type="wormbase-acedb" dump="true">
+          <property name="src.data.dir" location="&datadir;/wormbase-acedb/wbprocess/XML" />
+          <property name="mapping.file"
+              value="&datadir;/wormbase-acedb/wbprocess/mapping/wbprocess_mapping.properties" />
+          <property name="key.file"
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+          <property name="source.class" value="WBProcess"/>
+          <property name="rejects.file"
+              value="&datadir;/wormbase-acedb-wbprocess-rejects.xml"/>
+          <property name="data.set" value="AceDB XML (WBProcess)"/>
+      </source>
+
 
     <source name="panther" type="panther" dump="false">
       <property name="src.data.dir" location="&datadir;/panther"/>
