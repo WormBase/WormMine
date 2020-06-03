@@ -13,3 +13,6 @@ wormmine_dump.final*
 
 *.log
 *.final
+
+
+build/**
