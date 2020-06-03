@@ -296,14 +296,14 @@
 		<property name="data.set" value="AceDB XML (CDS)"/>
 	</source>
 
-<!--	<source name="wb-acedb-interaction" type="wormbase-acedb" dump="false">
+	<source name="wb-acedb-interaction" type="wormbase-acedb" dump="false">
                 <property name="src.data.dir" location="&datadir;/wormbase-acedb/interaction/XML" />
                 <property name="mapping.file" value="&datadir;/wormbase-acedb/interaction/mapping/interaction_mapping.properties" />
                 <property name="key.file"     value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
                 <property name="source.class" value="Interaction"/>
                 <property name="rejects.file" value="&datadir;/wormbase-acedb/interaction/wormbase-acedb-interaction-rejects.xml"/>
                 <property name="data.set" value="AceDB XML (Intreaction)"/>
-        </source> -->
+        </source>
 
 	<source name="wb-acedb-phenotype" type="wormbase-acedb" dump="false">
 		<property name="src.data.dir" location="&datadir;/wormbase-acedb/phenotype/XML" />
@@ -444,6 +444,30 @@
           <property name="rejects.file"
               value="&datadir;/wormbase-acedb-molecule-rejects.xml"/>
           <property name="data.set" value="AceDB XML (Molecule)"/>
+      </source>
+
+       <source name="wb-acedb-transgene" type="wormbase-acedb" dump="true">
+          <property name="src.data.dir" location="&datadir;/wormbase-acedb/transgene/XML" />
+          <property name="mapping.file"
+              value="&datadir;/wormbase-acedb/transgene/mapping/transgene_mapping.properties" />
+          <property name="key.file"
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+          <property name="source.class" value="Transgene"/>
+          <property name="rejects.file"
+              value="&datadir;/wormbase-acedb-transgene-rejects.xml"/>
+          <property name="data.set" value="AceDB XML (Transgene)"/>
+      </source>
+
+       <source name="wb-acedb-construct" type="wormbase-acedb" dump="true">
+          <property name="src.data.dir" location="&datadir;/wormbase-acedb/construct/XML" />
+          <property name="mapping.file"
+              value="&datadir;/wormbase-acedb/construct/mapping/construct_mapping.properties" />
+          <property name="key.file"
+                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+          <property name="source.class" value="Construct"/>
+          <property name="rejects.file"
+              value="&datadir;/wormbase-acedb-construct-rejects.xml"/>
+          <property name="data.set" value="AceDB XML (Construct)"/>
       </source>
 
     <source name="panther" type="panther" dump="false">
