@@ -482,7 +482,7 @@
           <property name="data.set" value="AceDB XML (Disease model annotation)"/>
       </source>
 
-       <source name="wb-acedb-so_term" type="wormbase-acedb" dump="true">
+<!--       <source name="wb-acedb-so_term" type="wormbase-acedb" dump="true">
           <property name="src.data.dir" location="&datadir;/wormbase-acedb/so_term/XML" />
           <property name="mapping.file"
               value="&datadir;/wormbase-acedb/so_term/mapping/so_term_mapping.properties" />
@@ -493,7 +493,7 @@
               value="&datadir;/wormbase-acedb-so_term-rejects.xml"/>
           <property name="data.set" value="AceDB XML (SO term)"/>
       </source>
-
+-->
        <source name="wb-acedb-wbprocess" type="wormbase-acedb" dump="true">
           <property name="src.data.dir" location="&datadir;/wormbase-acedb/wbprocess/XML" />
           <property name="mapping.file"
