@@ -84,7 +84,7 @@ except:
 
 query = service.new_query("Allele")
 query.add_view(
-    "primaryIdentifier", "genes.primaryIdentifier", "genes.secondaryIdentifier"
+    "primaryIdentifier", "gene.primaryIdentifier", "gene.secondaryIdentifier"
 )
 query.add_constraint("primaryIdentifier", "=", "WBVar01498288", code = "A")
 
@@ -506,8 +506,8 @@ except Exception as e:
 
 query = service.new_query("ExpressionPattern")
 query.add_view(
-    "primaryIdentifier", "gene.primaryIdentifier", "gene.secondaryIdentifier",
-    "gene.symbol"
+    "primaryIdentifier", "genes.primaryIdentifier", "genes.secondaryIdentifier",
+    "genes.symbol"
 )
 query.add_constraint("primaryIdentifier", "=", "Expr3417", code = "A")
 
