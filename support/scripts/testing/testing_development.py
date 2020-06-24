@@ -38,7 +38,6 @@ def save_txt_file(my_class, rows):
     output_file.close()
 
 
-
 def query_01(service, save_file=False):
 
     query = service.new_query('Gene')
