@@ -10,12 +10,14 @@ logging.getLogger('intermine').setLevel(logging.INFO)
 logging.getLogger('JSONIterator').setLevel(logging.INFO)
 logging.getLogger('Model').setLevel(logging.INFO)
 
+
 def assert_result(query_number, number_of_rows, expected_result, model):
 
     try:
         assert len(number_of_rows) == expected_result
         logger.info('Query #' + query_number + ' PASSED. Returned ' + str(len(number_of_rows)))
     except Exception as e:
+        logger.info(str(e))
         settings.to_check.append(('query_' + str(query_number), model))
         logger.warning('Query #' + query_number + ' FAILED. Expected ' + str(expected_result) + ' returned ' + str(len(number_of_rows)))
 
@@ -26,6 +28,7 @@ def assert_greater(query_number, number_of_rows, minimum, model):
         assert len(number_of_rows) >= minimum
         logger.info('Query #' + query_number + ' PASSED. Returned ' + str(len(number_of_rows)))
     except Exception as e:
+        logger.info(str(e))
         settings.to_check.append(('query_' + str(query_number), model))
         logger.warning('Query #' + query_number + ' FAILED. Expected ' + str(minimum) + ' returned ' + str(len(number_of_rows)))
 
@@ -73,7 +76,6 @@ def query_03(service, save_file=False):
     query.add_constraint('organism.name', '=', 'Caenorhabditis elegans', code='A')
     query.add_constraint('primaryIdentifier', 'IS NULL', code='B')
 
-
     if save_file:
         save_txt_file('gene', query.rows())
         return 'File saved'
@@ -91,7 +93,6 @@ def query_04(service, save_file=False):
     if save_file:
         save_txt_file('transcript', query.rows())
         return 'File saved'
-
 
     return assert_result('04', query.rows(), 0, 'Transcript')
 
@@ -213,7 +214,8 @@ def query_13(service, save_file=False):
         try:
             assert (row['length'] >= 999)
             return 'Query #13' + ' PASSED. Returned ' + str(row['length'])
-        except:
+        except Exception as e:
+            logger.info(e)
             return 'Query #13' + ' FAILED. Returned ' + str(row['length'])
 
 
@@ -283,7 +285,7 @@ def query_18(service, save_file=False):
         save_txt_file('cds', query.rows())
         return 'File saved'
 
-    return  assert_result('18', query.rows(), 0, 'CDS')
+    return assert_result('18', query.rows(), 0, 'CDS')
 
 
 def query_19(service, save_file=False):
@@ -296,7 +298,7 @@ def query_19(service, save_file=False):
     if save_file:
         save_txt_file('cds', query.rows())
         return 'File saved'
-    
+
     return assert_result('19', query.rows(), 0, 'CDS')
 
 
@@ -517,10 +519,10 @@ def query_36(service, save_file=False):
     print('Query #36')
     result = {}
     for row in query.rows():
-       result[row['name']] = row['taxonId']
+        result[row['name']] = row['taxonId']
 
     for i in result:
-       print('\t' + i + '\t' + str(result[i]))
+        print('\t' + i + '\t' + str(result[i]))
 
 
 def query_37(service, save_file=False):
@@ -532,13 +534,14 @@ def query_37(service, save_file=False):
 
     result = {}
     for row in query.rows():
-       result[row['primaryIdentifier']] = row['organism.name']
+        result[row['primaryIdentifier']] = row['organism.name']
 
     for i in result:
-       try:
-           print('\t' + i + '\t' + str(result[i]))
-       except:
-           print('\t' + i)
+        try:
+            print('\t' + i + '\t' + str(result[i]))
+        except Exception as e:
+            logger.info(e)
+            print('\t' + i)
 
 
 def query_38(service, save_file=False):
@@ -570,7 +573,7 @@ def query_39(service, save_file=False):
 def query_40(service, save_file=False):
 
     query = service.new_query('Gene')
-    query.add_view('primaryIdentifier', 'secondaryIdentifier', 'symbol','allele.primaryIdentifier', 'allele.symbol')
+    query.add_view('primaryIdentifier', 'secondaryIdentifier', 'symbol', 'allele.primaryIdentifier', 'allele.symbol')
     query.add_constraint('symbol', '=', 'cdk-4', code='A')
     query.add_constraint('allele.primaryIdentifier', '=', 'WBVar02146689', code='B')
 
@@ -592,12 +595,11 @@ def query_41(service, save_file=False):
 
     return assert_result('41', query.rows(), 0, 'AnatomyTerm')
 
-
     # print('\nTesting complete')
     # print('These queries need to be checked: {0}'.format(', '.join(to_check)))
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    service = Service('http://im-dev1.wormbase.org/tools/wormmine/service')
-    run_queries()
+#     service = Service('http://im-dev1.wormbase.org/tools/wormmine/service')
+#     run_queries()
