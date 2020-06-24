@@ -32,7 +32,7 @@ def assert_greater(query_number, number_of_rows, minimum, model):
 
 def save_txt_file(my_class, rows):
 
-    output_file = open('to_remove_' + my_class + '.txt', 'w+')
+    output_file = open('to_remove_' + my_class + '.txt', 'a+')
     for row in rows:
         output_file.write(row['primaryIdentifier'] + '\n')
     output_file.close()
