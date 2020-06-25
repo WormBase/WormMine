@@ -6,10 +6,10 @@ db_string = "postgres://postgres:interwormmine@localhost/intermine_dev_4_276_2"
 db = create_engine(db_string)
 connection = db.connect()
 
-def check_transcript_table():
+def check_mrna_table():
 
     all = []
-    result = connection.execute('select * from transcript')
+    result = connection.execute('select * from mrna')
     for row in result:
         all.append(row)
 
@@ -17,11 +17,11 @@ def check_transcript_table():
 
 if __name__ == '__main__':
 
-    print(len(check_transcript_table()))
+    print(len(check_mrna_table()))
 
-    print('Reading transcript list to remove')
+    print('Reading mRNA list to remove')
     to_remove = open('to_remove.txt').read().splitlines()
 
     for i in to_remove:
         print(i)
-        connection.execute("DELETE FROM transcript WHERE  primaryidentifier = '%s'" % (i))
+        connection.execute("DELETE FROM mrna WHERE  primaryidentifier = '%s'" % (i))
