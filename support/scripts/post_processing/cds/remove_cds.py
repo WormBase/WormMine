@@ -1,9 +1,9 @@
 # Paulo Nuin March 2018
 
-import pandas as pd
+import sys
 from sqlalchemy import create_engine
 
-db_string = "postgres://postgres:interwormmine@localhost/intermine_dev_4_276_2"
+db_string = "postgres://postgres:interwormmine@localhost/" + sys.argv[1]
 db = create_engine(db_string)
 connection = db.connect()
 

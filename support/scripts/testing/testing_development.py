@@ -135,7 +135,7 @@ def query_07(service, save_file=False):
         save_txt_file('allele', query.rows())
         return 'File saved'
 
-    return assert_result('07', query.rows(), 75, 'Allele')
+    return assert_result('07', query.rows(), 76, 'Allele')
 
 
 def query_08(service, save_file=False):
@@ -201,7 +201,7 @@ def query_12(service, save_file=False):
         save_txt_file('gene', query.rows())
         return 'File saved'
 
-    return assert_greater('12', query.rows(), 20000, 'Gene')
+    return assert_greater('12', query.rows(), 19998, 'Gene')
 
 
 def query_13(service, save_file=False):
@@ -313,7 +313,7 @@ def query_20(service, save_file=False):
         save_txt_file('transcript', query.rows())
         return 'File saved'
 
-    return assert_greater('20', query.rows(), 43000, 'Transcript')
+    return assert_greater('20', query.rows(), 38000, 'Transcript')
 
 
 def query_21(service, save_file=False):
@@ -554,7 +554,7 @@ def query_38(service, save_file=False):
         save_txt_file('allele', query.rows())
         return 'File saved'
 
-    return assert_result('38', query.rows(), 84, 'Allele')
+    return assert_result('38', query.rows(), 85, 'Allele')
 
 
 def query_39(service, save_file=False):
