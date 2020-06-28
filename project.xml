@@ -2,7 +2,7 @@
 <!DOCTYPE page [
 
 <!-- Relative path to the data directory, from basedir wormmine/integrate -->
-<!ENTITY datadir "/mnt/data2/mine_input/datadirWS276">
+<!ENTITY datadir "/mnt/data2/mine_input/datadirWS277">
 <!--<!ENTITY datadir "/mnt/data2/wormmine/datadir_small">-->
 
 
@@ -434,7 +434,7 @@
           <property name="data.set" value="AceDB XML (Gene Class)"/>
       </source>
 
-       <source name="wb-acedb-molecule" type="wormbase-acedb" dump="true">
+<!--       <source name="wb-acedb-molecule" type="wormbase-acedb" dump="true">
           <property name="src.data.dir" location="&datadir;/wormbase-acedb/molecule/XML" />
           <property name="mapping.file"
               value="&datadir;/wormbase-acedb/molecule/mapping/molecule_mapping.properties" />
@@ -481,7 +481,7 @@
               value="&datadir;/wormbase-acedb-disease_model_annotation-rejects.xml"/>
           <property name="data.set" value="AceDB XML (Disease model annotation)"/>
       </source>
-
+-->
 <!--       <source name="wb-acedb-so_term" type="wormbase-acedb" dump="true">
           <property name="src.data.dir" location="&datadir;/wormbase-acedb/so_term/XML" />
           <property name="mapping.file"
@@ -494,7 +494,7 @@
           <property name="data.set" value="AceDB XML (SO term)"/>
       </source>
 -->
-       <source name="wb-acedb-wbprocess" type="wormbase-acedb" dump="true">
+<!--       <source name="wb-acedb-wbprocess" type="wormbase-acedb" dump="true">
           <property name="src.data.dir" location="&datadir;/wormbase-acedb/wbprocess/XML" />
           <property name="mapping.file"
               value="&datadir;/wormbase-acedb/wbprocess/mapping/wbprocess_mapping.properties" />
@@ -505,7 +505,7 @@
               value="&datadir;/wormbase-acedb-wbprocess-rejects.xml"/>
           <property name="data.set" value="AceDB XML (WBProcess)"/>
       </source>
-
+-->
 
     <source name="panther" type="panther" dump="false">
       <property name="src.data.dir" location="&datadir;/panther"/>

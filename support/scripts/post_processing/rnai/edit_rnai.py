@@ -10,18 +10,35 @@ connection = db.connect()
 
 if __name__ == '__main__':
 
-    anatomy_ids = open('to_remove_anatomy_term.txt').read().splitlines()
+    rnai_ids = open('to_remove_rnai.txt').read().splitlines()
 
-    for i in anatomy_ids:
-        result = connection.execute("SELECT * from anatomyterm where primaryidentifier = '%s'" % (i))
+    for i in rnai_ids:
+        #print(i)
+        result = connection.execute("SELECT * from rnai where primaryidentifier = '%s'" % (i))
         for j in result:
-            definition = j['definition']
-            new_definition = definition.replace('<![CDATA[', '').replace(']]>', '').replace('\'', '`')
-            print(new_definition)
+            remark = j['remark']
+            secondaryidentifier = j['secondaryidentifier']
+            phenotyperemark = j['phenotyperemark']
+#            try:
+#                new_remark = remark.replace('<![CDATA[', '').replace(']]>', '').replace('\'', '`')
+#            except:
+#                print('No remark')
             try:
-                connection.execute("UPDATE anatomyterm SET definition = '%s' where primaryidentifier = '%s'" %  (new_definition, i))
-                result = connection.execute("SELECT * from anatomyterm where primaryidentifier = '%s'" % (i))
-                for k in result:
-                    print(k['definition'])
-            except Exception as e:
-                print('error', str(e))
+                new_phenotyperemark = phenotyperemark.replace('<![CDATA[', '').replace(']]>', '').replace('\'', '`')
+                #print(new_phenotyperemark)
+            except:
+                print('failed')
+#            try:
+#                new_identifier = secondaryidentifier.replace('<![CDATA[', '').replace(']]>', '').replace('\'', '`')
+#            except:
+#                print('no secondary')
+#            try:
+#                connection.execute("UPDATE rnai SET remark = '%s' where primaryidentifier = '%s'" %  (new_remark, i))
+#                connection.execute("UPDATE rnai SET secondaryidentifier = '%s' where primaryidentifier = '%s'" %  (new_identifier, i))
+#            connection.execute("UPDATE rnai SET phenotyperemark = '%s' where primaryidentifier = '%s'" %  (new_phenotyperemark, i))
+            print("UPDATE rnai SET phenotyperemark = '%s' where primaryidentifier = '%s'" %  (new_phenotyperemark, i))
+#                result = connection.execute("SELECT * from anatomyterm where primaryidentifier = '%s'" % (i))
+#                for k in result:
+#                    print(k['definition'])
+#            except Exception as e:
+#                print('error', str(e))
