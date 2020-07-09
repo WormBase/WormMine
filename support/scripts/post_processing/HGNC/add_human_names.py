@@ -20,8 +20,5 @@ if __name__ == '__main__':
     human_query = connection.execute("SELECT * FROM gene WHERE primaryidentifier like '%%HGNC%%';")
 
     for gene in human_query:
-    	print(gene)
-
-#    for i in gene_ids:
-#        print(i)
-#        connection.execute("DELETE from GENE WHERE primaryidentifier = '%s'" % (i))
+    	print(gene['primaryidentifier'], symbols[gene['primaryidentifier']])
+        update = connection.execute("UPDATE gene SET symbol '%s' where primaryidentifier = '%s'" % (symbols[gene['primaryidentifier']], gene['primaryidentifier'])
