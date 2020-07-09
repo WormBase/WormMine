@@ -17,6 +17,11 @@ if __name__ == '__main__':
     for i in symbols:
         print(i, symbols[i])
 
+    human_query = connection.execute("SELECT * FROM gene WHERE primaryidentifier like '%HGNC%';")
+
+    for gene in human_query:
+    	print(gene)
+
 #    for i in gene_ids:
 #        print(i)
 #        connection.execute("DELETE from GENE WHERE primaryidentifier = '%s'" % (i))
