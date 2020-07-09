@@ -14,11 +14,9 @@ if __name__ == '__main__':
 
     symbols = { x.split('\t')[0]: x.split('\t')[1] for x in  HGNC_ids}
 
-#    for i in symbols:
-#        print(i, symbols[i])
 
     human_query = connection.execute("SELECT * FROM gene WHERE primaryidentifier like '%%HGNC%%';")
 
     for gene in human_query:
-    	print(gene['primaryidentifier'], symbols[gene['primaryidentifier']])
+        print(gene['primaryidentifier'], symbols[gene['primaryidentifier']])
         update = connection.execute("UPDATE gene SET symbol '%s' where primaryidentifier = '%s'" % (symbols[gene['primaryidentifier']], gene['primaryidentifier'])
