@@ -510,8 +510,15 @@
     <source name="panther" type="panther" dump="false">
       <property name="src.data.dir" location="&datadir;/panther"/>
        <property name="panther.organisms" value="6239"/>
-       <property name="panther.homologues" value="10090 9606 7955 7227 4932 10116"/>
+       <property name="panther.homologues" value="10090 9606 7955 7227 4932 10116 6239 4932"/>
     </source> 
+
+    <source name="homologene" type="homologene">
+      <property name="src.data.dir" location="&datadir;/homologene"/>
+      <property name="homologene.organisms" value="10090 9606 7955 7227 4932 10116 6239 4932"/>
+    </source>
+
+
 
 <!--     <source name="ensembl-compara-human" type="ensembl-compara">
          <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
