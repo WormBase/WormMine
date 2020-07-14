@@ -569,6 +569,10 @@ ln -s $datadir'/ncbi/gene_info' $datadir'/idresolver/entrez'
 ln -s $datadir'/worm/wormid' $datadir'/idresolver/wormid'
 echo
 
+echo 'homologene'
+mkdir -p $datadir/homologene'
+wget ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data -O $datadir/homologene/homologene.data
+
 
 # ################### compara #####################
 # echo 'compara - Human'

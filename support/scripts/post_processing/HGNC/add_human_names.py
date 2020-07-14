@@ -19,4 +19,4 @@ if __name__ == '__main__':
 
     for gene in human_query:
         print(gene['primaryidentifier'], symbols[gene['primaryidentifier']])
-        update = connection.execute("UPDATE gene SET symbol '%s' where primaryidentifier = '%s'" % (symbols[gene['primaryidentifier']], gene['primaryidentifier'])
+        connection.execute("UPDATE gene SET secondaryidentifier = '%s' where primaryidentifier = '%s'" % (symbols[gene['primaryidentifier']], gene['primaryidentifier']))
