@@ -300,7 +300,7 @@ mkdir -vp $datadir/wormbase-acedb/gene/XML
 mkdir -vp $datadir/wormbase-acedb/gene/mapping
 if [ ! -f $datadir'/wormbase-acedb/gene/XML/prepped_gene.xml' ];then
   cp -v $sourcedir/Gene.xml $acexmldir/gene/Gene.xml
-  cp -v $intermine'/support/properties_xpath/wormbase-acedb-gene.properties' $datadir'/wormbase-acedb/gene/mapping/'
+  cp -v $intermine'/support/properties_xpath/gene_mapping.properties' $datadir'/wormbase-acedb/gene/mapping/'
   perl $testlab'/wb-acedb/purify_xace.pl' $datadir'/wormbase-acedb/gene/Gene.xml' $datadir'/wormbase-acedb/gene/purified_gene.xml'
   perl $testlab'/wb-acedb/prep_wb-acedb-gene.pl' $datadir'/wormbase-acedb/gene/purified_gene.xml' $datadir'/wormbase-acedb/gene/XML/prepped_gene.xml'
   rm $datadir/wormbase-acedb/gene/purified_gene.xml

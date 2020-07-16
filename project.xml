@@ -244,7 +244,7 @@
 			This file maps intermine data classes to an XPath query.
 		-->
 		<property name="mapping.file"
-			value="&datadir;/wormbase-acedb/gene/mapping/wormbase-acedb-gene.properties"/>
+			value="&datadir;/wormbase-acedb/gene/mapping/gene_mapping.properties"/>
 		<!--
 		File specifying the primary keys to use for this source
 		Usually this source's keys.properties file.  Keys must end in ".key"
