@@ -6,7 +6,7 @@
 # TODO: not process XML files already processed
 
 #set the version to be accessed
-wbrel="WS274"
+wbrel="WS278"
 echo 'Release version' $wbrel
 
 

@@ -570,7 +570,7 @@ ln -s $datadir'/worm/wormid' $datadir'/idresolver/wormid'
 echo
 
 echo 'homologene'
-mkdir -p $datadir/homologene'
+mkdir -p $datadir'/homologene'
 wget ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data -O $datadir/homologene/homologene.data
 
 
