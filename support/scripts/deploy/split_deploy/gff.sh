@@ -1,34 +1,61 @@
 #!/bin/bash
 
 # set -x
+#Paulo Nuin Jan 2015, modified Feb 15 - Aug 2016, Feb 2018
 
 # TODO: set release version as a script argument
 # TODO: not process XML files already processed
 
 #set the version to be accessed
-wbrel="WS268"
+wbrel="$1"
 echo 'Release version' $wbrel
+
+
+#################### Species ####################
+#                                               #
+#  species to be transferred                    #
+#  key:value structure with species             #
+#  "name" and BioProject number                 #
+#  required in order to get the right           #
+#  directory and file                           #
+#                                               #
+#################### Species ####################
 
 
 declare -A species=(["c_elegans"]="PRJNA13758")
 echo 'Deploying ' $species
 echo
+#sourcedir='/mnt/data2/acedb_dumps/WS265/WS265-test-data'
 sourcedir='/mnt/data2/acedb_dumps/'$wbrel'' # <---- XML dump location
+echo $sourcedir
+
+# example test data /mnt/data2/acedb_dumps/WS261/WS261-test-data
+# sourcedir='/Users/nuin/Dropbox/intermine/WS262-test-data/'
 
 echo 'Source directory is at' $sourcedir
 echo
-intermine='/mnt/data2/wormmine'
+#################### Main dirs ##################
+#                                               #
+#  datadir - main data directory                # 
+#  acexmldir - subdir for AceDB XML files       #
+#  pp - pre-processing dir with perl and bash   #
+#                                               #
+#################### Species ####################
 
-#datadir=$intermine'/datadir_small'   # for now the datadir is inside the intermine directory
-datadir=$intermine'/datadir'$wbrel''   # for now the datadir is inside the intermine directory
+intermine='/mnt/data2/4.0/WormMine'
+datadir='/mnt/data2/mine_input/datadir'$wbrel''
 acexmldir=$datadir'/wormbase-acedb'
-testlab=$intermine'/wormmine/support/scripts/'
-compara=$intermine'/wormmine/support/compara'
+testlab=$intermine'/support/scripts/'
+compara=$intermine'/support/scripts/deploy/compara'
 
-echo 'WormMine datadir is at ' $intermine
+
+echo 'WormMine code is at ' $intermine
+echo 'WormMine datadir is at ' $datadir
 echo 'AceDB directory is at ' $acexmldir
 echo 'Perl scripts are at ' $testlab
 echo
+
+
 
 #################### FTP ########################
 #################### Species #################### 
