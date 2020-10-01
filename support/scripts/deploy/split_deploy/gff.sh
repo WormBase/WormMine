@@ -23,6 +23,7 @@ echo 'Release version' $wbrel
 
 
 declare -A species=(["c_elegans"]="PRJNA13758")
+declare -A species2=(["c_elegans"]="PRJNA13758")
 echo 'Deploying ' $species
 echo
 #sourcedir='/mnt/data2/acedb_dumps/WS265/WS265-test-data'
