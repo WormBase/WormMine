@@ -2,8 +2,8 @@
 <!DOCTYPE page [
 
 <!-- Relative path to the data directory, from basedir wormmine/integrate -->
-<!--<!ENTITY datadir "/mnt/data2/mine_input/datadirWS277">-->
-<!ENTITY datadir "/mnt/data2/mine_input/datadir_small">
+<!ENTITY datadir "/mnt/data2/mine_input/datadirWS279">
+<!--<!ENTITY datadir "/mnt/data2/mine_input/datadir_small">-->
 
 
 <!-- Species and their NCBI taxonomy IDs -->
@@ -37,7 +37,13 @@
   
   <sources>
 
-  <source name="wb-acedb-species" type="wormbase-acedb" dump="true" version="4.1.1">
+     <source name="so" type="so">
+       <property name="src.data.file" location="so.obo" />
+       <property name="licence" value="https://creativecommons.org/licenses/by/4.0/"/>
+     </source>
+
+
+  <source name="wb-acedb-species" type="wormbase-acedb" dump="true">
         <property name="src.data.dir" location="&datadir;/wormbase-acedb/species/XML" />
         <property name="mapping.file"
 			value="/home/nuin/properties/species_mapping.properties" />
@@ -54,7 +60,7 @@
 		<property name="src.data.file" location="&datadir;/go/gene_ontology.1_2.obo"/> 
 	</source> 
 
-	 <source name="anatomy_ontology" type="anatomy_ontology" version="4.1.1"> 
+	 <source name="anatomy_ontology" type="anatomy_ontology"> 
             <property name="src.data.file" location="&datadir;/ontology/anatomy_ontology.obo"/>
         </source>
 
@@ -68,7 +74,7 @@
                 <property name="src.data.dir" location="&datadir;/anatomy_annotation"/>
         </source> -->
 
-         <source name="disease_ontology" type="disease_ontology" version="4.1.1">
+         <source name="disease_ontology" type="disease_ontology">
             <property name="src.data.file" location="&datadir;/ontology/disease_ontology.obo"/>
         </source>
 
@@ -238,7 +244,7 @@
                 </source>
 
 	<!-- WormBase aceDB data loader.  Base dir is wormmine/integrate -->
-	<source name="wb-acedb-gene" type="wormbase-acedb" dump="true" version="4.1.1">
+	<source name="wb-acedb-gene" type="wormbase-acedb" dump="true" >
 		<property name="src.data.dir" location="&datadir;/wormbase-acedb/gene/XML" />
 		<!--
 			This file maps intermine data classes to an XPath query.
@@ -470,7 +476,7 @@
           <property name="data.set" value="AceDB XML (Construct)"/>
       </source> -->
 
-       <source name="wb-acedb-disease_model_annotation" type="wormbase-acedb" dump="true">
+<!--       <source name="wb-acedb-disease_model_annotation" type="wormbase-acedb" dump="true">
           <property name="src.data.dir" location="&datadir;/wormbase-acedb/disease_model_annotation/XML" />
           <property name="mapping.file"
               value="&datadir;/wormbase-acedb/disease_model_annotation/mapping/disease_model_annotation_mapping.properties" />
@@ -482,7 +488,7 @@
           <property name="data.set" value="AceDB XML (Disease model annotation)"/>
       </source>
 
-<!--       <source name="wb-acedb-so_term" type="wormbase-acedb" dump="true">
+       <source name="wb-acedb-so_term" type="wormbase-acedb" dump="true">
           <property name="src.data.dir" location="&datadir;/wormbase-acedb/so_term/XML" />
           <property name="mapping.file"
               value="&datadir;/wormbase-acedb/so_term/mapping/so_term_mapping.properties" />
@@ -512,12 +518,12 @@
        <property name="panther.organisms" value="6239"/>
        <property name="panther.homologues" value="10090 9606 7955 7227 4932 10116 6239 4932"/>
     </source> 
-
+<!--
     <source name="homologene" type="homologene">
       <property name="src.data.dir" location="&datadir;/homologene"/>
       <property name="homologene.organisms" value="10090 9606 7955 7227 4932 10116 6239 4932"/>
     </source>
-
+-->
 
 
 <!--     <source name="ensembl-compara-human" type="ensembl-compara">
