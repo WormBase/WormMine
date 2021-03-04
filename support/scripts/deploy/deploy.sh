@@ -3,7 +3,6 @@
 # set -x
 #Paulo Nuin Jan 2015, modified Feb 15 - Aug 2016, Feb 2018
 
-# TODO: set release version as a script argument
 # TODO: not process XML files already processed
 
 #set the version to be accessed
