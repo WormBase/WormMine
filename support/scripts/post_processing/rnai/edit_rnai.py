@@ -1,37 +1,39 @@
 # Paulo Nuin November 2019
 
 import sys
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
 
 db_string = "postgres://postgres:interwormmine@localhost/" + sys.argv[1]
-db = create_engine(db_string)
+db  = create_engine(db_string)
 connection = db.connect()
+Session = sessionmaker(bind=db)
+session = Session()
 
 
 def remove_remarks():
+ 
+    sql_text = """SELECT * FROM rnai"""
 
-
-    for i in rnai_ids:
-        print(i)
-        # result = connection.execute("SELECT * from rnai where primaryidentifier = '%s'" % (i))
-        result = connection.execute("SELECT * FROM rnai WHERE remark LIKE '%CDATA%'")
-        print(result)
-        # for j in result:
-        #     remark = j['remark']
-        #     try:
-        #        new_remark = remark.replace('<![CDATA[', '').replace(']]>', '').replace('\'', '`')
-        #        print(new_remark)
-        #     except:
-        #        print('No remark')
-
-
+    res = db.execute(text(sql_text))
+    for row in res:
+        if str(row['remark']).find('CDATA') >= 0:
+            print(row['remark'])
+            remark = row['remark']
+            new_remark = remark.replace('<![CDATA[', '').replace(']]>', '').replace('\'', '`')
+            print(new_remark)
+            rnai_id = row['primaryidentifier']
+            print(rnai_id)
+            connection.execute("UPDATE rnai SET remark = '%s' where primaryidentifier = '%s'" %  (new_remark, rnai_id))
+            print('updated ' + rnai_id)
+            print('\n')
 
 
 if __name__ == '__main__':
 
-    rnai_ids = open('to_remove_rnai.txt').read().splitlines()
+#    rnai_ids = open('to_remove_rnai.txt').read().splitlines()
 
-    remove_remarks(rnai_ids)
+    remove_remarks()
 
 
 #     for i in rnai_ids:
