@@ -1,4 +1,5 @@
 # Paulo Nuin November 2019
+# modified March 2021
 
 import sys
 from sqlalchemy import create_engine, text
@@ -50,18 +51,21 @@ def remove_secondaryidentifier():
 def remove_phenotyperemark():
 
     sql_text = """SELECT * FROM rnai"""
-    
+
     res = db.execute(text(sql_text))
     for row in res:
         if str(row['phenotyperemark']).find('CDATA') >= 0:
             print(row['phenotyperemark'])
-            secondaryidentifier = row['phenotyperemark']
+            phenotyperemark = row['phenotyperemark']
             new_remark = phenotyperemark.replace('<![CDATA[', '').replace(']]>', '').replace('\'', '`')
             print(new_remark)
             rnai_id = row['primaryidentifier']
             print(rnai_id)
-            connection.execute("UPDATE rnai SET phenotyperemark = '%s' where primaryidentifier = '%s'" %  (new_remark, rnai_id))
-            print('updated ' + rnai_id)
+            try:
+                connection.execute("UPDATE rnai SET phenotyperemark = '%s' where primaryidentifier = '%s'" %  (new_remark, rnai_id))
+                print('updated ' + rnai_id)
+            except:
+                print('Error updating ' +  rnai_id)
             print('\n')
 
 
