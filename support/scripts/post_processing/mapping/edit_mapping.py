@@ -16,21 +16,25 @@ def process_mapping(mapping):
     error = error[0] + str('{:0.2f}'.format(float(error[1:])))
 
     final_mapping = mapping[0] + position + ' '  + error[0] + ' ' + error[1:] + ' cM'
-
+    print(final_mapping)
     return final_mapping
 
 def get_mapping():
 
-    try:
-        mappings = {}
-        all_genes = connection.execute('select * from gene where mapping is not null')
-        for row in all_genes:
+    all_genes = connection.execute('select * from gene where mapping is not null')
+    mappings = {}
+
+    for row in all_genes:
+        try:
            temp = row['mapping'].split(' ')
            to_add = [x for x in temp if x]
            mappings[row['primaryidentifier']] = process_mapping(to_add)
-    except:
-        pass
+           print(row['primaryidentifier'] + ' added')
+        except Exception as e:
+            pass
+#            print(str(e))
 
+    print(mappings)
     return mappings
 
 def update_mappings(mappings):
