@@ -16,7 +16,8 @@ def process_mapping(mapping):
     error = error[0] + str('{:0.2f}'.format(float(error[1:])))
 
     final_mapping = mapping[0] + position + ' '  + error[0] + ' ' + error[1:] + ' cM'
-    print(final_mapping)
+#    print(final_mapping)
+
     return final_mapping
 
 def get_mapping():
@@ -31,10 +32,13 @@ def get_mapping():
            mappings[row['primaryidentifier']] = process_mapping(to_add)
            print(row['primaryidentifier'] + ' added')
         except Exception as e:
-            pass
+           if row['mapping'].startswith(':') or len(row['mapping']) < 5:
+               mappings[row['primaryidentifier']] = ''
 #            print(str(e))
 
-    print(mappings)
+#    for i in mappings:
+#        print(i, mappings[i])
+
     return mappings
 
 def update_mappings(mappings):
