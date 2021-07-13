@@ -54,7 +54,7 @@ echo
 #                                               #
 #################### Species ####################
 
-intermine='/mnt/data2/4.0/WormMine'
+intermine='/mnt/data2/5.0/WormMine'
 datadir='/mnt/data2/mine_input/datadir'$wbrel''
 acexmldir=$datadir'/wormbase-acedb'
 testlab=$intermine'/support/scripts/'
