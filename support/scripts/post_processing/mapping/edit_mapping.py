@@ -1,10 +1,10 @@
 # Paulo Nuin May 2021
 
 import sys
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, null
 
 
-db_string = "postgres://postgres:interwormmine@localhost/" + sys.argv[1] + "?client_encoding=utf8"
+db_string = "postgresql://postgres:interwormmine@localhost/" + sys.argv[1] + "?client_encoding=utf8"
 db = create_engine(db_string)
 connection = db.connect()
 
@@ -30,14 +30,14 @@ def get_mapping():
            temp = row['mapping'].split(' ')
            to_add = [x for x in temp if x]
            mappings[row['primaryidentifier']] = process_mapping(to_add)
-           print(row['primaryidentifier'] + ' added')
+           # print(row['primaryidentifier'] + ' added')
         except Exception as e:
            if row['mapping'].startswith(':') or len(row['mapping']) < 5:
-               mappings[row['primaryidentifier']] = ''
+               mappings[row['primaryidentifier']] = None
 #            print(str(e))
 
-#    for i in mappings:
-#        print(i, mappings[i])
+    # for i in mappings:
+    #     print(i, mappings[i])
 
     return mappings
 
@@ -45,7 +45,10 @@ def update_mappings(mappings):
 
     for i in mappings:
         print(i, mappings[i])
-        connection.execute("UPDATE gene SET mapping = '%s' where primaryidentifier = '%s'" % (mappings[i], i))
+        if mappings[i] == None:
+            connection.execute("UPDATE gene SET mapping = '%s' where primaryidentifier = '%s'" % ('data unavailable', i))
+        else:
+            connection.execute("UPDATE gene SET mapping = '%s' where primaryidentifier = '%s'" % (mappings[i], i))
 
 if __name__ == '__main__':
 
