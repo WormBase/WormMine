@@ -22,5 +22,5 @@ if __name__ == '__main__':
         for gene in human_query:
             print(gene['primaryidentifier'], symbols[gene['primaryidentifier']])
             connection.execute("UPDATE gene SET secondaryidentifier = '%s' where primaryidentifier = '%s'" % (symbols[gene['primaryidentifier']], gene['primaryidentifier']))
-   except Exception as e:
-       print(str(e))
+    except Exception as e:
+        print(str(e))
