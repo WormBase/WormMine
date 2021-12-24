@@ -2,7 +2,7 @@
 <!DOCTYPE page [
 
 <!-- Relative path to the data directory, from basedir wormmine/integrate -->
-<!ENTITY datadir "/mnt/data2/mine_input/datadirWS282">
+<!ENTITY datadir "/mnt/data2/mine_input/datadirWS283">
 <!--<!ENTITY datadir "/mnt/data2/mine_input/datadir_small">-->
 
 
@@ -367,8 +367,6 @@
 		<property name="data.set" value="AceDB XML (Anatomy Term)"/>
 	</source>
 
-
-
 	<source name="wb-acedb-life_stage" type="wormbase-acedb" dump="true">
 		<property name="src.data.dir" location="&datadir;/wormbase-acedb/life_stage/XML" />
 		<property name="mapping.file"
@@ -379,7 +377,6 @@
 		<property name="rejects.file"
 			value="&datadir;/wormbase-acedb/life_stage/wormbase-acedb-life_stage-rejects.xml"/>
 		<property name="data.set" value="AceDB XML (Life Stage)"/>
-
 	</source>
 
 	<source name="wb-acedb-expr_cluster" type="wormbase-acedb" dump="false">
@@ -406,55 +403,42 @@
 		<property name="data.set" value="AceDB XML (Protein)"/>
 	</source>
 
-  <source name="wb-acedb-strain" type="wormbase-acedb" dump="true">
-        <property name="src.data.dir" location="&datadir;/wormbase-acedb/strain/XML" />
-        <property name="mapping.file"
-                value="&datadir;/wormbase-acedb/strain/mapping/strain_mapping.properties" />
-	<property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-        <property name="source.class" value="Strain"/>
-        <property name="rejects.file"
-            value="&datadir;/wormbase-acedb/strain/wormbase-acedb-species-rejects.xml"/>
-        <property name="data.set" value="AceDB XML (Species)"/>
+        <source name="wb-acedb-strain" type="wormbase-acedb" dump="true">
+       	        <property name="src.data.dir" location="&datadir;/wormbase-acedb/strain/XML" />
+        	<property name="mapping.file" value="&datadir;/wormbase-acedb/strain/mapping/strain_mapping.properties" />
+		<property name="key.file"  value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+	        <property name="source.class" value="Strain"/>
+        	<property name="rejects.file" value="&datadir;/wormbase-acedb/strain/wormbase-acedb-species-rejects.xml"/>
+	        <property name="data.set" value="AceDB XML (Species)"/>
+        </source> 
 
-    </source> 
-
-    <source name="wb-acedb-gene-class" type="wormbase-acedb" dump="false">
-          <property name="src.data.dir" location="&datadir;/wormbase-acedb/gene_class/XML" />
-          <property name="mapping.file"
-              value="&datadir;/wormbase-acedb/gene_class/mapping/gene_class_mapping.properties" />
-	  <property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-          <property name="source.class" value="GeneClass"/>
-          <property name="rejects.file"
-              value="&datadir;/wormbase-acedb-gene-class-rejects.xml"/>
-          <property name="data.set" value="AceDB XML (Gene Class)"/>
-      </source>
+	<source name="wb-acedb-gene-class" type="wormbase-acedb" dump="false">
+          	<property name="src.data.dir" location="&datadir;/wormbase-acedb/gene_class/XML" />
+          	<property name="mapping.file" value="&datadir;/wormbase-acedb/gene_class/mapping/gene_class_mapping.properties" />
+	        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+	        <property name="source.class" value="GeneClass"/>
+        	<property name="rejects.file" value="&datadir;/wormbase-acedb-gene-class-rejects.xml"/>
+                <property name="data.set" value="AceDB XML (Gene Class)"/>
+       </source>
 
 
 
-    <source name="wb-acedb-RNAi" type="wormbase-acedb" dump="false">
-          <property name="src.data.dir" location="&datadir;/wormbase-acedb/RNAi/XML" />
-          <property name="mapping.file"
-              value="&datadir;/wormbase-acedb/RNAi/mapping/RNAi_mapping.properties" />
-	  <property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-          <property name="source.class" value="RNAi"/>
-          <property name="rejects.file"
-              value="&datadir;/wormbase-acedb-RNAi-rejects.xml"/>
-          <property name="data.set" value="AceDB XML (RNAi)"/>
+       <source name="wb-acedb-RNAi" type="wormbase-acedb" dump="false">
+          	<property name="src.data.dir" location="&datadir;/wormbase-acedb/RNAi/XML" />
+          	<property name="mapping.file" value="&datadir;/wormbase-acedb/RNAi/mapping/RNAi_mapping.properties" />
+	        <property name="key.file"  value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+	        <property name="source.class" value="RNAi"/>
+                <property name="rejects.file" value="&datadir;/wormbase-acedb-RNAi-rejects.xml"/>
+	        <property name="data.set" value="AceDB XML (RNAi)"/>
       </source>
 
        <source name="wb-acedb-molecule" type="wormbase-acedb" dump="false">
-          <property name="src.data.dir" location="&datadir;/wormbase-acedb/molecule/XML" />
-          <property name="mapping.file"
-              value="&datadir;/wormbase-acedb/molecule/mapping/molecule_mapping.properties" />
-          <property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-          <property name="source.class" value="Molecule"/>
-          <property name="rejects.file"
-              value="&datadir;/wormbase-acedb-molecule-rejects.xml"/>
-          <property name="data.set" value="AceDB XML (Molecule)"/>
+          	<property name="src.data.dir" location="&datadir;/wormbase-acedb/molecule/XML" />
+          	<property name="mapping.file" value="&datadir;/wormbase-acedb/molecule/mapping/molecule_mapping.properties" />
+ 	        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+                <property name="source.class" value="Molecule"/>
+                <property name="rejects.file"  value="&datadir;/wormbase-acedb-molecule-rejects.xml"/>
+                <property name="data.set" value="AceDB XML (Molecule)"/>
       </source>
 
 <!--       <source name="wb-acedb-transgene" type="wormbase-acedb" dump="true">
@@ -491,18 +475,15 @@
           <property name="rejects.file"
               value="&datadir;/wormbase-acedb-disease_model_annotation-rejects.xml"/>
           <property name="data.set" value="AceDB XML (Disease model annotation)"/>
-      </source>
+      </source> -->
 
-       <source name="wb-acedb-so_term" type="wormbase-acedb" dump="true">
-          <property name="src.data.dir" location="&datadir;/wormbase-acedb/so_term/XML" />
-          <property name="mapping.file"
-              value="&datadir;/wormbase-acedb/so_term/mapping/so_term_mapping.properties" />
-          <property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-          <property name="source.class" value="Molecule"/>
-          <property name="rejects.file"
-              value="&datadir;/wormbase-acedb-so_term-rejects.xml"/>
-          <property name="data.set" value="AceDB XML (SO term)"/>
+<!--       <source name="wb-acedb-so_term" type="wormbase-acedb" dump="true">
+ 	         <property name="src.data.dir" location="&datadir;/wormbase-acedb/so_term/XML" />
+        	 <property name="mapping.file" value="&datadir;/wormbase-acedb/so_term/mapping/so_term_mapping.properties" />
+                 <property name="key.file"  value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+                 <property name="source.class" value="WBSOterm"/>
+                 <property name="rejects.file" value="&datadir;/wormbase-acedb-so_term-rejects.xml"/>
+                 <property name="data.set" value="AceDB XML (SO term)"/>
       </source>
 -->
 <!--       <source name="wb-acedb-wbprocess" type="wormbase-acedb" dump="true">
