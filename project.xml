@@ -321,7 +321,7 @@
 		<property name="rejects.file" value="&datadir;/wormbase-acedb/cds/wormbase-acedb-cds-rejects.xml"/>
 		<property name="data.set" value="AceDB XML (CDS)"/>
 	</source>
-
+<!--
 	<source name="wb-acedb-interaction" type="wormbase-acedb" dump="false">
                 <property name="src.data.dir" location="&datadir;/wormbase-acedb/interaction/XML" />
                 <property name="mapping.file" value="&datadir;/wormbase-acedb/interaction/mapping/interaction_mapping.properties" />
@@ -330,7 +330,7 @@
                 <property name="rejects.file" value="&datadir;/wormbase-acedb/interaction/wormbase-acedb-interaction-rejects.xml"/>
                 <property name="data.set" value="AceDB XML (Intreaction)"/>
         </source>
-
+-->
 	<source name="wb-acedb-phenotype" type="wormbase-acedb" dump="false">
 		<property name="src.data.dir" location="&datadir;/wormbase-acedb/phenotype/XML" />
 		<property name="mapping.file"
