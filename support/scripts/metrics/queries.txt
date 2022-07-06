@@ -1,0 +1,102 @@
+http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query=
+
+%0A&trail=%7Cquery&method=xml
+
+
+
+######### Query 01 ############
+<query model="genomic" view="Gene.primaryIdentifier" sortOrder="Gene.primaryIdentifier ASC" >
+  <constraint path="Gene.organism.species" op="=" value="elegans" code="A" />
+</query>
+
+
+http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query=%3Cquery%20model%3D%22genomic%22%20view%3D%22Gene.primaryIdentifier%22%20sortOrder%3D%22Gene.primaryIdentifier%20ASC%22%20%3E%0A%20%20%3Cconstraint%20path%3D%22Gene.organism.species%22%20op%3D%22%3D%22%20value%3D%22elegans%22%20code%3D%22A%22%20%2F%3E%0A%3C%2Fquery%3E%0A&trail=%7Cquery&method=xml
+
+
+https://bit.ly/3tdeT4T
+
+######### Query 02 ############
+
+<query model="genomic" view="CDS.name CDS.primaryIdentifier CDS.secondaryIdentifier CDS.symbol CDS.gene.symbol CDS.protein.primaryIdentifier CDS.protein.sequence.length" >
+  <constraint path="CDS.organism.name" op="=" value="Caenorhabditis elegans" code="C" />
+</query>
+
+
+http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query=%3Cquery%20model%3D%22genomic%22%20view%3D%22CDS.name%20CDS.primaryIdentifier%20CDS.secondaryIdentifier%20CDS.symbol%20CDS.gene.symbol%20CDS.protein.primaryIdentifier%20CDS.protein.sequence.length%22%20%3E%0A%20%20%3Cconstraint%20path%3D%22CDS.organism.name%22%20op%3D%22%3D%22%20value%3D%22Caenorhabditis%20elegans%22%20code%3D%22C%22%20%2F%3E%0A%3C%2Fquery%3E%0A&trail=%7Cquery&method=xml
+
+https://bit.ly/3cwLiNR
+
+######### Query 03 ############
+
+
+<query model="genomic" view="Phenotype.name Phenotype.identifier" sortOrder="Phenotype.name ASC" >
+</query>
+
+
+http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query=%3Cquery%20model%3D%22genomic%22%20view%3D%22Phenotype.name%20Phenotype.identifier%22%20sortOrder%3D%22Phenotype.name%20ASC%22%20%3E%0A%3C%2Fquery%3E%0A&trail=%7Cquery&method=xml
+
+https://bit.ly/3jbl0C7
+
+
+######### Query 04 ############
+
+
+<query model="genomic" view="Strain.name Strain.primaryIdentifier" sortOrder="Strain.name ASC" >
+  <constraint path="Strain.species" op="=" value="Caenorhabditis elegans" code="A" />
+</query>
+
+http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query=%3Cquery%20model%3D%22genomic%22%20view%3D%22Strain.name%20Strain.primaryIdentifier%22%20sortOrder%3D%22Strain.name%20ASC%22%20%3E%0A%20%20%3Cconstraint%20path%3D%22Strain.species%22%20op%3D%22%3D%22%20value%3D%22Caenorhabditis%20elegans%22%20code%3D%22A%22%20%2F%3E%0A%3C%2Fquery%3E%0A&trail=%7Cquery&method=xml
+
+https://bit.ly/3alHKv9
+
+
+######### Query 05 ############
+
+
+<query model="genomic" view="Allele.primaryIdentifier Allele.symbol" sortOrder="Allele.primaryIdentifier ASC" >
+  <constraint path="Allele.species" op="=" value="Caenorhabditis elegans" code="A" />
+</query>
+
+
+http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query=%3Cquery%20model%3D%22genomic%22%20view%3D%22Allele.primaryIdentifier%20Allele.symbol%22%20sortOrder%3D%22Allele.primaryIdentifier%20ASC%22%20%3E%0A%20%20%3Cconstraint%20path%3D%22Allele.species%22%20op%3D%22%3D%22%20value%3D%22Caenorhabditis%20elegans%22%20code%3D%22A%22%20%2F%3E%0A%3C%2Fquery%3E%0A&trail=%7Cquery&method=xml
+
+https://bit.ly/3ajKHMN
+
+
+######### Query 06 ############
+
+<query model="genomic" view="GOTerm.identifier GOTerm.name" sortOrder="GOTerm.identifier ASC" >
+</query>
+
+http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query=%3Cquery%20model%3D%22genomic%22%20view%3D%22GOTerm.identifier%20GOTerm.name%22%20sortOrder%3D%22GOTerm.identifier%20ASC%22%20%3E%0A%3C%2Fquery%3E%0A&trail=%7Cquery&method=xml
+
+https://bit.ly/3coUfZH
+
+######### Query 07 ############
+
+<query model="genomic" view="Gene.primaryIdentifier Gene.symbol Gene.goAnnotation.qualifier" sortOrder="Gene.primaryIdentifier ASC" >
+</query>
+
+http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query=%3Cquery%20model%3D%22genomic%22%20view%3D%22Gene.primaryIdentifier%20Gene.symbol%20Gene.goAnnotation.qualifier%22%20sortOrder%3D%22Gene.primaryIdentifier%20ASC%22%20%3E%0A%3C%2Fquery%3E%0A&trail=%7Cquery&method=xml
+
+https://bit.ly/3r3Cm6w
+
+
+
+######### Query 08 ############
+
+<query model="genomic" view="Protein.primaryIdentifier Protein.sequence.length" sortOrder="Protein.primaryIdentifier ASC" >
+  <constraint path="Protein.organism.species" op="=" value="elegans" code="A" />
+</query>
+
+http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query=
+
+
+
+http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query=%3Cquery%20model%3D%22genomic%22%20view%3D%22Protein.primaryIdentifier%20Protein.sequence.length%22%20sortOrder%3D%22Protein.primaryIdentifier%20ASC%22%20%3E%0A%20%20%3Cconstraint%20path%3D%22Protein.organism.species%22%20op%3D%22%3D%22%20value%3D%22elegans%22%20code%3D%22A%22%20%2F%3E%0A%3C%2Fquery%3E%0A&trail=%7Cquery&method=xml
+
+
+
+######### Query 09 ############
+######### Query 10 ############
+
