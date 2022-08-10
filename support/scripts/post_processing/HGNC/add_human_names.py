@@ -3,7 +3,7 @@
 import sys
 from sqlalchemy import create_engine
 
-db_string = "postgres://postgres:interwormmine@localhost/" + sys.argv[1]
+db_string = "postgresql://postgres:interwormmine@localhost/" + sys.argv[1]
 db = create_engine(db_string, client_encoding='utf8')
 connection = db.connect()
 

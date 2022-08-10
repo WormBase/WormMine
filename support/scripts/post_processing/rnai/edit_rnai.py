@@ -5,7 +5,7 @@ import sys
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
-db_string = "postgres://postgres:interwormmine@localhost/" + sys.argv[1]
+db_string = "postgresql://postgres:interwormmine@localhost/" + sys.argv[1]
 db  = create_engine(db_string)
 connection = db.connect()
 Session = sessionmaker(bind=db)
