@@ -218,10 +218,10 @@ echo
 
 
 #################### gene association #################
-mkdir -vp $datadir'/go-annotation/raw/'
-mkdir -vp $datadir'/go-annotation/final'
+mkdir -vp "$datadir"'/go-annotation/raw/'
+mkdir -vp "$datadir"'/go-annotation/final'
 
-if [ ! -f $datadir'/go-annotation/final/gene_association_sorted_filtered.wb' ];then
+if [ ! -f "$datadir"'/go-annotation/final/gene_association_sorted_filtered.wb' ];then
   echo 'Transferring gene association file'
   wget -q --show-progress -O $datadir'/go-annotation/raw/gene_association'."$wbrel".wb "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/ONTOLOGY/gene_association."$wbrel".wb"
   echo 'Sorting'
@@ -238,9 +238,9 @@ echo
 
 #################### anatomy term ####################
 echo 'anatomy_term'
-mkdir -vp $datadir/wormbase-acedb/anatomy_term/XML
-mkdir -vp $datadir/wormbase-acedb/anatomy_term/mapping
-if [ ! -f $datadir'/wormbase-acedb/anatomy_term/XML/Anatomy_term_prepped.xml' ];then
+mkdir -vp "$datadir"/wormbase-acedb/anatomy_term/XML
+mkdir -vp "$datadir"/wormbase-acedb/anatomy_term/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/anatomy_term/XML/Anatomy_term_prepped.xml' ];then
   cp -v $sourcedir/Anatomy_term.xml $acexmldir/anatomy_term/Anatomy_term.xml
   cp -v $intermine'/support/properties_xpath/anatomy_term_mapping.properties' $datadir'/wormbase-acedb/anatomy_term/mapping/'
   perl $testlab'/wb-acedb/prep_anatomy_term.pl' $datadir'/wormbase-acedb/anatomy_term/Anatomy_term.xml' $datadir'/wormbase-acedb/anatomy_term/XML/Anatomy_term_prepped.xml'
@@ -252,9 +252,9 @@ echo
 
 #################### cds #############################
 echo 'cds'
-mkdir -vp $datadir/wormbase-acedb/cds/XML
-mkdir -vp $datadir/wormbase-acedb/cds/mapping
-if [ ! -f $datadir'/wormbase-acedb/cds/XML/prepped_CDS.xml' ];then
+mkdir -vp "$datadir"/wormbase-acedb/cds/XML
+mkdir -vp "$datadir"/wormbase-acedb/cds/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/cds/XML/prepped_CDS.xml' ];then
   cp -v $sourcedir/CDS.xml $acexmldir/cds/CDS.xml
   cp -v $intermine'/support/properties_xpath/cds_mapping.properties' $datadir'/wormbase-acedb/cds/mapping/'
   perl $testlab'/wb-acedb/purify_xace.pl' $datadir'/wormbase-acedb/cds/CDS.xml' $datadir'/wormbase-acedb/cds/purified_CDS.xml'
@@ -267,9 +267,9 @@ echo
 
 #################### expression cluster ##############
 echo 'expression cluster'
-mkdir -vp $datadir/wormbase-acedb/expr_cluster/XML
-mkdir -vp $datadir/wormbase-acedb/expr_cluster/mapping
-if [ ! -f $datadir'/wormbase-acedb/expr_cluster/XML/purified_expression_cluster.xml' ];then
+mkdir -vp "$datadir"/wormbase-acedb/expr_cluster/XML
+mkdir -vp "$datadir"/wormbase-acedb/expr_cluster/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/expr_cluster/XML/purified_expression_cluster.xml' ];then
   cp -v $sourcedir/Expression_cluster.xml $acexmldir/expr_cluster/Expression_cluster.xml
   cp -v $intermine'/support/properties_xpath/expr_cluster_mapping.properties' $datadir'/wormbase-acedb/expr_cluster/mapping/'
   perl $testlab'/wb-acedb/purify_xace.pl' $datadir'/wormbase-acedb/expr_cluster/Expression_cluster.xml' $datadir'/wormbase-acedb/expr_cluster/XML/purified_expression_cluster.xml'
@@ -281,12 +281,12 @@ echo
 
 #################### expression pattern #############
 echo 'expression pattern'
-mkdir -vp $datadir/wormbase-acedb/expr_pattern/XML
-mkdir -vp $datadir/wormbase-acedb/expr_pattern/mapping
-if [ ! -f $datadir'/wormbase-acedb/expr_pattern/XML/Expr_pattern_prepped.xml' ];then
+mkdir -vp "$datadir"/wormbase-acedb/expr_pattern/XML
+mkdir -vp "$datadir"/wormbase-acedb/expr_pattern/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/expr_pattern/XML/Expr_pattern_prepped.xml' ];then
   cp -v $sourcedir/Expr_pattern.xml $acexmldir/expr_pattern/Expr_pattern.xml
-  cp -v $intermine'/support/properties_xpath/expr_pattern_mapping.properties' $datadir'/wormbase-acedb/expr_pattern/mapping/'
-  perl $testlab'/wb-acedb/prep_expr_pattern.pl' $datadir'/wormbase-acedb/expr_pattern/Expr_pattern.xml' $datadir'/wormbase-acedb/expr_pattern/XML/Expr_pattern_prepped.xml'
+  cp -v $intermine'/support/properties_xpath/expr_pattern_mapping.properties' "$datadir"'/wormbase-acedb/expr_pattern/mapping/'
+  perl $testlab'/wb-acedb/prep_expr_pattern.pl' "$datadir"'/wormbase-acedb/expr_pattern/Expr_pattern.xml' "$datadir"'/wormbase-acedb/expr_pattern/XML/Expr_pattern_prepped.xml'
 else
   echo 'Expr_pattern file processed'
 fi
@@ -295,14 +295,14 @@ echo
 
 #################### gene ###########################
 echo 'gene'
-mkdir -vp $datadir/wormbase-acedb/gene/XML
-mkdir -vp $datadir/wormbase-acedb/gene/mapping
-if [ ! -f $datadir'/wormbase-acedb/gene/XML/prepped_gene.xml' ];then
-  cp -v $sourcedir/Gene.xml $acexmldir/gene/Gene.xml
-  cp -v $intermine'/support/properties_xpath/gene_mapping.properties' $datadir'/wormbase-acedb/gene/mapping/'
-  perl $testlab'/wb-acedb/purify_xace.pl' $datadir'/wormbase-acedb/gene/Gene.xml' $datadir'/wormbase-acedb/gene/purified_gene.xml'
-  perl $testlab'/wb-acedb/prep_wb-acedb-gene.pl' $datadir'/wormbase-acedb/gene/purified_gene.xml' $datadir'/wormbase-acedb/gene/XML/prepped_gene.xml'
-  rm $datadir/wormbase-acedb/gene/purified_gene.xml
+mkdir -vp "$datadir"/wormbase-acedb/gene/XML
+mkdir -vp "$datadir"/wormbase-acedb/gene/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/gene/XML/prepped_gene.xml' ];then
+  cp -v "$sourcedir"/Gene.xml "$acexmldir"/gene/Gene.xml
+  cp -v $intermine'/support/properties_xpath/gene_mapping.properties' "$datadir"'/wormbase-acedb/gene/mapping/'
+  perl $testlab'/wb-acedb/purify_xace.pl' "$datadir"'/wormbase-acedb/gene/Gene.xml' "$datadir"'/wormbase-acedb/gene/purified_gene.xml'
+  perl $testlab'/wb-acedb/prep_wb-acedb-gene.pl' "$datadir"'/wormbase-acedb/gene/purified_gene.xml' "$datadir"'/wormbase-acedb/gene/XML/prepped_gene.xml'
+  rm "$datadir"/wormbase-acedb/gene/purified_gene.xml
 else
   echo 'Gene file processed'
 fi
@@ -311,12 +311,12 @@ echo
 
 #################### life stage #####################
 echo 'life stage'
-mkdir -vp $datadir/wormbase-acedb/life_stage/XML
-mkdir -vp $datadir/wormbase-acedb/life_stage/mapping
-if [ ! -f $datadir'/wormbase-acedb/life_stage/XML/purified_life_stage.xml' ];then
-  cp $sourcedir/Life_stage.xml $acexmldir/life_stage/Life_stage.xml
-  cp $intermine'/support/properties_xpath/life_stage_mapping.properties' $datadir'/wormbase-acedb/life_stage/mapping/'
-  perl $testlab'/wb-acedb/purify_xace.pl' $datadir'/wormbase-acedb/life_stage/Life_stage.xml' $datadir'/wormbase-acedb/life_stage/XML/purified_life_stage.xml'
+mkdir -vp "$datadir"/wormbase-acedb/life_stage/XML
+mkdir -vp "$datadir"/wormbase-acedb/life_stage/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/life_stage/XML/purified_life_stage.xml' ];then
+  cp "$sourcedir"/Life_stage.xml "$acexmldir"/life_stage/Life_stage.xml
+  cp $intermine'/support/properties_xpath/life_stage_mapping.properties' "$datadir"'/wormbase-acedb/life_stage/mapping/'
+  perl $testlab'/wb-acedb/purify_xace.pl' "$datadir"'/wormbase-acedb/life_stage/Life_stage.xml' "$datadir"'/wormbase-acedb/life_stage/XML/purified_life_stage.xml'
 else
   echo 'Life_stage file processed'
 fi
@@ -325,12 +325,12 @@ echo
 
 #################### phenotype #####################
 echo 'phenotype'
-mkdir -vp $datadir/wormbase-acedb/phenotype/XML
-mkdir -vp $datadir/wormbase-acedb/phenotype/mapping
-if [ ! -f $datadir'/wormbase-acedb/phenotype/XML/purified_phenotype.xml' ];then
-  cp -v $sourcedir/Phenotype.xml $acexmldir/phenotype/Phenotype.xml
-  cp -v $intermine'/support/properties_xpath/phenotype_mapping.properties' $datadir'/wormbase-acedb/phenotype/mapping'
-  perl $testlab'/wb-acedb/purify_xace.pl' $datadir'/wormbase-acedb/phenotype/Phenotype.xml' $datadir'/wormbase-acedb/phenotype/XML/purified_phenotype.xml'
+mkdir -vp "$datadir"/wormbase-acedb/phenotype/XML
+mkdir -vp "$datadir"/wormbase-acedb/phenotype/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/phenotype/XML/purified_phenotype.xml' ];then
+  cp -v "$sourcedir"/Phenotype.xml "$acexmldir"/phenotype/Phenotype.xml
+  cp -v $intermine'/support/properties_xpath/phenotype_mapping.properties' "$datadir"'/wormbase-acedb/phenotype/mapping'
+  perl $testlab'/wb-acedb/purify_xace.pl' "$datadir"'/wormbase-acedb/phenotype/Phenotype.xml' "$datadir"'/wormbase-acedb/phenotype/XML/purified_phenotype.xml'
 else
   echo 'Phenotype file processed'
 fi
@@ -339,14 +339,14 @@ echo
 
 ################### protein #######################
 echo 'protein'
-mkdir -vp $datadir/wormbase-acedb/protein/XML
-mkdir -vp $datadir/wormbase-acedb/protein/mapping
-if [ ! -f $datadir'/wormbase-acedb/protein/XML/purged_prepped_protein.xml' ];then
-  cp -v $sourcedir/Protein.xml $acexmldir/protein/Protein.xml
-  cp -v $intermine'/support/properties_xpath/protein_mapping.properties' $datadir'/wormbase-acedb/protein/mapping'
-  perl $testlab'/wb-acedb/prep_wb-acedb-protein.pl' $datadir'/wormbase-acedb/protein/Protein.xml' $datadir'/wormbase-acedb/protein/prepped_protein.xml'
-  perl $testlab'/wb-acedb/purge_protein.pl' $datadir'/wormbase-acedb/protein/prepped_protein.xml' $datadir/'wormbase-acedb/protein/XML/purged_prepped_protein.xml' $testlab'/wb-acedb/species_whitelist.txt' $datadir'/wormbase-acedb/protein/rejected_by_purge.xml'
-  rm $datadir/wormbase-acedb/protein/prepped_protein.xml
+mkdir -vp "$datadir"/wormbase-acedb/protein/XML
+mkdir -vp "$datadir"/wormbase-acedb/protein/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/protein/XML/purged_prepped_protein.xml' ];then
+  cp -v "$sourcedir"/Protein.xml "$acexmldir"/protein/Protein.xml
+  cp -v $intermine'/support/properties_xpath/protein_mapping.properties' "$datadir"'/wormbase-acedb/protein/mapping'
+  perl $testlab'/wb-acedb/prep_wb-acedb-protein.pl' "$datadir"'/wormbase-acedb/protein/Protein.xml' "$datadir"'/wormbase-acedb/protein/prepped_protein.xml'
+  perl $testlab'/wb-acedb/purge_protein.pl' "$datadir"'/wormbase-acedb/protein/prepped_protein.xml' "$datadir"/'wormbase-acedb/protein/XML/purged_prepped_protein.xml' $testlab'/wb-acedb/species_whitelist.txt' "$datadir"'/wormbase-acedb/protein/rejected_by_purge.xml'
+  rm "$datadir"/wormbase-acedb/protein/prepped_protein.xml
 else
   echo 'Protein file processed'
 fi
@@ -355,23 +355,23 @@ echo
 
 #################### species #####################
 echo 'species'
-mkdir -vp $datadir/wormbase-acedb/species/XML
-mkdir -vp $datadir/wormbase-acedb/species/mapping
-cp -v $sourcedir/Species.xml $acexmldir/species/Species.xml
+mkdir -vp "$datadir"/wormbase-acedb/species/XML
+mkdir -vp "$datadir"/wormbase-acedb/species/mapping
+cp -v "$sourcedir"/Species.xml "$acexmldir"/species/Species.xml
 # cp -v $intermine'/support/species_mapping.properties' $datadir'/wormbase-acedb/species/mapping'
-mkdir -p $datadir/entrez-organism/build/
+mkdir -p "$datadir"/entrez-organism/build/
 echo
 
 
 #################### transcript ##################
 echo 'transcript'
-mkdir -vp $datadir/wormbase-acedb/transcript/XML
-mkdir -vp $datadir/wormbase-acedb/transcript/mapping
-if [ ! -f $datadir'/wormbase-acedb/transcript/XML/Transcript.xml' ];then
-  cp -v $sourcedir/Transcript.xml $acexmldir/transcript/Transcript.xml
-  cp -v $intermine'/support/properties_xpath/transcript_mapping.properties' $datadir'/wormbase-acedb/transcript/mapping'
-  perl $testlab'/wb-acedb/purify_xace.pl' $datadir'/wormbase-acedb/transcript/Transcript.xml' $datadir'/wormbase-acedb/transcript/purified_transcript.xml'
-  perl $testlab'/wb-acedb/prep_wb-acedb-transcript.pl' $datadir'/wormbase-acedb/transcript/purified_transcript.xml' $datadir'/wormbase-acedb/transcript/XML/Transcript.xml'
+mkdir -vp "$datadir"/wormbase-acedb/transcript/XML
+mkdir -vp "$datadir"/wormbase-acedb/transcript/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/transcript/XML/Transcript.xml' ];then
+  cp -v "$sourcedir"/Transcript.xml "$acexmldir"/transcript/Transcript.xml
+  cp -v $intermine'/support/properties_xpath/transcript_mapping.properties' "$datadir"'/wormbase-acedb/transcript/mapping'
+  perl $testlab'/wb-acedb/purify_xace.pl' "$datadir"'/wormbase-acedb/transcript/Transcript.xml' "$datadir"'/wormbase-acedb/transcript/purified_transcript.xml'
+  perl $testlab'/wb-acedb/prep_wb-acedb-transcript.pl' "$datadir"'/wormbase-acedb/transcript/purified_transcript.xml' "$datadir"'/wormbase-acedb/transcript/XML/Transcript.xml'
 else
   echo 'Transcript file processed'
 fi
@@ -380,13 +380,13 @@ echo
 
 #################### RNAi #######################
 echo 'RNAi'
-mkdir -vp $datadir/wormbase-acedb/RNAi/XML
-mkdir -vp $datadir/wormbase-acedb/RNAi/mapping
-if [ ! -f $datadir'/wormbase-acedb/RNAi/XML/prepped_clean_RNAi.xml' ];then
-  cp -v $sourcedir/RNAi.xml $acexmldir/RNAi/RNAi.xml
-  cp -v $intermine'/support/properties_xpath/RNAi_mapping.properties' $datadir'/wormbase-acedb/RNAi/mapping'
-  perl $testlab'/wb-acedb/prep_RNAi.pl' $datadir'/wormbase-acedb/RNAi/RNAi.xml' $datadir'/wormbase-acedb/RNAi/prepped_RNAi.xml'
-  perl $testlab'/wb-acedb/prep_wb-acedb-RNAi.pl' $datadir'/wormbase-acedb/RNAi/prepped_RNAi.xml' $datadir'/wormbase-acedb/RNAi/XML/prepped_clean_RNAi.xml'
+mkdir -vp "$datadir"/wormbase-acedb/RNAi/XML
+mkdir -vp "$datadir"/wormbase-acedb/RNAi/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/RNAi/XML/prepped_clean_RNAi.xml' ];then
+  cp -v "$sourcedir"/RNAi.xml "$acexmldir"/RNAi/RNAi.xml
+  cp -v $intermine'/support/properties_xpath/RNAi_mapping.properties' "$datadir"'/wormbase-acedb/RNAi/mapping'
+  perl $testlab'/wb-acedb/prep_RNAi.pl' "$datadir"'/wormbase-acedb/RNAi/RNAi.xml' "$datadir"'/wormbase-acedb/RNAi/prepped_RNAi.xml'
+  perl $testlab'/wb-acedb/prep_wb-acedb-RNAi.pl' "$datadir"'/wormbase-acedb/RNAi/prepped_RNAi.xml' "$datadir"'/wormbase-acedb/RNAi/XML/prepped_clean_RNAi.xml'
 else
   echo 'RNAi file processed'
 fi
@@ -395,12 +395,12 @@ echo
 
 #################### variation ##################
 echo 'variation'
-mkdir -vp $datadir/wormbase-acedb/variation/XML
-mkdir -vp $datadir/wormbase-acedb/variation/mapping
-if [ ! -f $datadir'/wormbase-acedb/variation/XML/prepped_variation.xml' ];then
-  cp -v $sourcedir/Variation.xml $acexmldir/variation/Variation.xml
-  cp -v $intermine'/support/properties_xpath/variation_mapping.properties' $datadir'/wormbase-acedb/variation/mapping'
-  perl $testlab'/wb-acedb/purify_variation.pl' $datadir'/wormbase-acedb/variation/Variation.xml' $datadir'/wormbase-acedb/variation/XML/prepped_variation.xml'
+mkdir -vp "$datadir"/wormbase-acedb/variation/XML
+mkdir -vp "$datadir"/wormbase-acedb/variation/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/variation/XML/prepped_variation.xml' ];then
+  cp -v "$sourcedir"/Variation.xml "$acexmldir"/variation/Variation.xml
+  cp -v $intermine'/support/properties_xpath/variation_mapping.properties' "$datadir"'/wormbase-acedb/variation/mapping'
+  perl $testlab'/wb-acedb/purify_variation.pl' "$datadir"'/wormbase-acedb/variation/Variation.xml' "$datadir"'/wormbase-acedb/variation/XML/prepped_variation.xml'
   # sh $testlab'/wb-acedb/fix_elements_variation.sh' $acexmldir
 else
   echo 'Variation file processed'
@@ -409,12 +409,12 @@ echo
 
 #################### gene_class #################
 echo 'gene_class'
-mkdir -vp $datadir/wormbase-acedb/gene_class/XML
-mkdir -vp $datadir/wormbase-acedb/gene_class/mapping
-if [ ! -f $datadir'/wormbase-acedb/gene_class/XML/prepped_gene_class.xml' ];then
-  cp -v $sourcedir/Gene_class.xml $acexmldir/gene_class/Gene_class.xml
-  cp -v $intermine'/support/properties_xpath/gene_class_mapping.properties' $datadir'/wormbase-acedb/gene_class/mapping'
-  perl $testlab'/wb-acedb/prep_gene_class.pl' $datadir'/wormbase-acedb/gene_class/Gene_class.xml' $datadir'/wormbase-acedb/gene_class/XML/prepped_gene_class.xml'
+mkdir -vp "$datadir"/wormbase-acedb/gene_class/XML
+mkdir -vp "$datadir"/wormbase-acedb/gene_class/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/gene_class/XML/prepped_gene_class.xml' ];then
+  cp -v "$sourcedir"/Gene_class.xml "$acexmldir"/gene_class/Gene_class.xml
+  cp -v $intermine'/support/properties_xpath/gene_class_mapping.properties' "$datadir"'/wormbase-acedb/gene_class/mapping'
+  perl $testlab'/wb-acedb/prep_gene_class.pl' "$datadir"'/wormbase-acedb/gene_class/Gene_class.xml' "$datadir"'/wormbase-acedb/gene_class/XML/prepped_gene_class.xml'
 else
   echo 'Gene_class file processed'
 fi
@@ -422,12 +422,12 @@ echo
 
 #################### strain  ##################
 echo 'strain'
-mkdir -vp $datadir/wormbase-acedb/strain/XML
-mkdir -vp $datadir/wormbase-acedb/strain/mapping
-if [ ! -f $datadir'/wormbase-acedb/strain/XML/prepped_strain.xml' ];then
-  cp -v $sourcedir/Strain.xml $acexmldir/strain/Strain.xml
-  cp -v $intermine'/support/properties_xpath/strain_mapping.properties' $datadir'/wormbase-acedb/strain/mapping'
-  perl $testlab'/wb-acedb/prep_strain.pl' $datadir'/wormbase-acedb/strain/Strain.xml' $datadir'/wormbase-acedb/strain/XML/prepped_strain.xml'
+mkdir -vp "$datadir"/wormbase-acedb/strain/XML
+mkdir -vp "$datadir"/wormbase-acedb/strain/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/strain/XML/prepped_strain.xml' ];then
+  cp -v "$sourcedir"/Strain.xml "$acexmldir"/strain/Strain.xml
+  cp -v $intermine'/support/properties_xpath/strain_mapping.properties' "$datadir"'/wormbase-acedb/strain/mapping'
+  perl $testlab'/wb-acedb/prep_strain.pl' "$datadir"'/wormbase-acedb/strain/Strain.xml' "$datadir"'/wormbase-acedb/strain/XML/prepped_strain.xml'
 else
   echo 'Strain file processed'
 fi
@@ -436,12 +436,12 @@ echo
 
 #################### molecule  ###############
 echo 'molecule'
-mkdir -vp $datadir/wormbase-acedb/molecule/XML
-mkdir -vp $datadir/wormbase-acedb/molecule/mapping
-if [ ! -f $datadir'/wormbase-acedb/molecule/XML/prepped_molecule.xml' ];then
-  cp -v $sourcedir/Molecule.xml $acexmldir/molecule/Molecule.xml
-  cp -v $intermine'/support/properties_xpath/molecule_mapping.properties' $datadir'/wormbase-acedb/molecule/mapping'
-  perl $testlab'/wb-acedb/prep_molecule.pl' $datadir'/wormbase-acedb/molecule/Molecule.xml' $datadir'/wormbase-acedb/molecule/XML/prepped_molecule.xml'
+mkdir -vp "$datadir"/wormbase-acedb/molecule/XML
+mkdir -vp "$datadir"/wormbase-acedb/molecule/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/molecule/XML/prepped_molecule.xml' ];then
+  cp -v "$sourcedir"/Molecule.xml "$acexmldir"/molecule/Molecule.xml
+  cp -v $intermine'/support/properties_xpath/molecule_mapping.properties' "$datadir"'/wormbase-acedb/molecule/mapping'
+  perl $testlab'/wb-acedb/prep_molecule.pl' "$datadir"'/wormbase-acedb/molecule/Molecule.xml' "$datadir"'/wormbase-acedb/molecule/XML/prepped_molecule.xml'
 else
   echo 'Molecule file processed'
 fi
@@ -450,12 +450,12 @@ echo
 
 #################### interaction #############
 echo 'interaction'
-mkdir -vp $datadir/wormbase-acedb/interaction/XML
-mkdir -vp $datadir/wormbase-acedb/interaction/mapping
-if [ ! -f $datadir'/wormbase-acedb/interaction/XML/prepped_interaction.xml' ];then
-  cp -v $sourcedir/Interaction.xml $acexmldir/interaction/Interaction.xml
-  cp -v $intermine'/support/properties_xpath/interaction_mapping.properties' $datadir'/wormbase-acedb/interaction/mapping'
-  perl $testlab'/wb-acedb/prep_interaction.pl' $datadir'/wormbase-acedb/interaction/Interaction.xml' $datadir'/wormbase-acedb/interaction/XML/prepped_interaction.xml'
+mkdir -vp "$datadir"/wormbase-acedb/interaction/XML
+mkdir -vp "$datadir"/wormbase-acedb/interaction/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/interaction/XML/prepped_interaction.xml' ];then
+  cp -v "$sourcedir"/Interaction.xml "$acexmldir"/interaction/Interaction.xml
+  cp -v $intermine'/support/properties_xpath/interaction_mapping.properties' "$datadir"'/wormbase-acedb/interaction/mapping'
+  perl $testlab'/wb-acedb/prep_interaction.pl' "$datadir"'/wormbase-acedb/interaction/Interaction.xml' "$datadir"'/wormbase-acedb/interaction/XML/prepped_interaction.xml'
 else
   echo 'Interaction file processed'
 fi
@@ -463,12 +463,12 @@ echo
 
 #################### transgene #############
 echo 'transgene'
-mkdir -vp $datadir/wormbase-acedb/transgene/XML
-mkdir -vp $datadir/wormbase-acedb/transgene/mapping
-if [ ! -f $datadir'/wormbase-acedb/transgene/XML/prepped_transgene.xml' ];then
-  cp -v $sourcedir/Transgene.xml $acexmldir/transgene/Transgene.xml
-  cp -v $intermine'/support/properties_xpath/transgene_mapping.properties' $datadir'/wormbase-acedb/transgene/mapping'
-  perl $testlab'/wb-acedb/prep_transgene.pl' $datadir'/wormbase-acedb/transgene/Transgene.xml' $datadir'/wormbase-acedb/transgene/XML/prepped_transgene.xml'
+mkdir -vp "$datadir"/wormbase-acedb/transgene/XML
+mkdir -vp "$datadir"/wormbase-acedb/transgene/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/transgene/XML/prepped_transgene.xml' ];then
+  cp -v "$sourcedir"/Transgene.xml "$acexmldir"/transgene/Transgene.xml
+  cp -v $intermine'/support/properties_xpath/transgene_mapping.properties' "$datadir"'/wormbase-acedb/transgene/mapping'
+  perl $testlab'/wb-acedb/prep_transgene.pl' "$datadir"'/wormbase-acedb/transgene/Transgene.xml' "$datadir"'/wormbase-acedb/transgene/XML/prepped_transgene.xml'
 else
   echo 'Transgene file processed'
 fi
@@ -476,12 +476,12 @@ echo
 
 #################### construct #############
 echo 'construct'
-mkdir -vp $datadir/wormbase-acedb/construct/XML
-mkdir -vp $datadir/wormbase-acedb/construct/mapping
-if [ ! -f $datadir'/wormbase-acedb/construct/XML/prepped_construct.xml' ];then
-  cp -v $sourcedir/Construct.xml $acexmldir/construct/Construct.xml
-  cp -v $intermine'/support/properties_xpath/construct_mapping.properties' $datadir'/wormbase-acedb/construct/mapping'
-  perl $testlab'/wb-acedb/prepped_construct.pl' $datadir'/wormbase-acedb/construct/Construct.xml' $datadir'/wormbase-acedb/construct/XML/prepped_construct.xml'
+mkdir -vp "$datadir"/wormbase-acedb/construct/XML
+mkdir -vp "$datadir"/wormbase-acedb/construct/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/construct/XML/prepped_construct.xml' ];then
+  cp -v "$sourcedir"/Construct.xml "$acexmldir"/construct/Construct.xml
+  cp -v $intermine'/support/properties_xpath/construct_mapping.properties' "$datadir"'/wormbase-acedb/construct/mapping'
+  perl $testlab'/wb-acedb/prepped_construct.pl' "$datadir"'/wormbase-acedb/construct/Construct.xml' "$datadir"'/wormbase-acedb/construct/XML/prepped_construct.xml'
 else
   echo 'Construct file processed'
 fi
@@ -490,12 +490,12 @@ echo
 
 ################## disease model ###########
 echo 'disease model annotation'
-mkdir -vp $datadir/wormbase-acedb/disease_model_annotation/XML
-mkdir -vp $datadir/wormbase-acedb/disease_model_annotation/mapping
-if [ ! -f $datadir'/wormbase-acedb/disease_model_annotation/XML/prepped_disease_model_annotation.xml' ];then
-  cp -v $sourcedir/Disease_model_annotation.xml $acexmldir/disease_model_annotation/Disease_model_annotation.xml
-  cp -v $intermine'/support/properties_xpath/disease_model_annotation_mapping.properties' $datadir'/wormbase-acedb/disease_model_annotation/mapping'
-  perl $testlab'/wb-acedb/prepped_disease_model_annotation.pl' $datadir'/wormbase-acedb/disease_model_annotation/Disease_model_annotation.xml' $datadir'/wormbase-acedb/disease_model_annotation/XML/prepped_disease_model_annotation.xml'
+mkdir -vp "$datadir"/wormbase-acedb/disease_model_annotation/XML
+mkdir -vp "$datadir"/wormbase-acedb/disease_model_annotation/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/disease_model_annotation/XML/prepped_disease_model_annotation.xml' ];then
+  cp -v "$sourcedir"/Disease_model_annotation.xml "$acexmldir"/disease_model_annotation/Disease_model_annotation.xml
+  cp -v $intermine'/support/properties_xpath/disease_model_annotation_mapping.properties' "$datadir"'/wormbase-acedb/disease_model_annotation/mapping'
+  perl $testlab'/wb-acedb/prepped_disease_model_annotation.pl' "$datadir"'/wormbase-acedb/disease_model_annotation/Disease_model_annotation.xml' "$datadir"'/wormbase-acedb/disease_model_annotation/XML/prepped_disease_model_annotation.xml'
 else
   echo 'Disease model annotation file processed'
 fi
@@ -503,12 +503,12 @@ echo
 
 #################### so term #############
 echo 'SO term'
-mkdir -vp $datadir/wormbase-acedb/so_term/XML
-mkdir -vp $datadir/wormbase-acedb/so_term/mapping
-if [ ! -f $datadir'/wormbase-acedb/so_term/XML/prepped_so_term.xml' ];then
-  cp -v $sourcedir/SO_term.xml $acexmldir/so_term/SO_term.xml
-  cp -v $intermine'/support/properties_xpath/so_term_mapping.properties' $datadir'/wormbase-acedb/so_term/mapping'
-  perl $testlab'/wb-acedb/prepped_so_term.pl' $datadir'/wormbase-acedb/so_term/SO_term.xml' $datadir'/wormbase-acedb/so_term/XML/prepped_so_term.xml'
+mkdir -vp "$datadir"/wormbase-acedb/so_term/XML
+mkdir -vp "$datadir"/wormbase-acedb/so_term/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/so_term/XML/prepped_so_term.xml' ];then
+  cp -v "$sourcedir"/SO_term.xml "$acexmldir"/so_term/SO_term.xml
+  cp -v $intermine'/support/properties_xpath/so_term_mapping.properties' "$datadir"'/wormbase-acedb/so_term/mapping'
+  perl $testlab'/wb-acedb/prepped_so_term.pl' "$datadir"'/wormbase-acedb/so_term/SO_term.xml' "$datadir"'/wormbase-acedb/so_term/XML/prepped_so_term.xml'
 else
   echo 'SO term file processed'
 fi
@@ -517,11 +517,11 @@ echo
 
 #################### WBProcess #############
 echo 'WBProcess'
-mkdir -vp $datadir/wormbase-acedb/wbprocess/XML
-mkdir -vp $datadir/wormbase-acedb/wbprocess/mapping
-if [ ! -f $datadir'/wormbase-acedb/wbprocess/XML/prepped_wbprocess.xml' ];then
-  cp -v $sourcedir/WBProcess.xml $acexmldir/wbprocess/WBProcess.xml
-  cp -v $intermine'/support/properties_xpath/wbprocess_mapping.properties' $datadir'/wormbase-acedb/wbprocess/mapping'
+mkdir -vp "$datadir"/wormbase-acedb/wbprocess/XML
+mkdir -vp "$datadir"/wormbase-acedb/wbprocess/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/wbprocess/XML/prepped_wbprocess.xml' ];then
+  cp -v "$sourcedir"/WBProcess.xml "$acexmldir"/wbprocess/WBProcess.xml
+  cp -v $intermine'/support/properties_xpath/wbprocess_mapping.properties' "$datadir"'/wormbase-acedb/wbprocess/mapping'
   perl $testlab'/wb-acedb/prepped_wbprocess.pl' "$datadir"'/wormbase-acedb/wbprocess/WBProcess.xml' "$datadir"'/wormbase-acedb/wbprocess/XML/prepped_wbprocess.xml'
 else
   echo 'WBProcess file processed'
