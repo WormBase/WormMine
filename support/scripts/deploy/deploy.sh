@@ -58,7 +58,7 @@ intermine='/mnt/data2/5.0/WormMine'
 datadir='/mnt/data2/mine_input/datadir'$wbrel''
 acexmldir=$datadir'/wormbase-acedb'
 testlab=$intermine'/support/scripts/'
-compara=$intermine'/support/scripts/deploy/compara'
+# compara=$intermine'/support/scripts/deploy/compara'
 
 
 echo 'WormMine code is at ' "$intermine"
@@ -75,7 +75,7 @@ do
 
   #################### get the protein data ####################
   echo 'Getting protein data'
-  mkdir -vp "$datadir""/fasta/"$spe"/proteins/raw"
+  mkdir -vp "$datadir""/fasta/""$spe""/proteins/raw"
   mkdir -vp "$datadir""/fasta/""$spe""/proteins/raw"
   cd "$datadir""/fasta/""$spe""/proteins/raw" || exit
   if [ ! -f "$spe"."${species["$spe"]}"."$wbrel".protein.fa ]; then
@@ -135,11 +135,11 @@ do
   echo 'Getting CDS FASTA'
   mkdir -vp "$datadir""/fasta/""$spe""/cds/raw"
   mkdir -vp "$datadir""/fasta/""$spe""/cds/final"
-  cd $datadir"/fasta/"$spe"/cds/raw"
+  cd "$datadir""/fasta/""$spe""/cds/raw" || exit
   if [ ! -f "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa ]; then
     echo "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa 'not found'
     echo 'transferring' "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa
-    wget -q --show-progress -O "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/species/"$spe"/"${species2["$spe"]}"/"$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa.gz"
+    wget -q --show-progress -O "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".CDS_transcripts.fa.gz"
     gunzip -v "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa.gz
   else
     echo "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa.gz 'found, not transferring'
@@ -151,21 +151,21 @@ do
 
   #################### get gff annotations ####################
   echo 'Getting gff data'
-  mkdir -vp $datadir'/wormbase-gff3/raw'
-  mkdir -vp $datadir'/wormbase-gff3/final'
-  cd $datadir'/wormbase-gff3'
+  mkdir -vp "$datadir"'/wormbase-gff3/raw'
+  mkdir -vp "$datadir"'/wormbase-gff3/final'
+  cd "$datadir"'/wormbase-gff3' || exit
   if [ ! -f raw/"$spe"."${species2["$spe"]}"."$wbrel".gff ]; then
     echo 'transferring' "$spe"."${species2["$spe"]}"."$wbrel".gff
-    wget -q --show-progress -O raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz  "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/species/"$spe"/"${species2["$spe"]}"/"$spe"."${species2["$spe"]}"."$wbrel".annotations.gff3.gz"
+    wget -q --show-progress -O raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz  "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".annotations.gff3.gz"
     gunzip -v raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz
   else
     echo  raw/"$spe"."${species2["$spe"]}"."$wbrel".gff 'found'
   fi
   if [ ! -f final/"$spe"."${species2["$spe"]}"."$wbrel".prepped.gff ]; then
     echo 'Starting GFF3 pre-processing'
-    bash "$intermine"/support/scripts/gff3/scrape_gff3.sh $datadir/wormbase-gff3/raw/"$spe"."${species2["$spe"]}"."$wbrel".gff $datadir/wormbase-gff3/final/"$spe"."${species2["$spe"]}"."$wbrel".gff
+    bash "$intermine"/support/scripts/gff3/scrape_gff3.sh "$datadir"/wormbase-gff3/raw/"$spe"."${species2["$spe"]}"."$wbrel".gff "$datadir"/wormbase-gff3/final/"$spe"."${species2["$spe"]}"."$wbrel".gff
 
-    cd $datadir"/wormbase-gff3/final"
+    cd "$datadir""/wormbase-gff3/final" || exit
     python $testlab"/gff3/exon_processing.py" "$spe"."${species2["$spe"]}"."$wbrel".gff
     rm "$spe"."${species2["$spe"]}"."$wbrel".gff
 
@@ -176,41 +176,41 @@ done
 
 
 #################### gene ontology ####################
-mkdir -vp $datadir"/go/"
-if [ ! -f $datadir/go/gene_ontology.1_2.obo ];then
+mkdir -vp "$datadir""/go/"
+if [ ! -f "$datadir"/go/gene_ontology.1_2.obo ];then
   echo 'Transferring gene ontology file'
-  wget -q --show-progress -O $datadir/go/gene_ontology.1_2.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/ONTOLOGY/gene_ontology."$wbrel".obo"
+  wget -q --show-progress -O "$datadir"/go/gene_ontology.1_2.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/gene_ontology.""$wbrel"".obo"
 else
   echo 'gene ontolgy file found'
 fi
 echo
 
 #################### anatomy ontology #################
-mkdir -vp $datadir"/ontology/"
-if [ ! -f $datadir/ontology/anatomy_ontology.obo ];then
+mkdir -vp "$datadir""/ontology/"
+if [ ! -f "$datadir"/ontology/anatomy_ontology.obo ];then
   echo 'Transferring anatomy ontology file'
-  wget -q --show-progress -O $datadir/ontology/anatomy_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/ONTOLOGY/anatomy_ontology."$wbrel".obo"
-  sed -i '/subset:/d' $datadir/ontology/anatomy_ontology.obo
+  wget -q --show-progress -O "$datadir"/ontology/anatomy_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/anatomy_ontology.""$wbrel"".obo"
+  sed -i '/subset:/d' "$datadir"/ontology/anatomy_ontology.obo
 else
   echo 'anatomy ontolgy file found'
 fi
 echo
 
 #################### disease ontology #################
-mkdir -vp $datadir"/ontology/"
-if [ ! -f $datadir/ontology/disease_ontology.obo ];then
+mkdir -vp "$datadir""/ontology/"
+if [ ! -f "$datadir"/ontology/disease_ontology.obo ];then
   echo 'Transferring anatomy ontology file'
-  wget -q --show-progress -O $datadir/ontology/disease_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/ONTOLOGY/disease_ontology."$wbrel".obo"
+  wget -q --show-progress -O "$datadir"/ontology/disease_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/disease_ontology.""$wbrel"".obo"
 else
   echo 'disease ontolgy file found'
 fi
 echo
 
 #################### phenotype ontology ################
-mkdir -vp $datadir"/ontology/"
-if [ ! -f $datadir/ontology/phenotype_ontology.obo ];then
+mkdir -vp "$datadir""/ontology/"
+if [ ! -f "$datadir"/ontology/phenotype_ontology.obo ];then
   echo 'Transferring anatomy ontology file'
-  wget -q --show-progress -O $datadir/ontology/phenotype_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/ONTOLOGY/phenotype_ontology."$wbrel".obo"
+  wget -q --show-progress -O "$datadir"/ontology/phenotype_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/phenotype_ontology.""$wbrel"".obo"
 else
   echo 'phenotype ontolgy file found'
 fi
@@ -223,11 +223,11 @@ mkdir -vp "$datadir"'/go-annotation/final'
 
 if [ ! -f "$datadir"'/go-annotation/final/gene_association_sorted_filtered.wb' ];then
   echo 'Transferring gene association file'
-  wget -q --show-progress -O $datadir'/go-annotation/raw/gene_association'."$wbrel".wb "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/ONTOLOGY/gene_association."$wbrel".wb"
+  wget -q --show-progress -O "$datadir"'/go-annotation/raw/gene_association'."$wbrel".wb "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/gene_association.""$wbrel"".wb"
   echo 'Sorting'
-  sort -k 2,2 $datadir'/go-annotation/raw/gene_association'."$wbrel".wb > $datadir'/go-annotation/raw/gene_association_sorted.wb'
+  sort -k 2,2 "$datadir"'/go-annotation/raw/gene_association'."$wbrel".wb > "$datadir"'/go-annotation/raw/gene_association_sorted.wb'
   echo 'Filtering'
-  bash $testlab'/go-annotation/filter_out_uniprot.sh' $datadir'/go-annotation/raw/gene_association_sorted.wb' $datadir'/go-annotation/final/gene_association_sorted_filtered.wb'
+  bash $testlab'/go-annotation/filter_out_uniprot.sh' "$datadir"'/go-annotation/raw/gene_association_sorted.wb' "$datadir"'/go-annotation/final/gene_association_sorted_filtered.wb'
 else
   echo 'gene association file found'
 fi
@@ -241,9 +241,9 @@ echo 'anatomy_term'
 mkdir -vp "$datadir"/wormbase-acedb/anatomy_term/XML
 mkdir -vp "$datadir"/wormbase-acedb/anatomy_term/mapping
 if [ ! -f "$datadir"'/wormbase-acedb/anatomy_term/XML/Anatomy_term_prepped.xml' ];then
-  cp -v $sourcedir/Anatomy_term.xml $acexmldir/anatomy_term/Anatomy_term.xml
-  cp -v $intermine'/support/properties_xpath/anatomy_term_mapping.properties' $datadir'/wormbase-acedb/anatomy_term/mapping/'
-  perl $testlab'/wb-acedb/prep_anatomy_term.pl' $datadir'/wormbase-acedb/anatomy_term/Anatomy_term.xml' $datadir'/wormbase-acedb/anatomy_term/XML/Anatomy_term_prepped.xml'
+  cp -v "$sourcedir"/Anatomy_term.xml "$acexmldir"/anatomy_term/Anatomy_term.xml
+  cp -v $intermine'/support/properties_xpath/anatomy_term_mapping.properties' "$datadir"'/wormbase-acedb/anatomy_term/mapping/'
+  perl $testlab'/wb-acedb/prep_anatomy_term.pl' "$datadir"'/wormbase-acedb/anatomy_term/Anatomy_term.xml' "$datadir"'/wormbase-acedb/anatomy_term/XML/Anatomy_term_prepped.xml'
 else
   echo 'Anatomy_term file processed'
 fi
@@ -255,10 +255,10 @@ echo 'cds'
 mkdir -vp "$datadir"/wormbase-acedb/cds/XML
 mkdir -vp "$datadir"/wormbase-acedb/cds/mapping
 if [ ! -f "$datadir"'/wormbase-acedb/cds/XML/prepped_CDS.xml' ];then
-  cp -v $sourcedir/CDS.xml $acexmldir/cds/CDS.xml
-  cp -v $intermine'/support/properties_xpath/cds_mapping.properties' $datadir'/wormbase-acedb/cds/mapping/'
-  perl $testlab'/wb-acedb/purify_xace.pl' $datadir'/wormbase-acedb/cds/CDS.xml' $datadir'/wormbase-acedb/cds/purified_CDS.xml'
-  perl $testlab'/wb-acedb/prep_wb-acedb-cds.pl' $datadir'/wormbase-acedb/cds/purified_CDS.xml' $datadir'/wormbase-acedb/cds/XML/prepped_CDS.xml'
+  cp -v "$sourcedir"/CDS.xml "$acexmldir"/cds/CDS.xml
+  cp -v $intermine'/support/properties_xpath/cds_mapping.properties' "$datadir"'/wormbase-acedb/cds/mapping/'
+  perl $testlab'/wb-acedb/purify_xace.pl' "$datadir"'/wormbase-acedb/cds/CDS.xml' "$datadir"'/wormbase-acedb/cds/purified_CDS.xml'
+  perl $testlab'/wb-acedb/prep_wb-acedb-cds.pl' "$datadir"'/wormbase-acedb/cds/purified_CDS.xml' "$datadir"'/wormbase-acedb/cds/XML/prepped_CDS.xml'
 else
   echo 'CDS file processed'
 fi
@@ -270,9 +270,9 @@ echo 'expression cluster'
 mkdir -vp "$datadir"/wormbase-acedb/expr_cluster/XML
 mkdir -vp "$datadir"/wormbase-acedb/expr_cluster/mapping
 if [ ! -f "$datadir"'/wormbase-acedb/expr_cluster/XML/purified_expression_cluster.xml' ];then
-  cp -v $sourcedir/Expression_cluster.xml $acexmldir/expr_cluster/Expression_cluster.xml
-  cp -v $intermine'/support/properties_xpath/expr_cluster_mapping.properties' $datadir'/wormbase-acedb/expr_cluster/mapping/'
-  perl $testlab'/wb-acedb/purify_xace.pl' $datadir'/wormbase-acedb/expr_cluster/Expression_cluster.xml' $datadir'/wormbase-acedb/expr_cluster/XML/purified_expression_cluster.xml'
+  cp -v "$sourcedir"/Expression_cluster.xml "$acexmldir"/expr_cluster/Expression_cluster.xml
+  cp -v $intermine'/support/properties_xpath/expr_cluster_mapping.properties' "$datadir"'/wormbase-acedb/expr_cluster/mapping/'
+  perl $testlab'/wb-acedb/purify_xace.pl' "$datadir"'/wormbase-acedb/expr_cluster/Expression_cluster.xml' "$datadir"'/wormbase-acedb/expr_cluster/XML/purified_expression_cluster.xml'
 else
   echo 'Expression_cluster file processed'
 fi
@@ -284,7 +284,7 @@ echo 'expression pattern'
 mkdir -vp "$datadir"/wormbase-acedb/expr_pattern/XML
 mkdir -vp "$datadir"/wormbase-acedb/expr_pattern/mapping
 if [ ! -f "$datadir"'/wormbase-acedb/expr_pattern/XML/Expr_pattern_prepped.xml' ];then
-  cp -v $sourcedir/Expr_pattern.xml $acexmldir/expr_pattern/Expr_pattern.xml
+  cp -v "$sourcedir"/Expr_pattern.xml "$acexmldir"/expr_pattern/Expr_pattern.xml
   cp -v $intermine'/support/properties_xpath/expr_pattern_mapping.properties' "$datadir"'/wormbase-acedb/expr_pattern/mapping/'
   perl $testlab'/wb-acedb/prep_expr_pattern.pl' "$datadir"'/wormbase-acedb/expr_pattern/Expr_pattern.xml' "$datadir"'/wormbase-acedb/expr_pattern/XML/Expr_pattern_prepped.xml'
 else
