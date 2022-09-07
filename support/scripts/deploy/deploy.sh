@@ -7,7 +7,7 @@
 
 #set the version to be accessed
 wbrel="$1"
-echo 'Release version' $wbrel
+echo 'Release version' "$wbrel"
 
 
 #################### Species ####################
@@ -35,20 +35,20 @@ declare -A species=(["c_elegans"]="PRJNA13758"
                     ["t_muris"]="PRJEB126")
 
 # declare -A species=(["c_elegans"]="PRJNA13758")
-echo 'Deploying ' $species
+echo 'Deploying ' "$species"
 echo
 #sourcedir='/mnt/data2/acedb_dumps/WS265/WS265-test-data'
 sourcedir='/mnt/data2/acedb_dumps/'$wbrel'' # <---- XML dump location
-echo $sourcedir
+echo "$sourcedir"
 
 # example test data /mnt/data2/acedb_dumps/WS261/WS261-test-data
 # sourcedir='/Users/nuin/Dropbox/intermine/WS262-test-data/'
 
-echo 'Source directory is at' $sourcedir
+echo 'Source directory is at' "$sourcedir"
 echo
 #################### Main dirs ##################
 #                                               #
-#  datadir - main data directory                # 
+#  datadir - main data directory                #
 #  acexmldir - subdir for AceDB XML files       #
 #  pp - pre-processing dir with perl and bash   #
 #                                               #
@@ -61,27 +61,27 @@ testlab=$intermine'/support/scripts/'
 compara=$intermine'/support/scripts/deploy/compara'
 
 
-echo 'WormMine code is at ' $intermine
-echo 'WormMine datadir is at ' $datadir
-echo 'AceDB directory is at ' $acexmldir
-echo 'Perl scripts are at ' $testlab
+echo 'WormMine code is at ' "$intermine"
+echo 'WormMine datadir is at ' "$datadir"
+echo 'AceDB directory is at ' "$acexmldir"
+echo 'Perl scripts are at ' "$testlab"
 echo
 
 ################### FTP ########################
-################## Species #################### 
+################## Species ####################
 for spe in "${!species[@]}"
 do
-  echo species: $spe ${species["$spe"]}
+  echo species: "$spe" "${species["$spe"]}"
 
   #################### get the protein data ####################
   echo 'Getting protein data'
-  mkdir -vp $datadir"/fasta/"$spe"/proteins/raw"
-  mkdir -vp $datadir"/fasta/"$spe"/proteins/prepped"
-  cd $datadir"/fasta/"$spe"/proteins/raw"
+  mkdir -vp "$datadir""/fasta/"$spe"/proteins/raw"
+  mkdir -vp "$datadir""/fasta/""$spe""/proteins/raw"
+  cd "$datadir""/fasta/""$spe""/proteins/raw" || exit
   if [ ! -f "$spe"."${species["$spe"]}"."$wbrel".protein.fa ]; then
     echo "$spe"."${species["$spe"]}"."$wbrel".protein.fa 'not found'
     echo 'transferring ' "$spe"."${species["$spe"]}"."$wbrel".protein.fa
-    wget -q --show-progress -O "$spe"."${species["$spe"]}"."$wbrel".protein.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/species/"$spe"/"${species["$spe"]}"/"$spe"."${species["$spe"]}"."$wbrel".protein.fa.gz"
+    wget -q --show-progress -O "$spe"."${species["$spe"]}"."$wbrel".protein.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species["$spe"]}""/""$spe"".""${species["$spe"]}"".""$wbrel"".protein.fa.gz"
     gunzip -v "$spe"."${species["$spe"]}"."$wbrel".protein.fa.gz
   else
     echo "$spe"."${species["$spe"]}"."$wbrel".protein.fa 'found, not transferring'
@@ -89,7 +89,7 @@ do
   # echo 'Pre-processing protein FASTA file'
   # perl $testlab'/deploy/fasta/wb-proteins/prep-wb-proteins.pl' "$spe"."${species["$spe"]}"."$wbrel".protein.fa ../prepped/"$spe"."${species["$spe"]}"."$wbrel".protein.fa
     echo 'Pre-processing protein FASTA file'
-    awk '{ if (NF > 1) {split($2,res,"="); print ">"res[2]} else {print}}' < "$spe"."${species["$spe"]}"."$wbrel".protein.fa > $datadir"/fasta/"$spe"/proteins/prepped/""$spe"."${species["$spe"]}"."$wbrel".protein.final.fa
+    awk '{ if (NF > 1) {split($2,res,"="); print ">"res[2]} else {print}}' < "$spe"."${species["$spe"]}"."$wbrel".protein.fa > "$datadir""/fasta/""$spe""/proteins/prepped/""$spe"."${species["$spe"]}"."$wbrel".protein.final.fa
   echo
 done
 
@@ -97,16 +97,16 @@ declare -A species2=(["c_elegans"]="PRJNA13758")
 
 for spe in "${!species2[@]}"
 do
-  echo species: $spe ${species2["$spe"]}
+  echo species: "$spe" "${species2["$spe"]}"
 
   #################### get the genomic data ####################
   echo 'Getting genomic data'
-  mkdir -vp $datadir'/fasta/'$spe"/genomic"
-  cd $datadir'/fasta/'$spe"/genomic"
+  mkdir -vp "$datadir"'/fasta/'"$spe""/genomic"
+  cd "$datadir"'/fasta/'"$spe""/genomic" || exit
   if [ ! -f "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa ]; then
     echo "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa 'not found'
     echo 'transferring ' "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa.gz
-    wget -q --show-progress -O "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/species/"$spe"/"${species2["$spe"]}"/"$spe"."${species2["$spe"]}"."$wbrel".genomic.fa.gz"
+    wget -q --show-progress -O "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".genomic.fa.gz"
     gunzip  -v "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa.gz
   else
     echo "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa 'found, not transferring'
@@ -115,9 +115,9 @@ do
 
 
   echo 'Getting Transcript FASTA'
-  mkdir -vp $datadir"/fasta/"$spe"/transcript/raw"
-  mkdir -vp $datadir"/fasta/"$spe"/transcript/final"
-  cd $datadir"/fasta/"$spe"/transcript/raw"
+  mkdir -vp "$datadir""/fasta/""$spe""/transcript/raw"
+  mkdir -vp "$datadir""/fasta/""$spe""/transcript/final"
+  cd "$datadir""/fasta/""$spe""/transcript/raw" || exit
   if [ ! -f "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa ]; then
     echo "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa 'not found'
     echo 'transferring' "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa
@@ -129,7 +129,7 @@ do
   echo 'Pre-processing Transcript FASTA file'
     sed  's/>/>Transcript:/g' "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa > "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.prepped.fa
     sed 's/gene=.*//g' "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.prepped.fa > ../final/"$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.prepped.fa
-  echo 
+  echo
 
 
   echo 'Getting CDS FASTA'
@@ -147,7 +147,7 @@ do
   echo 'Pre-processing CDS FASTA file'
     sed 's/>/>CDS:/g' "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa > "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.prepped.fa
     sed 's/gene=.*//g' "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.prepped.fa > ../final/"$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.prepped.fa
-  echo 
+  echo
 
   #################### get gff annotations ####################
   echo 'Getting gff data'
@@ -540,7 +540,7 @@ if [ ! -f $datadir'/panther/RefGenomeOrthologsFixed' ];then
   echo 'Processing Panther file'
   grep -vwFf $testlab/deploy/panther/lines_to_remove.txt -v RefGenomeOrthologs > RefGenomeOrthologsFixed
   mv RefGenomeOrthologs.tar.gz $datadir
-  rm -v 
+  rm -v
 else
   echo 'Panther already deployed'
 fi
