@@ -121,7 +121,7 @@ do
   if [ ! -f "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa ]; then
     echo "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa 'not found'
     echo 'transferring' "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa
-    wget -q --show-progress -O "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/"$wbrel"/species/"$spe"/"${species2["$spe"]}"/"$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa.gz"
+    wget -q --show-progress -O "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".mRNA_transcripts.fa.gz"
     gunzip -v "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa.gz
   else
     echo "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa.gz 'found, not transferring'
@@ -133,8 +133,8 @@ do
 
 
   echo 'Getting CDS FASTA'
-  mkdir -vp $datadir"/fasta/"$spe"/cds/raw"
-  mkdir -vp $datadir"/fasta/"$spe"/cds/final"
+  mkdir -vp "$datadir""/fasta/""$spe""/cds/raw"
+  mkdir -vp "$datadir""/fasta/""$spe""/cds/final"
   cd $datadir"/fasta/"$spe"/cds/raw"
   if [ ! -f "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa ]; then
     echo "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa 'not found'
@@ -522,24 +522,23 @@ mkdir -vp $datadir/wormbase-acedb/wbprocess/mapping
 if [ ! -f $datadir'/wormbase-acedb/wbprocess/XML/prepped_wbprocess.xml' ];then
   cp -v $sourcedir/WBProcess.xml $acexmldir/wbprocess/WBProcess.xml
   cp -v $intermine'/support/properties_xpath/wbprocess_mapping.properties' $datadir'/wormbase-acedb/wbprocess/mapping'
-  perl $testlab'/wb-acedb/prepped_wbprocess.pl' $datadir'/wormbase-acedb/wbprocess/WBProcess.xml' $datadir'/wormbase-acedb/wbprocess/XML/prepped_wbprocess.xml'
+  perl $testlab'/wb-acedb/prepped_wbprocess.pl' "$datadir"'/wormbase-acedb/wbprocess/WBProcess.xml' "$datadir"'/wormbase-acedb/wbprocess/XML/prepped_wbprocess.xml'
 else
   echo 'WBProcess file processed'
 fi
 echo
 
 
-
 # ################### panther ######################
 echo 'panther'
-mkdir -p $datadir'/panther'
-if [ ! -f $datadir'/panther/RefGenomeOrthologsFixed' ];then
-  wget -O $datadir'/panther/RefGenomeOrthologs.tar.gz' ftp://ftp.pantherdb.org/ortholog/current_release/RefGenomeOrthologs.tar.gz
-  tar xzvf $datadir'/panther/RefGenomeOrthologs.tar.gz' -C $datadir'/panther'
-  cd $datadir'/panther'
+mkdir -p "$datadir"'/panther'
+if [ ! -f "$datadir"'/panther/RefGenomeOrthologsFixed' ];then
+  wget -O "$datadir"'/panther/RefGenomeOrthologs.tar.gz' ftp://ftp.pantherdb.org/ortholog/current_release/RefGenomeOrthologs.tar.gz
+  tar xzvf "$datadir"'/panther/RefGenomeOrthologs.tar.gz' -C "$datadir"'/panther'
+  cd "$datadir"'/panther' || exit
   echo 'Processing Panther file'
-  grep -vwFf $testlab/deploy/panther/lines_to_remove.txt -v RefGenomeOrthologs > RefGenomeOrthologsFixed
-  mv RefGenomeOrthologs.tar.gz $datadir
+  grep -vwFf "$testlab"/deploy/panther/lines_to_remove.txt -v RefGenomeOrthologs > RefGenomeOrthologsFixed
+  mv RefGenomeOrthologs.tar.gz "$datadir"
   rm -v
 else
   echo 'Panther already deployed'
@@ -548,29 +547,29 @@ echo
 
 ################### id resolver ##################
 echo 'ncbi'
-if [ ! -f $datadir'/ncbi/gene_info' ];then
-  mkdir -p $datadir'/ncbi'
-  wget  -q --show-progress -O $datadir'/ncbi/gene_info.gz' "ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz"
-  gunzip -v $datadir'/ncbi/gene_info.gz'
+if [ ! -f "$datadir"'/ncbi/gene_info' ];then
+  mkdir -p "$datadir"'/ncbi'
+  wget  -q --show-progress -O "$datadir"'/ncbi/gene_info.gz' "ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz"
+  gunzip -v "$datadir"'/ncbi/gene_info.gz'
 else
   echo 'NCBI gene_info already deployed'
 fi
 echo
 
 echo 'wormid'
-mkdir -p $datadir'/worm'
-cp -v $testlab'/deploy/panther/wormid' $datadir'/worm'
+mkdir -p "$datadir"'/worm'
+cp -v "$testlab"'/deploy/panther/wormid' "$datadir"'/worm'
 echo
 
 echo 'idresolver'
-mkdir -p $datadir'/idresolver'
-ln -s $datadir'/ncbi/gene_info' $datadir'/idresolver/entrez'
-ln -s $datadir'/worm/wormid' $datadir'/idresolver/wormid'
+mkdir -p "$datadir"'/idresolver'
+ln -s "$datadir"'/ncbi/gene_info' "$datadir"'/idresolver/entrez'
+ln -s "$datadir"'/worm/wormid' "$datadir"'/idresolver/wormid'
 echo
 
 echo 'homologene'
-mkdir -p $datadir'/homologene'
-wget ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data -O $datadir/homologene/homologene.data
+mkdir -p "$datadir"'/homologene'
+wget ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data -O "$datadir"/homologene/homologene.data
 
 
 # ################### compara #####################
