@@ -37,11 +37,11 @@ declare -A species=(["c_elegans"]="PRJNA13758"
 # declare -A species=(["c_elegans"]="PRJNA13758")
 echo 'Deploying ' "$species"
 echo
-#sourcedir='/mnt/data2/acedb_dumps/WS265/WS265-test-data'
-sourcedir='/mnt/data2/acedb_dumps/'$wbrel'' # <---- XML dump location
+#sourcedir='/mnt/data/acedb_dumps/WS265/WS265-test-data'
+sourcedir='/mnt/data/acedb_dumps/'$wbrel'' # <---- XML dump location
 echo "$sourcedir"
 
-# example test data /mnt/data2/acedb_dumps/WS261/WS261-test-data
+# example test data /mnt/data/acedb_dumps/WS261/WS261-test-data
 # sourcedir='/Users/nuin/Dropbox/intermine/WS262-test-data/'
 
 echo 'Source directory is at' "$sourcedir"
@@ -54,8 +54,8 @@ echo
 #                                               #
 #################### Species ####################
 
-intermine='/mnt/data2/5.0/WormMine'
-datadir='/mnt/data2/mine_input/datadir'$wbrel''
+intermine='/mnt/data/5.0/WormMine'
+datadir='/mnt/data/mine_input/datadir'$wbrel''
 acexmldir=$datadir'/wormbase-acedb'
 testlab=$intermine'/support/scripts/'
 # compara=$intermine'/support/scripts/deploy/compara'
