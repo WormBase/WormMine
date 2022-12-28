@@ -3,13 +3,13 @@
 import sys
 from sqlalchemy import create_engine
 
-db_string = "postgresql://postgres:interwormmine@localhost/" + sys.argv[1]
+pg_creds = open("../pgcreds").read().strip()
+db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"
 db = create_engine(db_string, client_encoding='utf8')
 connection = db.connect()
 
 
 if __name__ == '__main__':
-
 
     print('starting')
     HGNC_ids = open('HGNC.txt').read().splitlines()

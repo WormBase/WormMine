@@ -5,7 +5,9 @@ import sys
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
-db_string = "postgresql://postgres:interwormmine@localhost/" + sys.argv[1]
+
+pg_creds = open("../pgcreds").read().strip()
+db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"
 db  = create_engine(db_string)
 connection = db.connect()
 Session = sessionmaker(bind=db)

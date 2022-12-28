@@ -111,13 +111,13 @@ if __name__ == '__main__':
     prepend = 'http://intermine.wormbase.org/tools/wormmine/loadQuery.do?skipBuilder=true&query='
     append = '%0A&trail=%7Cquery&method=xml'
 
-    output_sec1 = open('../section_01.json', 'w')
-    output_sec2 = open('../section_02.json', 'w')
-    output_sec3 = open('../section_03.json', 'w')
-    output_sec4 = open('../section_04.json', 'w')
-    output_sec5 = open('../section_05.json', 'w')
-    output_sec6 = open('../section_06.json', 'w')
-    output_sec7 = open('../section_07.json', 'w')
+    output_sec1 = open('section_01.json', 'w')
+    output_sec2 = open('section_02.json', 'w')
+    output_sec3 = open('section_03.json', 'w')
+    output_sec4 = open('section_04.json', 'w')
+    output_sec5 = open('section_05.json', 'w')
+    output_sec6 = open('section_06.json', 'w')
+    output_sec7 = open('section_07.json', 'w')
 
     print('Running')
     all_queries = run_queries()
