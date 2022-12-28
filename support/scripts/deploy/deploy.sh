@@ -76,7 +76,7 @@ do
   #################### get the protein data ####################
   echo 'Getting protein data'
   mkdir -vp "$datadir""/fasta/""$spe""/proteins/raw"
-  mkdir -vp "$datadir""/fasta/""$spe""/proteins/raw"
+  mkdir -vp "$datadir""/fasta/""$spe""/proteins/prepped"
   cd "$datadir""/fasta/""$spe""/proteins/raw" || exit
   if [ ! -f "$spe"."${species["$spe"]}"."$wbrel".protein.fa ]; then
     echo "$spe"."${species["$spe"]}"."$wbrel".protein.fa 'not found'
@@ -86,8 +86,6 @@ do
   else
     echo "$spe"."${species["$spe"]}"."$wbrel".protein.fa 'found, not transferring'
   fi
-  # echo 'Pre-processing protein FASTA file'
-  # perl $testlab'/deploy/fasta/wb-proteins/prep-wb-proteins.pl' "$spe"."${species["$spe"]}"."$wbrel".protein.fa ../prepped/"$spe"."${species["$spe"]}"."$wbrel".protein.fa
     echo 'Pre-processing protein FASTA file'
     awk '{ if (NF > 1) {split($2,res,"="); print ">"res[2]} else {print}}' < "$spe"."${species["$spe"]}"."$wbrel".protein.fa > "$datadir""/fasta/""$spe""/proteins/prepped/""$spe"."${species["$spe"]}"."$wbrel".protein.final.fa
   echo
