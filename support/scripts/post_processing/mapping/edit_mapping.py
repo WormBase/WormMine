@@ -1,8 +1,8 @@
 # Paulo Nuin May 2021
 
 import sys
-from sqlalchemy import create_engine, null
 
+from sqlalchemy import create_engine, null
 
 db_string = "postgresql://postgres:interwormmine@localhost/" + sys.argv[1] + "?client_encoding=utf8"
 db = create_engine(db_string)

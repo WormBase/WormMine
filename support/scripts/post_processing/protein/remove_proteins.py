@@ -1,8 +1,8 @@
 # Paulo Nuin March 2018
 
 import sys
-from sqlalchemy import create_engine
 
+from sqlalchemy import create_engine
 
 pg_creds = open("../pgcreds").read().strip()
 db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"

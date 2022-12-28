@@ -1,6 +1,7 @@
 # Paulo Nuin July 2020
 
 import sys
+
 from sqlalchemy import create_engine
 
 pg_creds = open("../pgcreds").read().strip()
