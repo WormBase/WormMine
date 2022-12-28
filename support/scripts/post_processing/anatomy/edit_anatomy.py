@@ -20,7 +20,8 @@ if __name__ == '__main__':
             new_definition = definition.replace('<![CDATA[', '').replace(']]>', '').replace('\'', '`')
             print(new_definition)
             try:
-                connection.execute("UPDATE anatomyterm SET definition = '%s' where primaryidentifier = '%s'" %  (new_definition, i))
+                connection.execute("UPDATE anatomyterm SET definition = '%s' where primaryidentifier = '%s'"
+                                   % (new_definition, i))
                 result = connection.execute("SELECT * from anatomyterm where primaryidentifier = '%s'" % (i))
                 for k in result:
                     print(k['definition'])

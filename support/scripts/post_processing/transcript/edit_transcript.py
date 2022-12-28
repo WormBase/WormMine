@@ -8,6 +8,7 @@ db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"
 db = create_engine(db_string)
 connection = db.connect()
 
+
 def check_transcript_table():
 
     all = []
@@ -15,7 +16,8 @@ def check_transcript_table():
     for row in result:
         all.append(row)
 
-    return(all)
+    return all
+
 
 if __name__ == '__main__':
 

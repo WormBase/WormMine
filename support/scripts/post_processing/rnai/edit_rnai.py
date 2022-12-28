@@ -8,14 +8,14 @@ from sqlalchemy.orm import sessionmaker
 
 pg_creds = open("../pgcreds").read().strip()
 db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"
-db  = create_engine(db_string)
+db = create_engine(db_string)
 connection = db.connect()
 Session = sessionmaker(bind=db)
 session = Session()
 
 
 def remove_remarks():
- 
+
     sql_text = """SELECT * FROM rnai"""
 
     res = db.execute(text(sql_text))
@@ -27,7 +27,7 @@ def remove_remarks():
             print(new_remark)
             rnai_id = row['primaryidentifier']
             print(rnai_id)
-            connection.execute("UPDATE rnai SET remark = '%s' where primaryidentifier = '%s'" %  (new_remark, rnai_id))
+            connection.execute("UPDATE rnai SET remark = '%s' where primaryidentifier = '%s'" % (new_remark, rnai_id))
             print('updated ' + rnai_id)
             print('\n')
 
@@ -45,7 +45,8 @@ def remove_secondaryidentifier():
             print(new_identifier)
             rnai_id = row['primaryidentifier']
             print(rnai_id)
-            connection.execute("UPDATE rnai SET secondaryidentifier = '%s' where primaryidentifier = '%s'" %  (new_identifier, rnai_id))
+            connection.execute("UPDATE rnai SET secondaryidentifier = '%s' where primaryidentifier = '%s'"
+                               % (new_identifier, rnai_id))
             print('updated ' + rnai_id)
             print('\n')
 
@@ -64,10 +65,11 @@ def remove_phenotyperemark():
             rnai_id = row['primaryidentifier']
             print(rnai_id)
             try:
-                connection.execute("UPDATE rnai SET phenotyperemark = '%s' where primaryidentifier = '%s'" %  (new_remark, rnai_id))
+                connection.execute("UPDATE rnai SET phenotyperemark = '%s' where primaryidentifier = '%s'"
+                                   % (new_remark, rnai_id))
                 print('updated ' + rnai_id)
-            except:
-                print('Error updating ' +  rnai_id)
+            except Exception as e:
+                print('Error updating ' + rnai_id + ' ' + str(e))
             print('\n')
 
 
@@ -76,4 +78,3 @@ if __name__ == '__main__':
     remove_remarks()
     remove_secondaryidentifier()
     remove_phenotyperemark()
-
