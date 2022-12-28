@@ -13,20 +13,22 @@ connection = db.connect()
 def check_transcript_table():
 
     all = []
-    result = connection.execute('select * from transcript')
+    result = connection.execute("select * from transcript")
     for row in result:
         all.append(row)
 
     return all
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     print(len(check_transcript_table()))
 
-    print('Reading transcript list to remove')
-    to_remove = open('to_remove_transcript.txt').read().splitlines()
+    print("Reading transcript list to remove")
+    to_remove = open("to_remove_transcript.txt").read().splitlines()
 
     for i in to_remove:
         print(i)
-        connection.execute("DELETE FROM transcript WHERE  primaryidentifier = '%s'" % (i))
+        connection.execute(
+            "DELETE FROM transcript WHERE  primaryidentifier = '%s'" % (i)
+        )

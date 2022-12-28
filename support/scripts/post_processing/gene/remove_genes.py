@@ -10,9 +10,9 @@ db = create_engine(db_string)
 connection = db.connect()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    gene_ids = open('to_remove_gene.txt').read().splitlines()
+    gene_ids = open("to_remove_gene.txt").read().splitlines()
     print(gene_ids)
 
     for i in gene_ids:

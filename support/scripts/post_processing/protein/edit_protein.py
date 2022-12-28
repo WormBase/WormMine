@@ -20,16 +20,19 @@ def remove_wormpep():
 
     res = db.execute(text(sql_text))
     for row in res:
-        if str(row['primaryidentifier']).find('wormpep') >= 0:
-            print(row['primaryidentifier'])
-            pid = row['id']
-            identifier = row['primaryidentifier']
-            new_identifier = identifier.replace('wormpep=', '')
+        if str(row["primaryidentifier"]).find("wormpep") >= 0:
+            print(row["primaryidentifier"])
+            pid = row["id"]
+            identifier = row["primaryidentifier"]
+            new_identifier = identifier.replace("wormpep=", "")
             print(new_identifier, pid)
-            connection.execute("UPDATE protein SET primaryidentifier = '%s'  where id = '%s'" % (new_identifier, pid))
+            connection.execute(
+                "UPDATE protein SET primaryidentifier = '%s'  where id = '%s'"
+                % (new_identifier, pid)
+            )
             print(f"updated {identifier}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     remove_wormpep()

@@ -13,19 +13,19 @@ connection = db.connect()
 def check_mrna_table():
 
     all = []
-    result = connection.execute('select * from mrna')
+    result = connection.execute("select * from mrna")
     for row in result:
         all.append(row)
 
     return all
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     print(len(check_mrna_table()))
 
-    print('Reading mRNA list to remove')
-    to_remove = open('to_remove_mrna.txt').read().splitlines()
+    print("Reading mRNA list to remove")
+    to_remove = open("to_remove_mrna.txt").read().splitlines()
 
     for i in to_remove:
         print(i)

@@ -10,9 +10,9 @@ db = create_engine(db_string)
 connection = db.connect()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    transcript_ids = open('to_remove_cds.txt').read().splitlines()
+    transcript_ids = open("to_remove_cds.txt").read().splitlines()
 
     for i in transcript_ids:
         print(i)
