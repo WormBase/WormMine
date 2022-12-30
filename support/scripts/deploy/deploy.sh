@@ -527,6 +527,21 @@ fi
 echo
 
 
+#################### Operon ###############
+echo 'Operon'
+mkdir -vp "$datadir"/wormbase-acedb/operon/XML
+mkdir -vp "$datadir"/wormbase-acedb/operon/mapping
+if [ ! -f "$datadir"'/wormbase-acedb/wbprocess/XML/prepped_operon.xml' ];then
+  cp -v "$sourcedir"/Operon.xml "$acexmldir"/operon/Operon.xml
+  cp -v $intermine'/support/properties_xpath/operon_mapping.properties' "$datadir"'/wormbase-acedb/operon/mapping'
+  perl $testlab'/wb-acedb/prepped_operon.pl' "$datadir"'/wormbase-acedb/operon/Operon.xml' "$datadir"'/wormbase-acedb/operon/XML/prepped_operon.xml'
+else
+  echo 'Operon file processed'
+fi
+echo
+
+
+
 # ################### panther ######################
 echo 'panther'
 mkdir -p "$datadir"'/panther'
@@ -570,6 +585,15 @@ mkdir -p "$datadir"'/homologene'
 wget ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data -O "$datadir"/homologene/homologene.data
 
 
+
+echo
+echo 'Success: deployment and pre-processing complete'
+echo
+
+
+
+
+
 # ################### compara #####################
 # echo 'compara - Human'
 # mkdir -p $datadir'/ensembl/compara'
@@ -601,14 +625,4 @@ wget ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data -O "$datadir"
 # mkdir -p $datadir'/ensembl/compara'
 # # perl $compara'/compara.pl' $compara'/yeast.xml' > $datadir'/ensembl/compara/6239_4932'
 # python $compara/compara.py $compara'/yeast.xml' > $datadir'/ensembl/compara/6239_4932'
-
-
-echo
-echo 'Success: deployment and pre-processing complete'
-echo
-
-# echo 'Starting build'
-# cd $intermine'/wormmine'
-# pwd
-#../bio/scripts/project_build -b -v localhost wormmine_dump
 
