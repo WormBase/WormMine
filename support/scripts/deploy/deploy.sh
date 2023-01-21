@@ -81,7 +81,7 @@ do
   if [ ! -f "$spe"."${species["$spe"]}"."$wbrel".protein.fa ]; then
     echo "$spe"."${species["$spe"]}"."$wbrel".protein.fa 'not found'
     echo 'transferring ' "$spe"."${species["$spe"]}"."$wbrel".protein.fa
-    wget -q --show-progress -O "$spe"."${species["$spe"]}"."$wbrel".protein.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species["$spe"]}""/""$spe"".""${species["$spe"]}"".""$wbrel"".protein.fa.gz"
+    wget -q  -O "$spe"."${species["$spe"]}"."$wbrel".protein.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species["$spe"]}""/""$spe"".""${species["$spe"]}"".""$wbrel"".protein.fa.gz"
     gunzip -v "$spe"."${species["$spe"]}"."$wbrel".protein.fa.gz
   else
     echo "$spe"."${species["$spe"]}"."$wbrel".protein.fa 'found, not transferring'
@@ -104,7 +104,7 @@ do
   if [ ! -f "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa ]; then
     echo "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa 'not found'
     echo 'transferring ' "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa.gz
-    wget -q --show-progress -O "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".genomic.fa.gz"
+    wget -q  -O "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".genomic.fa.gz"
     gunzip  -v "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa.gz
   else
     echo "$spe"."${species2["$spe"]}"."$wbrel".genomic.fa 'found, not transferring'
@@ -119,7 +119,7 @@ do
   if [ ! -f "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa ]; then
     echo "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa 'not found'
     echo 'transferring' "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa
-    wget -q --show-progress -O "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".mRNA_transcripts.fa.gz"
+    wget -q  -O "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".mRNA_transcripts.fa.gz"
     gunzip -v "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa.gz
   else
     echo "$spe"."${species2["$spe"]}"."$wbrel".mRNA_transcripts.fa.gz 'found, not transferring'
@@ -137,7 +137,7 @@ do
   if [ ! -f "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa ]; then
     echo "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa 'not found'
     echo 'transferring' "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa
-    wget -q --show-progress -O "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".CDS_transcripts.fa.gz"
+    wget -q -O "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa.gz "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".CDS_transcripts.fa.gz"
     gunzip -v "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa.gz
   else
     echo "$spe"."${species2["$spe"]}"."$wbrel".CDS_transcripts.fa.gz 'found, not transferring'
@@ -154,7 +154,7 @@ do
   cd "$datadir"'/wormbase-gff3' || exit
   if [ ! -f raw/"$spe"."${species2["$spe"]}"."$wbrel".gff ]; then
     echo 'transferring' "$spe"."${species2["$spe"]}"."$wbrel".gff
-    wget -q --show-progress -O raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz  "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".annotations.gff3.gz"
+    wget -q -O raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz  "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".annotations.gff3.gz"
     gunzip -v raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz
   else
     echo  raw/"$spe"."${species2["$spe"]}"."$wbrel".gff 'found'
@@ -177,7 +177,7 @@ done
 mkdir -vp "$datadir""/go/"
 if [ ! -f "$datadir"/go/gene_ontology.1_2.obo ];then
   echo 'Transferring gene ontology file'
-  wget -q --show-progress -O "$datadir"/go/gene_ontology.1_2.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/gene_ontology.""$wbrel"".obo"
+  wget -q -O "$datadir"/go/gene_ontology.1_2.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/gene_ontology.""$wbrel"".obo"
 else
   echo 'gene ontolgy file found'
 fi
@@ -187,7 +187,7 @@ echo
 mkdir -vp "$datadir""/ontology/"
 if [ ! -f "$datadir"/ontology/anatomy_ontology.obo ];then
   echo 'Transferring anatomy ontology file'
-  wget -q --show-progress -O "$datadir"/ontology/anatomy_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/anatomy_ontology.""$wbrel"".obo"
+  wget -q -O "$datadir"/ontology/anatomy_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/anatomy_ontology.""$wbrel"".obo"
   sed -i '/subset:/d' "$datadir"/ontology/anatomy_ontology.obo
 else
   echo 'anatomy ontolgy file found'
@@ -198,7 +198,7 @@ echo
 mkdir -vp "$datadir""/ontology/"
 if [ ! -f "$datadir"/ontology/disease_ontology.obo ];then
   echo 'Transferring anatomy ontology file'
-  wget -q --show-progress -O "$datadir"/ontology/disease_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/disease_ontology.""$wbrel"".obo"
+  wget -q -O "$datadir"/ontology/disease_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/disease_ontology.""$wbrel"".obo"
 else
   echo 'disease ontolgy file found'
 fi
@@ -208,7 +208,7 @@ echo
 mkdir -vp "$datadir""/ontology/"
 if [ ! -f "$datadir"/ontology/phenotype_ontology.obo ];then
   echo 'Transferring anatomy ontology file'
-  wget -q --show-progress -O "$datadir"/ontology/phenotype_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/phenotype_ontology.""$wbrel"".obo"
+  wget -q -O "$datadir"/ontology/phenotype_ontology.obo "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/phenotype_ontology.""$wbrel"".obo"
 else
   echo 'phenotype ontolgy file found'
 fi
@@ -221,7 +221,7 @@ mkdir -vp "$datadir"'/go-annotation/final'
 
 if [ ! -f "$datadir"'/go-annotation/final/gene_association_sorted_filtered.wb' ];then
   echo 'Transferring gene association file'
-  wget -q --show-progress -O "$datadir"'/go-annotation/raw/gene_association'."$wbrel".wb "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/gene_association.""$wbrel"".wb"
+  wget -q -O "$datadir"'/go-annotation/raw/gene_association'."$wbrel".wb "ftp://ftp.wormbase.org/pub/wormbase/releases/""$wbrel""/ONTOLOGY/gene_association.""$wbrel"".wb"
   echo 'Sorting'
   sort -k 2,2 "$datadir"'/go-annotation/raw/gene_association'."$wbrel".wb > "$datadir"'/go-annotation/raw/gene_association_sorted.wb'
   echo 'Filtering'
@@ -562,7 +562,7 @@ echo
 echo 'ncbi'
 if [ ! -f "$datadir"'/ncbi/gene_info' ];then
   mkdir -p "$datadir"'/ncbi'
-  wget  -q --show-progress -O "$datadir"'/ncbi/gene_info.gz' "ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz"
+  wget  -q -O "$datadir"'/ncbi/gene_info.gz' "ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz"
   gunzip -v "$datadir"'/ncbi/gene_info.gz'
 else
   echo 'NCBI gene_info already deployed'
