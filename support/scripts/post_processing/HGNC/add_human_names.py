@@ -2,7 +2,7 @@
 
 import sys
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 pg_creds = open("../pgcreds").read().strip()
 db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"
@@ -17,16 +17,16 @@ if __name__ == "__main__":
 
     symbols = {x.split("\t")[0]: x.split("\t")[1] for x in HGNC_ids}
     try:
-        human_query = connection.execute(
+        human_query = connection.execute(text(
             "SELECT * FROM gene WHERE primaryidentifier like '%%HGNC%%';"
-        )
+        ))
         for g in human_query:
             print(g)
         for gene in human_query:
             print(gene["primaryidentifier"], symbols[gene["primaryidentifier"]])
-            connection.execute(
+            connection.execute(text(
                 "UPDATE gene SET secondaryidentifier = '%s' where primaryidentifier = '%s'"
                 % (symbols[gene["primaryidentifier"]], gene["primaryidentifier"])
-            )
+            ))
     except Exception as e:
         print(str(e))

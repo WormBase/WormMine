@@ -2,7 +2,7 @@
 
 import sys
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 pg_creds = open("../pgcreds").read().strip()
 db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"
@@ -13,7 +13,7 @@ connection = db.connect()
 def check_transcript_table():
 
     all = []
-    result = connection.execute("select * from transcript")
+    result = connection.execute(text("select * from transcript"))
     for row in result:
         all.append(row)
 
@@ -29,6 +29,6 @@ if __name__ == "__main__":
 
     for i in to_remove:
         print(i)
-        connection.execute(
+        connection.execute(text(
             "DELETE FROM transcript WHERE  primaryidentifier = '%s'" % (i)
-        )
+        ))

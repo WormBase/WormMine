@@ -2,7 +2,7 @@
 
 import sys
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 pg_creds = open("../pgcreds").read().strip()
 db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"
@@ -16,4 +16,4 @@ if __name__ == "__main__":
 
     for i in transcript_ids:
         print(i)
-        connection.execute("DELETE from cds WHERE primaryidentifier = '%s'" % (i))
+        connection.execute(text("DELETE from cds WHERE primaryidentifier = '%s'" % (i)))
