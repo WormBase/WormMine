@@ -1,0 +1,350 @@
+Query 1 - All live genes
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc">   <constraint path="Gene.organism.name" op="=" value="Caenorhabditis elegans"/> </query>
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+
+
+###############################################################################
+
+Query 2 - All pseudogenes
+
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0000336"/> </query>
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0000336", code="B")
+
+
+###############################################################################
+
+Query 3 - All uncloned genes	
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.secondaryIdentifier" code="B" op="IS NULL"/> </query>
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("secondaryIdentifier", "IS NULL", code="B")
+
+
+
+###############################################################################
+
+Query 4 - All cloned genes (minus pseudogenes)	
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="!=" value="SO:0000336"/> </query>
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "!=", "SO:0000336", code="B")
+
+
+
+###############################################################################
+
+Query 5 - All protein coding genes	
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.CDSs" code="B" op="IS NOT NULL"/> </query>
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("CDSs", "IS NOT NULL", code="B")
+
+
+###############################################################################
+
+Query 6 - All non-coding genes	
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B and C">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.CDSs" code="B" op="IS NULL"/>   <constraint path="Gene.biotype" code="C" op="!=" value="SO:0000336"/> </query>
+
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("CDSs", "IS NULL", code="B")
+query.add_constraint("biotype", "!=", "SO:0000336", code="C")
+
+
+###############################################################################
+
+Query 7 - All tRNA genes	
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0001272"/> </query>	
+
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0001272", code="B")
+
+
+###############################################################################
+
+Query 8 - All rRNA genes	
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0001637"/> </query>
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0001637", code="B")
+
+
+###############################################################################
+
+Query 9 - All miRNA genes	
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0001265"/> </query>
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0001265", code="B")
+
+
+###############################################################################
+
+Query 10 - All piRNA genes	
+
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0001638"/> </query>	
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0001638", code="B")
+
+
+###############################################################################
+
+Query 11 - - All snRNA genes	
+
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0001268"/> </query>
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0001268", code="B")
+
+
+###############################################################################
+
+Query 12 - All snoRNA genes
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0001267"/> </query>
+
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0001267", code="B")
+
+
+###############################################################################
+
+Query 13 - - All lincRNA genes	
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0001641"/> </query>
+
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0001641", code="B")
+
+
+###############################################################################
+
+Query 14 - All asRNA genes	
+
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0002182"/> </query>	
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0002182", code="B")
+
+
+###############################################################################
+
+Query 15 - All scRNA genes	
+
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0001266"/> </query>	
+
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0001266", code="B")
+
+
+###############################################################################
+
+Query 16 - All unclassified ncRNA genes	
+
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.biotype" code="B" op="=" value="SO:0001263"/> </query>	
+
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("biotype", "=", "SO:0001263", code="B")
+
+
+###############################################################################
+
+Query 17 - All genes with GO annotation	
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.goAnnotation" code="B" op="IS NOT NULL"/> </query>
+
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("goAnnotation", "IS NOT NULL", code="B")
+
+
+###############################################################################
+
+Query 18 - All genes with GO experimental evidence	
+
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B and C and (D or E or F or G or H or I or J or K or L or M or N)"> <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/> <constraint path="Gene.goAnnotation.qualifier" code="B" op="!=" value=" NOT|enables"/> <constraint path="Gene.goAnnotation.qualifier" code="C" op="!=" value=" NOT|enables"/> <constraint path="Gene.goAnnotation.evidence.code.name" code="D" op="=" value="Inferred from Direct Assay"/> <constraint path="Gene.goAnnotation.evidence.code.name" code="E" op="=" value="Inferred from Experiment"/> <constraint path="Gene.goAnnotation.evidence.code.name" code="F" op="=" value="Inferred from Expression Pattern "/> <constraint path="Gene.goAnnotation.evidence.code.name" code="G" op="=" value="Inferred from Genetic Interaction"/> <constraint path="Gene.goAnnotation.evidence.code.name" code="H" op="=" value="Inferred from High Throughput Direct Assay"/> <constraint path="Gene.goAnnotation.evidence.code.name" code="I" op="=" value="Inferred from High Throughput Experiment"/> <constraint path="Gene.goAnnotation.evidence.code.name" code="J" op="=" value="Inferred from High Throughput Expression Pattern"/> <constraint path="Gene.goAnnotation.evidence.code.name" code="K" op="=" value="Inferred from Hight Throughput Mutant Phenotype"/> <constraint path="Gene.goAnnotation.evidence.code.name" code="L" op="=" value="Inferred from Mutant Phenotype"/> <constraint path="Gene.goAnnotation.evidence.code.name" code="M" op="=" value="Inferred from Physical Interaction"/> <constraint path="Gene.goAnnotation.evidence.code.name" code="N" op="=" value="nferred from High Throughput Genetic Interaction"/> </query>
+
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("goAnnotation.qualifier", "!=", " NOT|enables", code="B")
+query.add_constraint("goAnnotation.qualifier", "!=", " NOT|enables", code="C")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "Inferred from Direct Assay", code="D")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "Inferred from Experiment", code="E")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "Inferred from Expression Pattern ", code="F")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "Inferred from Genetic Interaction", code="G")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "Inferred from High Throughput Direct Assay", code="H")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "Inferred from High Throughput Experiment", code="I")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "Inferred from High Throughput Expression Pattern", code="J")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "Inferred from Hight Throughput Mutant Phenotype", code="K")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "Inferred from Mutant Phenotype", code="L")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "Inferred from Physical Interaction", code="M")
+query.add_constraint("goAnnotation.evidence.code.name", "=", "nferred from High Throughput Genetic Interaction", code="N")
+query.set_logic("A and B and C and (D or E or F or G or H or I or J or K or L or M or N)")
+
+
+###############################################################################
+
+Query 19 - All genes with phenotype	
+
+This has to be a complex query in WormMine (two queries with the union of those results)
+
+UNION OF: <query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.allele.phenotype" code="B" op="IS NOT NULL"/> </query> 
+
+5,023
+
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("allele.phenotype", "IS NOT NULL", code="B")
+
+
+<query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.symbol" longDescription="" sortOrder="Gene.primaryIdentifier asc" constraintLogic="A and B">   <constraint path="Gene.organism.name" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Gene.RNAiResult.phenotype" code="B" op="IS NOT NULL"/> </query>
+
+
+7,756
+
+query = service.new_query("Gene")
+query.add_view("primaryIdentifier", "secondaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("RNAiResult.phenotype", "IS NOT NULL", code="B")
+
+
+
+###############################################################################
+
+Query 20  - All chromosomes (including mitochondrial)	
+
+
+<query name="" model="genomic" view="Chromosome.primaryIdentifier" longDescription="" sortOrder="Chromosome.primaryIdentifier asc">   <constraint path="Chromosome.organism.name" op="=" value="Caenorhabditis elegans"/> </query>		
+
+
+query = service.new_query("Chromosome")
+query.add_view("primaryIdentifier")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")
+
+
+###############################################################################
+
+Query 21 - All distinct proteins	
+
+<query name="" model="genomic" view="Protein.primaryIdentifier Protein.symbol" longDescription="" sortOrder="Protein.primaryIdentifier asc">   <constraint path="Protein.organism.name" op="=" value="Caenorhabditis elegans"/> </query>
+
+query = service.new_query("Protein")
+query.add_view("primaryIdentifier", "symbol")
+query.add_constraint("organism.name", "=", "Caenorhabditis elegans", code="A")	
+
+
+###############################################################################
+
+Query 22 - All protein sequences	
+
+<query name="" model="genomic" view="Protein.primaryIdentifier Protein.symbol Protein.sequence.residues" longDescription="" sortOrder="Protein.primaryIdentifier asc">   <constraint path="Protein.organism.name" op="=" value="Caenorhabditis elegans"/> </query>		
+
+
+add query here
+
+###############################################################################
+
+Query 23 - All strains	
+
+<query name="" model="genomic" view="Strain.primaryIdentifier Strain.name" longDescription="" sortOrder="Strain.primaryIdentifier asc">   <constraint path="Strain.species" op="=" value="Caenorhabditis elegans"/> </query>		
+
+add query here
+
+###############################################################################
+
+
+Query 24 - All alleles
+
+<query name="" model="genomic" view="Allele.primaryIdentifier Allele.symbol" longDescription="" sortOrder="Allele.primaryIdentifier asc"><constraint path="Allele.species" op="=" value="Caenorhabditis elegans"/></query>
+
+
+query = service.new_query("Allele")
+query.add_view("primaryIdentifier", "symbol")
+query.add_constraint("species", "=", "Caenorhabditis elegans", code="A")
+
+###############################################################################
+
+Query 25 - All SNPs
+
+<query name="" model="genomic" view="Allele.primaryIdentifier Allele.symbol" longDescription="" sortOrder="Allele.primaryIdentifier asc" constraintLogic="A and (B or C)">   <constraint path="Allele.species" code="A" op="=" value="Caenorhabditis elegans"/>   <constraint path="Allele.type" code="B" op="=" value="SNP"/>   <constraint path="Allele.type" code="C" op="=" value="Predicted_SNP"/> </query>
+
+query = service.new_query("Allele")
+query.add_view("primaryIdentifier", "symbol")
+query.add_constraint("species", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("type", "=", "SNP", code="B")
+query.add_constraint("type", "=", "Predicted_SNP", code="C")
+query.set_logic("A and (B or C)")
+
+
+
+Query 26 - All phenotypic alleles
+
+<query name="" model="genomic" view="Allele.primaryIdentifier Allele.symbol" longDescription="" sortOrder="Allele.primaryIdentifier asc"constraintLogic="A and B"><constraint path="Allele.species" code="A" op="=" value="Caenorhabditis elegans"/><constraint path="Allele.phenotype"code="B" op="IS NOT NULL"/> </query>
+
+
+query = service.new_query("Allele")
+query.add_view("primaryIdentifier", "symbol")
+query.add_constraint("species", "=", "Caenorhabditis elegans", code="A")
+query.add_constraint("phenotype", "IS NOT NULL", code="B")
