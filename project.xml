@@ -2,7 +2,7 @@
 <!DOCTYPE page [
 
 <!-- Relative path to the data directory, from basedir wormmine/integrate -->
-<!ENTITY datadir "/mnt/data/mine_input/datadirWS288">
+<!ENTITY datadir "/mnt/data/mine_input/datadirWS289">
 <!--<!ENTITY datadir "/mnt/data2/mine_input/datadir_small">-->
 
 
