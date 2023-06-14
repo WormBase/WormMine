@@ -8,7 +8,7 @@ pg_creds = open("../pgcreds").read().strip()
 db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"
 db = create_engine(db_string)
 connection = db.connect()
-
+t = connection.begin()
 
 if __name__ == "__main__":
 
@@ -19,7 +19,8 @@ if __name__ == "__main__":
             "SELECT * from anatomyterm where primaryidentifier = '%s'" % (i)
         ))
         for j in result:
-            definition = j["definition"]
+            print(j[0])
+            definition = j[0]
             new_definition = (
                 definition.replace("<![CDATA[", "").replace("]]>", "").replace("'", "`")
             )
@@ -33,6 +34,7 @@ if __name__ == "__main__":
                     "SELECT * from anatomyterm where primaryidentifier = '%s'" % (i)
                 ))
                 for k in result:
-                    print(k["definition"])
+                    print(k[0])
             except Exception as e:
                 print("error", str(e))
+    t.commit()
