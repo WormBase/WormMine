@@ -2,7 +2,7 @@
 <!DOCTYPE page [
 
 <!-- Relative path to the data directory, from basedir wormmine/integrate -->
-<!ENTITY datadir "/mnt/data/mine_input/datadirWS289">
+<!ENTITY datadir "/mnt/data/mine_input/datadirWS290">
 <!--<!ENTITY datadir "/mnt/data2/mine_input/datadir_small">-->
 
 
@@ -67,7 +67,7 @@
 	<source name="go-annotation" type="go-annotation" dump="true">
 		<property name="ontologyfile" location="&datadir;/go/gene_ontology.1_2.obo"/>
 		<property name="src.data.dir" location="&datadir;/go-annotation/final"/>
-	</source> -->
+	</source>
 
 <!--	<source name="anat-annotation" type="anat-annotation" dump="false">
                 <property name="ontologyfile" location="&datadir;/ontology/anatomy_ontology.obo"/>

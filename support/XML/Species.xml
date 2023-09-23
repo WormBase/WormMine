@@ -1,3 +1,49 @@
+<Species>Saccharomyces cerevisiae S288C
+  <NCBITaxonomyID>
+    <Int>559292</Int>
+  </NCBITaxonomyID>
+</Species>
+
+
+<Species>Saccharomyces cerevisiae
+   <NCBITaxonomyID>
+     <Int>4932</Int>
+  </NCBITaxonomyID>
+</Species>
+
+<Species> Drosophila melanogaster
+   <NCBITaxonomyID>
+     <Int>7227</Int>
+  </NCBITaxonomyID>
+</Species>
+
+
+
+<Species>Rattus norvegicus
+   <NCBITaxonomyID>
+     <Int>10116</Int>
+  </NCBITaxonomyID>
+</Species>
+
+
+<Species>Oscheius tipulae
+   <NCBITaxonomyID>
+     <Int>141969</Int>
+  </NCBITaxonomyID>
+</Species>
+
+<Species>Caenorhabditis inopinata
+   <NCBITaxonomyID>
+     <Int>1978547</Int>
+  </NCBITaxonomyID>
+</Species>
+
+<Species>Caenorhabditis latens
+   <NCBITaxonomyID>
+     <Int>1503980</Int>
+  </NCBITaxonomyID>
+</Species>	
+
 <Species>Trichuris muris
   <NCBITaxonomyID>
     <Int>70415</Int>
@@ -29,12 +75,6 @@
   </NCBITaxonomyID>
 </Species>
 
-
-<Species>Saccharomyces cerevisiae S288c
-  <NCBITaxonomyID>
-    <Int>559292</Int>
-  </NCBITaxonomyID>
-</Species>
 
 <Species>Mus musculus
   <NCBITaxonomyID>
@@ -1468,3 +1508,75 @@
   </Assembly>
 </Species>
 
+<Species>Caenorhabditis quiockensis
+   <NCBITaxonomyID>
+     <Int>1729975</Int>
+   </NCBITaxonomyID>
+</Species>
+
+
+<Species>Caenorhabditis becei
+   <NCBITaxonomyID>
+     <Int>2301260</Int>
+   </NCBITaxonomyID>
+</Species>
+
+<Species>Caenorhabditis bovis
+   <NCBITaxonomyID>
+     <Int>2654633</Int>
+   </NCBITaxonomyID>
+</Species>
+
+<Species>Caenorhabditis tribulationis
+   <NCBITaxonomyID>
+     <Int>1737337</Int>
+   </NCBITaxonomyID>
+</Species>
+
+
+<Species>Caenorhabditis zanzibari
+   <NCBITaxonomyID>
+     <Int>1737333</Int>
+   </NCBITaxonomyID>
+</Species>
+
+
+<Species>Caenorhabditis waitukubuli
+   <NCBITaxonomyID>
+     <Int>1737336</Int>
+   </NCBITaxonomyID>
+</Species>
+
+
+<Species>Caenorhabditis parvicauda
+   <NCBITaxonomyID>
+     <Int>1737332</Int>
+   </NCBITaxonomyID>
+</Species>
+
+
+<Species>Caenorhabditis panamensis
+   <NCBITaxonomyID>
+     <Int>2301259</Int>
+   </NCBITaxonomyID>
+</Species>
+
+
+<Species>Caenorhabditis uteleia
+   <NCBITaxonomyID>
+     <Int>1737334</Int>
+   </NCBITaxonomyID>
+</Species>
+
+<Species>Caenorhabditis sulstoni
+   <NCBITaxonomyID>
+     <Int>1737335</Int>
+   </NCBITaxonomyID>
+</Species>
+
+
+<Species>Steinernema carpocapsae
+      <NCBITaxonomyID>                                                                                                                                                                              │··········
+     <Int>34508</Int>                                                                                                                                                                          │··········
+   </NCBITaxonomyID>                                                                                                                                                                             │··········
+</Species> 
