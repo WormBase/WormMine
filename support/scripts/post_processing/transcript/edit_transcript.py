@@ -6,7 +6,7 @@ from sqlalchemy import create_engine, text
 
 pg_creds = open("../pgcreds").read().strip()
 db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"
-db = create_engine(db_string)
+db = create_engine(db_string, isolation_level = 'AUTOCOMMIT')
 connection = db.connect()
 
 

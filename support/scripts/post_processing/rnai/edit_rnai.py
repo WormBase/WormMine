@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 
 pg_creds = open("../pgcreds").read().strip()
 db_string = f"postgresql://{pg_creds}@localhost/{sys.argv[1]}"
-db = create_engine(db_string)
+db = create_engine(db_string, isolation_level = 'AUTOCOMMIT')
 connection = db.connect()
 Session = sessionmaker(bind=db)
 session = Session()
@@ -94,6 +94,6 @@ def remove_phenotyperemark():
 
 if __name__ == "__main__":
 
-#    remove_remarks()
-#    remove_secondaryidentifier()
+    remove_remarks()
+    remove_secondaryidentifier()
     remove_phenotyperemark()
