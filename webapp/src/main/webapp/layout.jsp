@@ -208,8 +208,7 @@ if (typeof imtables != 'undefined' && imtables.setMessages) {
       </div>
     </c:if>
 
-  <c:import var="wbfooter" url="${WEB_PROPERTIES['webapp.wormbase.url']}/footer?desktop=true"/>
-  ${wbfooter}
+  <c:import url="footer.jsp"/>
 
     <c:set var="googleAnalyticsId" value="${WEB_PROPERTIES['google.analytics.id']}"/>
     <c:if test="${!empty googleAnalyticsId}">
