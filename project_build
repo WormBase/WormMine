@@ -108,7 +108,7 @@ my $dry_run = 0;
 # the "CREATE DATABASE foo WITH TEMPLATE bar" command
 my $server_backup = 1;
 
-my $db_encoding = 'SQL_ASCII';
+my $db_encoding = 'UTF8';
 
 # if true, run build-db before starting the integration
 my $run_build_db = 0;
