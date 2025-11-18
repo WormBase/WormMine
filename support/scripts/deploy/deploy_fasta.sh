@@ -39,30 +39,30 @@ do
   mkdir -vp "$datadir/fasta/$spe/proteins/prepped"
 
   # Check if we have the file locally first
-  # Try different possible locations
-  local_file_gz="$sourcedir/species/$spe/${species["$spe"]}/$spe.${species["$spe"]}.$wbrel.protein.fa.gz"
+  # Try different possible locations - both compressed and uncompressed
+  local_file_ftp_gz="$sourcedir/ftp/$spe.${species["$spe"]}.$wbrel.protein.fa.gz"
   local_file_ftp="$sourcedir/ftp/$spe.${species["$spe"]}.$wbrel.protein.fa"
-  local_file_plain="$sourcedir/$spe.${species["$spe"]}.$wbrel.protein.fa"
+  local_file_gz="$sourcedir/species/$spe/${species["$spe"]}/$spe.${species["$spe"]}.$wbrel.protein.fa.gz"
   target_raw="$datadir/fasta/$spe/proteins/raw/$spe.${species["$spe"]}.$wbrel.protein.fa"
 
-  if [ -f "$local_file_ftp" ]; then
-    echo "Found local file: $local_file_ftp"
+  if [ -f "$local_file_ftp_gz" ]; then
+    echo "Found local compressed file: $local_file_ftp_gz"
+    if [ ! -f "$target_raw" ]; then
+      echo "Extracting to $target_raw"
+      gunzip -c "$local_file_ftp_gz" > "$target_raw"
+    else
+      echo "Raw file already exists: $target_raw"
+    fi
+  elif [ -f "$local_file_ftp" ]; then
+    echo "Found local uncompressed file: $local_file_ftp"
     if [ ! -f "$target_raw" ]; then
       echo "Copying to $target_raw"
       cp "$local_file_ftp" "$target_raw"
     else
       echo "Raw file already exists: $target_raw"
     fi
-  elif [ -f "$local_file_plain" ]; then
-    echo "Found local file: $local_file_plain"
-    if [ ! -f "$target_raw" ]; then
-      echo "Copying to $target_raw"
-      cp "$local_file_plain" "$target_raw"
-    else
-      echo "Raw file already exists: $target_raw"
-    fi
   elif [ -f "$local_file_gz" ]; then
-    echo "Found local file: $local_file_gz"
+    echo "Found local compressed file: $local_file_gz"
     if [ ! -f "$target_raw" ]; then
       echo "Extracting to $target_raw"
       gunzip -c "$local_file_gz" > "$target_raw"
@@ -104,12 +104,21 @@ do
   mkdir -vp "$datadir/fasta/$spe/cds/prepped"
 
   # Genomic FASTA
+  local_genomic_ftp_gz="$sourcedir/ftp/$spe.${species2["$spe"]}.$wbrel.genomic.fa.gz"
   local_genomic_ftp="$sourcedir/ftp/$spe.${species2["$spe"]}.$wbrel.genomic.fa"
   local_genomic_gz="$sourcedir/species/$spe/${species2["$spe"]}/$spe.${species2["$spe"]}.$wbrel.genomic.fa.gz"
   target_genomic="$datadir/fasta/$spe/genomic/$spe.${species2["$spe"]}.$wbrel.genomic.fa"
 
-  if [ -f "$local_genomic_ftp" ]; then
-    echo "Found local genomic file: $local_genomic_ftp"
+  if [ -f "$local_genomic_ftp_gz" ]; then
+    echo "Found local compressed genomic file: $local_genomic_ftp_gz"
+    if [ ! -f "$target_genomic" ]; then
+      echo "Extracting genomic to $target_genomic"
+      gunzip -c "$local_genomic_ftp_gz" > "$target_genomic"
+    else
+      echo "Genomic file already exists: $target_genomic"
+    fi
+  elif [ -f "$local_genomic_ftp" ]; then
+    echo "Found local uncompressed genomic file: $local_genomic_ftp"
     if [ ! -f "$target_genomic" ]; then
       echo "Copying genomic to $target_genomic"
       cp "$local_genomic_ftp" "$target_genomic"
@@ -117,7 +126,7 @@ do
       echo "Genomic file already exists: $target_genomic"
     fi
   elif [ -f "$local_genomic_gz" ]; then
-    echo "Found local genomic file: $local_genomic_gz"
+    echo "Found local compressed genomic file: $local_genomic_gz"
     if [ ! -f "$target_genomic" ]; then
       echo "Extracting genomic to $target_genomic"
       gunzip -c "$local_genomic_gz" > "$target_genomic"
@@ -135,12 +144,21 @@ do
   fi
 
   # CDS FASTA
+  local_cds_ftp_gz="$sourcedir/ftp/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa.gz"
   local_cds_ftp="$sourcedir/ftp/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa"
   local_cds_gz="$sourcedir/species/$spe/${species2["$spe"]}/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa.gz"
   target_cds_raw="$datadir/fasta/$spe/cds/raw/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa"
 
-  if [ -f "$local_cds_ftp" ]; then
-    echo "Found local CDS file: $local_cds_ftp"
+  if [ -f "$local_cds_ftp_gz" ]; then
+    echo "Found local compressed CDS file: $local_cds_ftp_gz"
+    if [ ! -f "$target_cds_raw" ]; then
+      echo "Extracting CDS to $target_cds_raw"
+      gunzip -c "$local_cds_ftp_gz" > "$target_cds_raw"
+    else
+      echo "CDS raw file already exists: $target_cds_raw"
+    fi
+  elif [ -f "$local_cds_ftp" ]; then
+    echo "Found local uncompressed CDS file: $local_cds_ftp"
     if [ ! -f "$target_cds_raw" ]; then
       echo "Copying CDS to $target_cds_raw"
       cp "$local_cds_ftp" "$target_cds_raw"
@@ -148,7 +166,7 @@ do
       echo "CDS raw file already exists: $target_cds_raw"
     fi
   elif [ -f "$local_cds_gz" ]; then
-    echo "Found local CDS file: $local_cds_gz"
+    echo "Found local compressed CDS file: $local_cds_gz"
     if [ ! -f "$target_cds_raw" ]; then
       echo "Extracting CDS to $target_cds_raw"
       gunzip -c "$local_cds_gz" > "$target_cds_raw"
