@@ -45,49 +45,50 @@ do
   local_file_gz="$sourcedir/species/$spe/${species["$spe"]}/$spe.${species["$spe"]}.$wbrel.protein.fa.gz"
   target_raw="$datadir/fasta/$spe/proteins/raw/$spe.${species["$spe"]}.$wbrel.protein.fa"
 
+  echo "  Looking for: $local_file_ftp"
+
   if [ -f "$local_file_ftp_gz" ]; then
-    echo "Found local compressed file: $local_file_ftp_gz"
+    echo "  Found local compressed file: $local_file_ftp_gz"
     if [ ! -f "$target_raw" ]; then
-      echo "Extracting to $target_raw"
+      echo "  Extracting to $target_raw"
       gunzip -c "$local_file_ftp_gz" > "$target_raw"
     else
-      echo "Raw file already exists: $target_raw"
+      echo "  Raw file already exists: $target_raw"
     fi
   elif [ -f "$local_file_ftp" ]; then
-    echo "Found local uncompressed file: $local_file_ftp"
+    echo "  Found local uncompressed file: $local_file_ftp"
     if [ ! -f "$target_raw" ]; then
-      echo "Copying to $target_raw"
+      echo "  Copying to $target_raw"
       cp "$local_file_ftp" "$target_raw"
     else
-      echo "Raw file already exists: $target_raw"
+      echo "  Raw file already exists: $target_raw"
     fi
   elif [ -f "$local_file_gz" ]; then
-    echo "Found local compressed file: $local_file_gz"
+    echo "  Found local compressed file: $local_file_gz"
     if [ ! -f "$target_raw" ]; then
-      echo "Extracting to $target_raw"
+      echo "  Extracting to $target_raw"
       gunzip -c "$local_file_gz" > "$target_raw"
     else
-      echo "Raw file already exists: $target_raw"
+      echo "  Raw file already exists: $target_raw"
     fi
   else
-    echo "Local file not found, downloading from WormBase FTP"
-    cd "$datadir/fasta/$spe/proteins/raw" || exit
-    if [ ! -f "$spe.${species["$spe"]}.$wbrel.protein.fa" ]; then
-      wget -q -O "$spe.${species["$spe"]}.$wbrel.protein.fa.gz" \
-        "https://downloads.wormbase.org/releases/$wbrel/species/$spe/${species["$spe"]}/$spe.${species["$spe"]}.$wbrel.protein.fa.gz"
-      gunzip -v "$spe.${species["$spe"]}.$wbrel.protein.fa.gz"
-    fi
+    echo "  ERROR: No local file found, cannot download (Cloudflare blocks FTP)"
+    echo "  Tried:"
+    echo "    - $local_file_ftp_gz"
+    echo "    - $local_file_ftp"
+    echo "    - $local_file_gz"
+    continue
   fi
 
   # Prep the FASTA file
   if [ -f "$target_raw" ]; then
-    echo "Pre-processing protein FASTA file"
+    echo "  Pre-processing protein FASTA file"
     awk '{ if (NF > 1) {split($2,res,"="); print ">"res[2]} else {print}}' \
       < "$target_raw" \
       > "$datadir/fasta/$spe/proteins/prepped/$spe.${species["$spe"]}.$wbrel.protein.final.fa"
-    echo "✓ Prepped: $datadir/fasta/$spe/proteins/prepped/$spe.${species["$spe"]}.$wbrel.protein.final.fa"
+    echo "  ✓ Prepped: $datadir/fasta/$spe/proteins/prepped/$spe.${species["$spe"]}.$wbrel.protein.final.fa"
   else
-    echo "✗ ERROR: Raw protein file not found for $spe"
+    echo "  ✗ ERROR: Raw protein file not found for $spe"
   fi
   echo
 done
@@ -110,37 +111,16 @@ do
   target_genomic="$datadir/fasta/$spe/genomic/$spe.${species2["$spe"]}.$wbrel.genomic.fa"
 
   if [ -f "$local_genomic_ftp_gz" ]; then
-    echo "Found local compressed genomic file: $local_genomic_ftp_gz"
-    if [ ! -f "$target_genomic" ]; then
-      echo "Extracting genomic to $target_genomic"
-      gunzip -c "$local_genomic_ftp_gz" > "$target_genomic"
-    else
-      echo "Genomic file already exists: $target_genomic"
-    fi
+    echo "  Found local compressed genomic file"
+    gunzip -c "$local_genomic_ftp_gz" > "$target_genomic"
   elif [ -f "$local_genomic_ftp" ]; then
-    echo "Found local uncompressed genomic file: $local_genomic_ftp"
-    if [ ! -f "$target_genomic" ]; then
-      echo "Copying genomic to $target_genomic"
-      cp "$local_genomic_ftp" "$target_genomic"
-    else
-      echo "Genomic file already exists: $target_genomic"
-    fi
+    echo "  Found local uncompressed genomic file"
+    cp "$local_genomic_ftp" "$target_genomic"
   elif [ -f "$local_genomic_gz" ]; then
-    echo "Found local compressed genomic file: $local_genomic_gz"
-    if [ ! -f "$target_genomic" ]; then
-      echo "Extracting genomic to $target_genomic"
-      gunzip -c "$local_genomic_gz" > "$target_genomic"
-    else
-      echo "Genomic file already exists: $target_genomic"
-    fi
+    echo "  Found local compressed genomic file (alt location)"
+    gunzip -c "$local_genomic_gz" > "$target_genomic"
   else
-    echo "Local genomic file not found, downloading..."
-    cd "$datadir/fasta/$spe/genomic" || exit
-    if [ ! -f "$spe.${species2["$spe"]}.$wbrel.genomic.fa" ]; then
-      wget -q -O "$spe.${species2["$spe"]}.$wbrel.genomic.fa.gz" \
-        "https://downloads.wormbase.org/releases/$wbrel/species/$spe/${species2["$spe"]}/$spe.${species2["$spe"]}.$wbrel.genomic.fa.gz"
-      gunzip -v "$spe.${species2["$spe"]}.$wbrel.genomic.fa.gz"
-    fi
+    echo "  ERROR: No local genomic file found"
   fi
 
   # CDS FASTA
@@ -150,48 +130,27 @@ do
   target_cds_raw="$datadir/fasta/$spe/cds/raw/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa"
 
   if [ -f "$local_cds_ftp_gz" ]; then
-    echo "Found local compressed CDS file: $local_cds_ftp_gz"
-    if [ ! -f "$target_cds_raw" ]; then
-      echo "Extracting CDS to $target_cds_raw"
-      gunzip -c "$local_cds_ftp_gz" > "$target_cds_raw"
-    else
-      echo "CDS raw file already exists: $target_cds_raw"
-    fi
+    echo "  Found local compressed CDS file"
+    gunzip -c "$local_cds_ftp_gz" > "$target_cds_raw"
   elif [ -f "$local_cds_ftp" ]; then
-    echo "Found local uncompressed CDS file: $local_cds_ftp"
-    if [ ! -f "$target_cds_raw" ]; then
-      echo "Copying CDS to $target_cds_raw"
-      cp "$local_cds_ftp" "$target_cds_raw"
-    else
-      echo "CDS raw file already exists: $target_cds_raw"
-    fi
+    echo "  Found local uncompressed CDS file"
+    cp "$local_cds_ftp" "$target_cds_raw"
   elif [ -f "$local_cds_gz" ]; then
-    echo "Found local compressed CDS file: $local_cds_gz"
-    if [ ! -f "$target_cds_raw" ]; then
-      echo "Extracting CDS to $target_cds_raw"
-      gunzip -c "$local_cds_gz" > "$target_cds_raw"
-    else
-      echo "CDS raw file already exists: $target_cds_raw"
-    fi
+    echo "  Found local compressed CDS file (alt location)"
+    gunzip -c "$local_cds_gz" > "$target_cds_raw"
   else
-    echo "Local CDS file not found, downloading..."
-    cd "$datadir/fasta/$spe/cds/raw" || exit
-    if [ ! -f "$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa" ]; then
-      wget -q -O "$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa.gz" \
-        "https://downloads.wormbase.org/releases/$wbrel/species/$spe/${species2["$spe"]}/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa.gz"
-      gunzip -v "$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa.gz"
-    fi
+    echo "  ERROR: No local CDS file found"
   fi
 
   # Prep CDS FASTA
   if [ -f "$target_cds_raw" ]; then
-    echo "Pre-processing CDS FASTA file"
+    echo "  Pre-processing CDS FASTA file"
     awk '{ if (NF > 1) {split($2,res,"="); print ">"res[2]} else {print}}' \
       < "$target_cds_raw" \
       > "$datadir/fasta/$spe/cds/prepped/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.final.fa"
-    echo "✓ Prepped: $datadir/fasta/$spe/cds/prepped/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.final.fa"
+    echo "  ✓ Prepped CDS"
   else
-    echo "✗ ERROR: Raw CDS file not found for $spe"
+    echo "  ✗ ERROR: Raw CDS file not found"
   fi
   echo
 done
