@@ -3,7 +3,7 @@
 # FASTA-only deployment script for WormMine
 # Processes protein and genomic FASTA files from FTP or local sources
 
-wbrel="$1"
+wbrel="${1:-WS298}"
 echo 'Release version' "$wbrel"
 
 #################### Species ####################
