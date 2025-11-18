@@ -1,0 +1,147 @@
+#!/bin/bash
+
+# FASTA-only deployment script for WormMine
+# Processes protein and genomic FASTA files from FTP or local sources
+
+wbrel="$1"
+echo 'Release version' "$wbrel"
+
+#################### Species ####################
+declare -A species=(["c_elegans"]="PRJNA13758"
+                    ["b_malayi"]="PRJNA10729"
+                    ["c_angaria"]="PRJNA51225"
+                    ["c_brenneri"]="PRJNA20035"
+                    ["c_briggsae"]="PRJNA10731"
+                    ["c_japonica"]="PRJNA12591"
+                    ["c_remanei"]="PRJNA53967"
+                    ["c_tropicalis"]="PRJNA53597"
+                    ["o_volvulus"]="PRJEB513"
+                    ["s_ratti"]="PRJEB125"
+                    ["p_pacificus"]="PRJNA12644")
+
+#################### Directories ####################
+sourcedir='/root/data/ftp_files'
+intermine='/opt/intermine/wormmine'
+datadir='/root/data/mine_input/datadir'$wbrel''
+
+echo 'Source directory is at' "$sourcedir"
+echo 'WormMine code is at ' "$intermine"
+echo 'WormMine datadir is at ' "$datadir"
+echo
+
+#################### Process Protein FASTA ####################
+for spe in "${!species[@]}"
+do
+  echo "Processing species: $spe ${species["$spe"]}"
+
+  # Create directories
+  mkdir -vp "$datadir/fasta/$spe/proteins/raw"
+  mkdir -vp "$datadir/fasta/$spe/proteins/prepped"
+
+  # Check if we have the file locally first
+  local_file="$sourcedir/species/$spe/${species["$spe"]}/$spe.${species["$spe"]}.$wbrel.protein.fa.gz"
+  target_raw="$datadir/fasta/$spe/proteins/raw/$spe.${species["$spe"]}.$wbrel.protein.fa"
+
+  if [ -f "$local_file" ]; then
+    echo "Found local file: $local_file"
+    if [ ! -f "$target_raw" ]; then
+      echo "Extracting to $target_raw"
+      gunzip -c "$local_file" > "$target_raw"
+    else
+      echo "Raw file already exists: $target_raw"
+    fi
+  else
+    echo "Local file not found: $local_file"
+    cd "$datadir/fasta/$spe/proteins/raw" || exit
+    if [ ! -f "$spe.${species["$spe"]}.$wbrel.protein.fa" ]; then
+      echo "Downloading from WormBase FTP"
+      wget -q -O "$spe.${species["$spe"]}.$wbrel.protein.fa.gz" \
+        "https://downloads.wormbase.org/releases/$wbrel/species/$spe/${species["$spe"]}/$spe.${species["$spe"]}.$wbrel.protein.fa.gz"
+      gunzip -v "$spe.${species["$spe"]}.$wbrel.protein.fa.gz"
+    fi
+  fi
+
+  # Prep the FASTA file
+  if [ -f "$target_raw" ]; then
+    echo "Pre-processing protein FASTA file"
+    awk '{ if (NF > 1) {split($2,res,"="); print ">"res[2]} else {print}}' \
+      < "$target_raw" \
+      > "$datadir/fasta/$spe/proteins/prepped/$spe.${species["$spe"]}.$wbrel.protein.final.fa"
+    echo "✓ Prepped: $datadir/fasta/$spe/proteins/prepped/$spe.${species["$spe"]}.$wbrel.protein.final.fa"
+  else
+    echo "✗ ERROR: Raw protein file not found for $spe"
+  fi
+  echo
+done
+
+#################### Process Genomic FASTA (C. elegans only) ####################
+declare -A species2=(["c_elegans"]="PRJNA13758")
+
+for spe in "${!species2[@]}"
+do
+  echo "Processing genomic data for: $spe ${species2["$spe"]}"
+
+  mkdir -vp "$datadir/fasta/$spe/genomic"
+  mkdir -vp "$datadir/fasta/$spe/cds/raw"
+  mkdir -vp "$datadir/fasta/$spe/cds/prepped"
+
+  # Genomic FASTA
+  local_genomic="$sourcedir/species/$spe/${species2["$spe"]}/$spe.${species2["$spe"]}.$wbrel.genomic.fa.gz"
+  target_genomic="$datadir/fasta/$spe/genomic/$spe.${species2["$spe"]}.$wbrel.genomic.fa"
+
+  if [ -f "$local_genomic" ]; then
+    echo "Found local genomic file: $local_genomic"
+    if [ ! -f "$target_genomic" ]; then
+      echo "Extracting genomic to $target_genomic"
+      gunzip -c "$local_genomic" > "$target_genomic"
+    else
+      echo "Genomic file already exists: $target_genomic"
+    fi
+  else
+    echo "Local genomic file not found, downloading..."
+    cd "$datadir/fasta/$spe/genomic" || exit
+    if [ ! -f "$spe.${species2["$spe"]}.$wbrel.genomic.fa" ]; then
+      wget -q -O "$spe.${species2["$spe"]}.$wbrel.genomic.fa.gz" \
+        "https://downloads.wormbase.org/releases/$wbrel/species/$spe/${species2["$spe"]}/$spe.${species2["$spe"]}.$wbrel.genomic.fa.gz"
+      gunzip -v "$spe.${species2["$spe"]}.$wbrel.genomic.fa.gz"
+    fi
+  fi
+
+  # CDS FASTA
+  local_cds="$sourcedir/species/$spe/${species2["$spe"]}/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa.gz"
+  target_cds_raw="$datadir/fasta/$spe/cds/raw/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa"
+
+  if [ -f "$local_cds" ]; then
+    echo "Found local CDS file: $local_cds"
+    if [ ! -f "$target_cds_raw" ]; then
+      echo "Extracting CDS to $target_cds_raw"
+      gunzip -c "$local_cds" > "$target_cds_raw"
+    else
+      echo "CDS raw file already exists: $target_cds_raw"
+    fi
+  else
+    echo "Local CDS file not found, downloading..."
+    cd "$datadir/fasta/$spe/cds/raw" || exit
+    if [ ! -f "$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa" ]; then
+      wget -q -O "$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa.gz" \
+        "https://downloads.wormbase.org/releases/$wbrel/species/$spe/${species2["$spe"]}/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa.gz"
+      gunzip -v "$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.fa.gz"
+    fi
+  fi
+
+  # Prep CDS FASTA
+  if [ -f "$target_cds_raw" ]; then
+    echo "Pre-processing CDS FASTA file"
+    awk '{ if (NF > 1) {split($2,res,"="); print ">"res[2]} else {print}}' \
+      < "$target_cds_raw" \
+      > "$datadir/fasta/$spe/cds/prepped/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.final.fa"
+    echo "✓ Prepped: $datadir/fasta/$spe/cds/prepped/$spe.${species2["$spe"]}.$wbrel.CDS_transcripts.final.fa"
+  else
+    echo "✗ ERROR: Raw CDS file not found for $spe"
+  fi
+  echo
+done
+
+echo "================================"
+echo "FASTA deployment complete!"
+echo "================================"
