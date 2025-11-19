@@ -155,7 +155,7 @@ do
   cd "$datadir"'/wormbase-gff3' || exit
 
   # Check if we have the GFF3 file locally first
-  local_gff3="$sourcedir/../ftp_files/ftp/$spe.${species2["$spe"]}.$wbrel.annotations.gff3"
+  local_gff3="/root/data/ftp_files/ftp/$spe.${species2["$spe"]}.$wbrel.annotations.gff3"
 
   if [ ! -f raw/"$spe"."${species2["$spe"]}"."$wbrel".gff ]; then
     if [ -f "$local_gff3" ]; then
@@ -164,7 +164,7 @@ do
       cp -v "$local_gff3" raw/"$spe"."${species2["$spe"]}"."$wbrel".gff
     else
       echo 'Downloading' "$spe"."${species2["$spe"]}"."$wbrel".gff
-      wget -q -O raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz  "https://downloads.wormbase.org/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".annotations.gff3.gz"
+      wget -O raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz  "https://downloads.wormbase.org/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".annotations.gff3.gz"
       gunzip -v raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz
     fi
   else
