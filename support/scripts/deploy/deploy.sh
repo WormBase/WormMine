@@ -153,10 +153,20 @@ do
   mkdir -vp "$datadir"'/wormbase-gff3/raw'
   mkdir -vp "$datadir"'/wormbase-gff3/final'
   cd "$datadir"'/wormbase-gff3' || exit
+
+  # Check if we have the GFF3 file locally first
+  local_gff3="$sourcedir/../ftp_files/ftp/$spe.${species2["$spe"]}.$wbrel.annotations.gff3"
+
   if [ ! -f raw/"$spe"."${species2["$spe"]}"."$wbrel".gff ]; then
-    echo 'transferring' "$spe"."${species2["$spe"]}"."$wbrel".gff
-    wget -q -O raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz  "https://downloads.wormbase.org/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".annotations.gff3.gz"
-    gunzip -v raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz
+    if [ -f "$local_gff3" ]; then
+      echo "Found local GFF3 file: $local_gff3"
+      echo "Copying to raw directory..."
+      cp -v "$local_gff3" raw/"$spe"."${species2["$spe"]}"."$wbrel".gff
+    else
+      echo 'Downloading' "$spe"."${species2["$spe"]}"."$wbrel".gff
+      wget -q -O raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz  "https://downloads.wormbase.org/releases/""$wbrel""/species/""$spe""/""${species2["$spe"]}""/""$spe"".""${species2["$spe"]}"".""$wbrel"".annotations.gff3.gz"
+      gunzip -v raw/"$spe"."${species2["$spe"]}"."$wbrel".gff.gz
+    fi
   else
     echo  raw/"$spe"."${species2["$spe"]}"."$wbrel".gff 'found'
   fi
