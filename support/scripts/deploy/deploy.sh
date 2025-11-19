@@ -187,41 +187,66 @@ done
 #################### gene ontology ####################
 mkdir -vp "$datadir""/go/"
 if [ ! -f "$datadir"/go/gene_ontology.1_2.obo ];then
-  echo 'Transferring gene ontology file'
-  wget -q -O "$datadir"/go/gene_ontology.1_2.obo "https://downloads.wormbase.org/releases/""$wbrel""/ONTOLOGY/gene_ontology.""$wbrel"".obo"
+  local_go="/root/data/ftp_files/ftp/gene_ontology.$wbrel.obo"
+  if [ -f "$local_go" ]; then
+    echo "Copying local gene ontology file"
+    cp -v "$local_go" "$datadir"/go/gene_ontology.1_2.obo
+  else
+    echo 'Downloading gene ontology file'
+    wget -O "$datadir"/go/gene_ontology.1_2.obo "https://downloads.wormbase.org/releases/""$wbrel""/ONTOLOGY/gene_ontology.""$wbrel"".obo"
+  fi
 else
-  echo 'gene ontolgy file found'
+  echo 'gene ontology file found'
 fi
 echo
 
 #################### anatomy ontology #################
 mkdir -vp "$datadir""/ontology/"
 if [ ! -f "$datadir"/ontology/anatomy_ontology.obo ];then
-  echo 'Transferring anatomy ontology file'
-  wget -q -O "$datadir"/ontology/anatomy_ontology.obo "https://downloads.wormbase.org/releases/""$wbrel""/ONTOLOGY/anatomy_ontology.""$wbrel"".obo"
-  sed -i '/subset:/d' "$datadir"/ontology/anatomy_ontology.obo
+  local_anat="/root/data/ftp_files/ftp/anatomy_ontology.$wbrel.obo"
+  if [ -f "$local_anat" ]; then
+    echo "Copying local anatomy ontology file"
+    cp -v "$local_anat" "$datadir"/ontology/anatomy_ontology.obo
+    sed -i '/subset:/d' "$datadir"/ontology/anatomy_ontology.obo
+  else
+    echo 'Downloading anatomy ontology file'
+    wget -O "$datadir"/ontology/anatomy_ontology.obo "https://downloads.wormbase.org/releases/""$wbrel""/ONTOLOGY/anatomy_ontology.""$wbrel"".obo"
+    sed -i '/subset:/d' "$datadir"/ontology/anatomy_ontology.obo
+  fi
 else
-  echo 'anatomy ontolgy file found'
+  echo 'anatomy ontology file found'
 fi
 echo
 
 #################### disease ontology #################
 mkdir -vp "$datadir""/ontology/"
 if [ ! -f "$datadir"/ontology/disease_ontology.obo ];then
-  echo 'Transferring anatomy ontology file'
-  wget -q -O "$datadir"/ontology/disease_ontology.obo "https://downloads.wormbase.org/releases/""$wbrel""/ONTOLOGY/disease_ontology.""$wbrel"".obo"
+  local_disease="/root/data/ftp_files/ftp/disease_ontology.$wbrel.obo"
+  if [ -f "$local_disease" ]; then
+    echo "Copying local disease ontology file"
+    cp -v "$local_disease" "$datadir"/ontology/disease_ontology.obo
+  else
+    echo 'Downloading disease ontology file'
+    wget -O "$datadir"/ontology/disease_ontology.obo "https://downloads.wormbase.org/releases/""$wbrel""/ONTOLOGY/disease_ontology.""$wbrel"".obo"
+  fi
 else
-  echo 'disease ontolgy file found'
+  echo 'disease ontology file found'
 fi
 echo
 
 #################### phenotype ontology ################
 mkdir -vp "$datadir""/ontology/"
 if [ ! -f "$datadir"/ontology/phenotype_ontology.obo ];then
-  echo 'Transferring anatomy ontology file'
-  wget -q -O "$datadir"/ontology/phenotype_ontology.obo "https://downloads.wormbase.org/releases/""$wbrel""/ONTOLOGY/phenotype_ontology.""$wbrel"".obo"
+  local_pheno="/root/data/ftp_files/ftp/phenotype_ontology.$wbrel.obo"
+  if [ -f "$local_pheno" ]; then
+    echo "Copying local phenotype ontology file"
+    cp -v "$local_pheno" "$datadir"/ontology/phenotype_ontology.obo
+  else
+    echo 'Downloading phenotype ontology file'
+    wget -O "$datadir"/ontology/phenotype_ontology.obo "https://downloads.wormbase.org/releases/""$wbrel""/ONTOLOGY/phenotype_ontology.""$wbrel"".obo"
+  fi
 else
-  echo 'phenotype ontolgy file found'
+  echo 'phenotype ontology file found'
 fi
 echo
 
@@ -231,8 +256,14 @@ mkdir -vp "$datadir"'/go-annotation/raw/'
 mkdir -vp "$datadir"'/go-annotation/final'
 
 if [ ! -f "$datadir"'/go-annotation/final/gene_association_sorted_filtered.wb' ];then
-  echo 'Transferring gene association file'
-  wget -q -O "$datadir"'/go-annotation/raw/gene_association'."$wbrel".wb "https://downloads.wormbase.org/releases/""$wbrel""/ONTOLOGY/gene_association.""$wbrel"".wb"
+  local_gene_assoc="/root/data/ftp_files/ftp/gene_association.$wbrel.wb"
+  if [ -f "$local_gene_assoc" ]; then
+    echo 'Copying local gene association file'
+    cp -v "$local_gene_assoc" "$datadir"'/go-annotation/raw/gene_association'."$wbrel".wb
+  else
+    echo 'Downloading gene association file'
+    wget -O "$datadir"'/go-annotation/raw/gene_association'."$wbrel".wb "https://downloads.wormbase.org/releases/""$wbrel""/ONTOLOGY/gene_association.""$wbrel"".wb"
+  fi
   echo 'Sorting'
   sort -k 2,2 "$datadir"'/go-annotation/raw/gene_association'."$wbrel".wb > "$datadir"'/go-annotation/raw/gene_association_sorted.wb'
   echo 'Filtering'
