@@ -17,7 +17,9 @@ declare -A species=(["c_elegans"]="PRJNA13758"
                     ["c_tropicalis"]="PRJNA53597"
                     ["o_volvulus"]="PRJEB513"
                     ["s_ratti"]="PRJEB125"
-                    ["p_pacificus"]="PRJNA12644")
+                    ["p_pacificus"]="PRJNA12644"
+                    ["t_muris"]="PRJEB126"
+                    ["p_redivivus"]="PRJNA186477")
 
 #################### Directories ####################
 sourcedir='/root/data/ftp_files'
