@@ -2,7 +2,7 @@
 <!DOCTYPE page [
 
 <!-- Relative path to the data directory, from basedir wormmine/integrate -->
-<!ENTITY datadir "/mnt/data2/mine_input/datadirWS284">
+<!ENTITY datadir "/mnt/data2/mine_input/datadirWS298">
 <!--<!ENTITY datadir "/mnt/data2/mine_input/datadir_small">-->
 
 
@@ -34,557 +34,536 @@
   <property name="target.model" value="genomic"/>
   <property name="intermine.properties.file" value="wormmine.properties"/>
   <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
-  
+
   <sources>
 
-<!--     <source name="so" type="so">
-       <property name="src.data.file" location="so.obo" />
-       <property name="licence" value="https://creativecommons.org/licenses/by/4.0/"/>
-     </source>
--->
+    <!-- ============================================================ -->
+    <!-- WormBase AceDB XML sources (synced with wormmine-bio-sources) -->
+    <!-- ============================================================ -->
 
-  <source name="wb-acedb-species" type="wormbase-acedb" dump="true">
+    <source name="wb-acedb-species" type="wormbase-acedb" dump="true">
         <property name="src.data.dir" location="&datadir;/wormbase-acedb/species/XML" />
-        <property name="mapping.file"
-			value="/home/nuin/properties/species_mapping.properties" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/species/mapping/species_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
         <property name="source.class" value="Organism"/>
-	<property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-        <property name="rejects.file" 
-            value="&datadir;/wormbase-acedb/species/wormbase-acedb-species-rejects.xml"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/species/wormbase-acedb-species-rejects.xml"/>
         <property name="data.set" value="AceDB XML (Species)"/>
-
     </source>
 
- 	<source name="go" type="go" dump="true">
-		<property name="src.data.file" location="&datadir;/go/gene_ontology.1_2.obo"/> 
-	</source> 
+    <!-- ============================================================ -->
+    <!-- Ontology sources                                             -->
+    <!-- ============================================================ -->
 
-	 <source name="anatomy_ontology" type="anatomy_ontology"> 
-            <property name="src.data.file" location="&datadir;/ontology/anatomy_ontology.obo"/>
-        </source>
+    <source name="go" type="go" dump="true">
+        <property name="src.data.file" location="&datadir;/go/gene_ontology.1_2.obo"/>
+    </source>
 
-	<source name="go-annotation" type="go-annotation" dump="true">
-		<property name="ontologyfile" location="&datadir;/go/gene_ontology.1_2.obo"/>
-		<property name="src.data.dir" location="&datadir;/go-annotation/final"/>
-	</source> -->
+    <source name="anatomy_ontology" type="anatomy_ontology">
+        <property name="src.data.file" location="&datadir;/ontology/anatomy_ontology.obo"/>
+    </source>
 
-<!--	<source name="anat-annotation" type="anat-annotation" dump="false">
-                <property name="ontologyfile" location="&datadir;/ontology/anatomy_ontology.obo"/>
-                <property name="src.data.dir" location="&datadir;/anatomy_annotation"/>
-        </source> -->
+    <source name="go-annotation" type="go-annotation" dump="true">
+        <property name="ontologyfile" location="&datadir;/go/gene_ontology.1_2.obo"/>
+        <property name="src.data.dir" location="&datadir;/go-annotation/final"/>
+    </source>
 
-         <source name="disease_ontology" type="disease_ontology">
-            <property name="src.data.file" location="&datadir;/ontology/disease_ontology.obo"/>
-        </source>
+<!--    <source name="anat-annotation" type="anat-annotation" dump="false">
+        <property name="ontologyfile" location="&datadir;/ontology/anatomy_ontology.obo"/>
+        <property name="src.data.dir" location="&datadir;/anatomy_annotation"/>
+    </source> -->
 
-<!--	 <source name="phenotype_ontology" type="phenotype_ontology">
-            <property name="src.data.file" location="&datadir;/ontology/phenotype_ontology.obo"/>
-        </source>
--->
+    <source name="disease_ontology" type="disease_ontology">
+        <property name="src.data.file" location="&datadir;/ontology/disease_ontology.obo"/>
+    </source>
 
-	<!-- CORE GENOMIC ANNOTATION IN GFF3 -->
+<!--    <source name="phenotype_ontology" type="phenotype_ontology">
+        <property name="src.data.file" location="&datadir;/ontology/phenotype_ontology.obo"/>
+    </source> -->
+
+    <!-- ============================================================ -->
+    <!-- Core genomic annotation: GFF3                                -->
+    <!-- ============================================================ -->
+
     <source name="celegans-gff3" type="malaria-gff" dump="true">
         <property name="gff3.taxonId"           value="&c_elegans_taxon_id;"/>
         <property name="gff3.seqDataSourceName" value="WormBase"/>
         <property name="gff3.dataSourceName"    value="WormBase"/>
-	<property name="gff3.seqClsName"        value="Chromosome"/>
+        <property name="gff3.seqClsName"        value="Chromosome"/>
         <property name="gff3.dataSetTitle"      value="C. elegans genomic annotations (GFF3 Gene)"/>
         <property name="src.data.dir"           location="&datadir;/wormbase-gff3/final"/>
-        <property name="gff3.allowedClasses"     value="gene,mrna,exon,cds"/>
-        <property name="gff3.IDMappingFile"      value="&datadir;/wormbase-gff3/mapping/id_mapping.tab"/>
+        <property name="gff3.allowedClasses"    value="gene,mrna,exon,cds"/>
+        <property name="gff3.IDMappingFile"     value="&datadir;/wormbase-gff3/mapping/id_mapping.tab"/>
     </source>
 
-	<!-- FASTA DNA sequences -->
-	<source name="celegans-genome-fasta" type="fasta">
-		<property name="fasta.taxonId"         value="&c_elegans_taxon_id;"/>
-		<property name="fasta.className"       value="org.intermine.model.bio.Chromosome"/>
-		<property name="fasta.classAttribute"  value="primaryIdentifier"/>
-		<property name="fasta.dataSourceName"  value="WormBase FTP"/>
-		<property name="fasta.dataSetTitle"    value="WormBase C. elegans chromosome sequence (Fasta)"/>
-		<property name="fasta.sequenceType"    value="dna"/>
-		<property name="fasta.includes"        value="*.fa*"/>
-		<property name="src.data.dir"          location="&datadir;/fasta/c_elegans/genomic" />
-	</source> 
+    <!-- ============================================================ -->
+    <!-- FASTA: DNA sequences                                         -->
+    <!-- ============================================================ -->
 
-        <source name="celegans-transcript-fasta" type="fasta">
-                <property name="fasta.taxonId"         value="&c_elegans_taxon_id;"/>
-                <property name="fasta.className"       value="org.intermine.model.bio.Transcript"/>
-                <property name="fasta.classAttribute"  value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"  value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"    value="WormBase C. elegans transcript sequence (Fasta)"/>
-                <property name="fasta.sequenceType"    value="dna"/>
-                <property name="fasta.includes"        value="*.fa*"/>
-                <property name="src.data.dir"          location="&datadir;/fasta/c_elegans/transcript/final" />
-        </source>
-		
-	<source name="celegans-cds-fasta" type="fasta">
-                <property name="fasta.taxonId"         value="&c_elegans_taxon_id;"/>
-                <property name="fasta.className"       value="org.intermine.model.bio.CDS"/>
-                <property name="fasta.classAttribute"  value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"  value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"    value="WormBase C. elegans CDS sequence (Fasta)"/>
-                <property name="fasta.sequenceType"    value="dna"/>
-                <property name="fasta.includes"        value="*.fa*"/>
-                <property name="src.data.dir"          location="&datadir;/fasta/c_elegans/cds/final" />
-        </source>
-
-
-    <!-- FASTA Protein sequences -->
-	<source name="celegans-protein-fasta" type="fasta">
-		<property name="fasta.taxonId"         	value="&c_elegans_taxon_id;"/>
-		<property name="fasta.className"       	value="org.intermine.model.bio.Protein"/>
-		<property name="fasta.classAttribute"  	value="primaryIdentifier"/>
-		<property name="fasta.dataSourceName"  	value="WormBase FTP"/>
-		<property name="fasta.dataSetTitle"    	value="WormBase C. elegans protein sequence (Fasta)"/>
-		<property name="fasta.sequenceType"    	value="protein"/>
-		<property name="src.data.dir"          	location="&datadir;/fasta/c_elegans/proteins/prepped" />
-		<property name="fasta.includes"        	value="*.fa*"/> 
-		<property name="fasta.PIDPrefix"		value="WP:"/>
-	</source>
-
-        <source name="ovolvulus-protein-fasta" type="fasta">
-                <property name="fasta.taxonId"          value="&o_volvulus_taxon_id;"/>
-                <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
-                <property name="fasta.classAttribute"   value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"   value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"     value="WormBase O. volvulus protein sequence (Fasta)"/>
-                <property name="fasta.sequenceType"     value="protein"/>
-                <property name="src.data.dir"           location="&datadir;/fasta/o_volvulus/proteins/prepped" />
-                <property name="fasta.includes"         value="*.fa*"/>
-        </source>
-
-        <source name="b_malayi-protein-fasta" type="fasta">
-                <property name="fasta.taxonId"          value="&b_malayi_taxon_id;"/>
-                <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
-                <property name="fasta.classAttribute"   value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"   value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"     value="WormBase B. malayi protein sequence (Fasta)"/>
-                <property name="fasta.sequenceType"     value="protein"/>
-                <property name="src.data.dir"           location="&datadir;/fasta/b_malayi/proteins/prepped" />
-                <property name="fasta.includes"         value="*.fa*"/>
-        </source>
-
-
-            <source name="c_brenneri-protein-fasta" type="fasta">
-                <property name="fasta.taxonId"          value="&c_brenneri_taxon_id;"/>
-                <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
-                <property name="fasta.classAttribute"   value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"   value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"     value="WormBase C. brenneri protein sequence (Fasta)"/>
-                <property name="fasta.sequenceType"     value="protein"/>
-                <property name="src.data.dir"           location="&datadir;/fasta/c_brenneri/proteins/prepped/" />
-                <property name="fasta.includes"         value="*.fa*"/>
-                </source>
-
-            <source name="c_briggsae-protein-fasta" type="fasta">
-                <property name="fasta.taxonId"          value="&c_briggsae_taxon_id;"/>
-                <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
-                <property name="fasta.classAttribute"   value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"   value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"     value="WormBase C. briggsae protein sequence (Fasta)"/>
-                <property name="fasta.sequenceType"     value="protein"/>
-                <property name="src.data.dir"           location="&datadir;/fasta/c_briggsae/proteins/prepped" />
-                <property name="fasta.includes"         value="*.fa*"/>
-                </source>
-
-            <source name="c_japonica-protein-fasta" type="fasta">
-                <property name="fasta.taxonId"          value="&c_japonica_taxon_id;"/>
-                <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
-                <property name="fasta.classAttribute"   value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"   value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"     value="WormBase C. japonica protein sequence (Fasta)"/>
-                <property name="fasta.sequenceType"     value="protein"/>
-                <property name="src.data.dir"           location="&datadir;/fasta/c_japonica/proteins/prepped" />
-                <property name="fasta.includes"         value="*.fa*"/>
-                </source>
-
-            <source name="c_remanei-protein-fasta" type="fasta">
-                <property name="fasta.taxonId"          value="&c_remanei_taxon_id;"/>
-                <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
-                <property name="fasta.classAttribute"   value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"   value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"     value="WormBase C. remanei protein sequence (Fasta)"/>
-                <property name="fasta.sequenceType"     value="protein"/>
-                <property name="src.data.dir"           location="&datadir;/fasta/c_remanei/proteins/prepped" />
-                <property name="fasta.includes"         value="*.fa*"/>
-                </source>
-
-                <source name="p_pacificus-protein-fasta" type="fasta">
-                <property name="fasta.taxonId"          value="&p_pacificus_taxon_id;"/>
-                <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
-                <property name="fasta.classAttribute"   value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"   value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"     value="WormBase P. pacificus protein sequence (Fasta)"/>
-                <property name="fasta.sequenceType"     value="protein"/>
-                <property name="src.data.dir"           location="&datadir;/fasta/p_pacificus/proteins/prepped" />
-                <property name="fasta.includes"         value="*.fa*"/>
-                </source>
-
-                <source name="s_ratti-protein-fasta" type="fasta">
-                <property name="fasta.taxonId"          value="&s_ratti_taxon_id;"/>
-                <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
-                <property name="fasta.classAttribute"   value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"   value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"     value="WormBase S. ratti protein sequence (Fasta)"/>
-                <property name="fasta.sequenceType"     value="protein"/>
-                <property name="src.data.dir"           location="&datadir;/fasta/s_ratti/proteins/prepped" />
-                <property name="fasta.includes"         value="*.fa*"/>
-                </source>
-
-                <source name="t_muris-protein-fasta" type="fasta">
-                <property name="fasta.taxonId"          value="&t_muris_taxon_id;"/>
-                <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
-                <property name="fasta.classAttribute"   value="primaryIdentifier"/>
-                <property name="fasta.dataSourceName"   value="WormBase FTP"/>
-                <property name="fasta.dataSetTitle"     value="WormBase T. muris protein sequence (Fasta)"/>
-                <property name="fasta.sequenceType"     value="protein"/>
-                <property name="src.data.dir"           location="&datadir;/fasta/t_muris/proteins/prepped" />
-                <property name="fasta.includes"         value="*.fa*"/>
-                </source>
-
-	<source name="wb-acedb-variation" type="wormbase-acedb" dump="true">
-		<property name="src.data.dir" location="&datadir;/wormbase-acedb/variation/XML" />
-
-		<property name="mapping.file"
-			value="&datadir;/wormbase-acedb/variation/mapping/variation_mapping.properties" />
-
-		<property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-		<property name="source.class" value="Allele"/>
-
-		<property name="rejects.file"
-			value="&datadir;/wormbase-acedb/variation/wormbase-acedb-variation-rejects.xml"/>
-		<property name="data.set" value="AceDB XML (Variation)"/>
-		<property name="debug" value="false"/>
-	</source> 
-
-
-
-
-
-	<!-- WormBase aceDB data loader.  Base dir is wormmine/integrate -->
-	<source name="wb-acedb-gene" type="wormbase-acedb" dump="true" >
-		<property name="src.data.dir" location="&datadir;/wormbase-acedb/gene/XML" />
-		<!--
-			This file maps intermine data classes to an XPath query.
-		-->
-		<property name="mapping.file"
-			value="&datadir;/wormbase-acedb/gene/mapping/gene_mapping.properties"/>
-		<!--
-		File specifying the primary keys to use for this source
-		Usually this source's keys.properties file.  Keys must end in ".key"
-		-->
-		<property name="key.file"
-			    value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-
-		<!--
-		This property specifies the intermine class type this source loads.
-		Must use proper CamelCase
-		-->
-		<property name="source.class" value="Gene"/>
-
-		<!--
-		Optional.
-		This specifies where the XML rejects file should go.  This file stores all XML records
-		which could not be parsed
-		-->
-		<property name="rejects.file"
-			value="&datadir;/wormbase-acedb/gene/wormbase-acedb-gene-rejects.xml"/>
-		<property name="data.set" value="AceDB XML (Gene)"/>
-	</source>
-
-
-	<source name="wb-acedb-transcript" type="wormbase-acedb" dump="true">
-		<property name="src.data.dir" location="&datadir;/wormbase-acedb/transcript/XML" />
-
-		<property name="mapping.file"
-			value="&datadir;/wormbase-acedb/transcript/mapping/transcript_mapping.properties" />
-
-		<property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-		<property name="source.class" value="Transcript"/>
-
-		<property name="rejects.file"
-			value="&datadir;/wormbase-acedb/transcript/wormbase-acedb-transcript-rejects.xml"/>
-
-				<!--<property name="debug" value="true" />-->
-		<property name="data.set" value="AceDB XML (Transcript)"/>
-	</source>
-
-
-	<source name="wb-acedb-cds" type="wormbase-acedb" dump="true">
-		<property name="src.data.dir" location="&datadir;/wormbase-acedb/cds/XML" />
-		<property name="mapping.file" value="&datadir;/wormbase-acedb/cds/mapping/cds_mapping.properties" />
-		<property name="key.file"     value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-		<property name="source.class" value="CDS"/>
-		<property name="rejects.file" value="&datadir;/wormbase-acedb/cds/wormbase-acedb-cds-rejects.xml"/>
-		<property name="data.set" value="AceDB XML (CDS)"/>
-	</source>
-<!--
-	<source name="wb-acedb-interaction" type="wormbase-acedb" dump="false">
-                <property name="src.data.dir" location="&datadir;/wormbase-acedb/interaction/XML" />
-                <property name="mapping.file" value="&datadir;/wormbase-acedb/interaction/mapping/interaction_mapping.properties" />
-                <property name="key.file"     value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-                <property name="source.class" value="Interaction"/>
-                <property name="rejects.file" value="&datadir;/wormbase-acedb/interaction/wormbase-acedb-interaction-rejects.xml"/>
-                <property name="data.set" value="AceDB XML (Intreaction)"/>
-        </source>
--->
-	<source name="wb-acedb-phenotype" type="wormbase-acedb" dump="false">
-		<property name="src.data.dir" location="&datadir;/wormbase-acedb/phenotype/XML" />
-		<property name="mapping.file"
-				value = "&datadir;/wormbase-acedb/phenotype/mapping/phenotype_mapping.properties" />
-		<property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />		<property name="source.class" value="Phenotype"/>
-		<property name="rejects.file"
-			value="&datadir;/wormbase-acedb/phenotype/wormbase-acedb-phenotype-rejects.xml"/>
-		<property name="data.set" value="AceDB XML (Phenotype)"/>
-		<property name="debug" value="false"/>
-	</source>
-
-	<source name="wb-acedb-expr_pattern" type="wormbase-acedb" dump="false">
-		<property name="src.data.dir" location="&datadir;/wormbase-acedb/expr_pattern/XML" />
-		<property name="mapping.file"
-				value = "&datadir;/wormbase-acedb/expr_pattern/mapping/expr_pattern_mapping.properties" />
-		<property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />		<property name="source.class" value="ExpressionPattern"/>
-		<property name="rejects.file"
-			value="&datadir;/wormbase-acedb/expr_pattern/wormbase-acedb-expr_pattern-rejects.xml"/>
-		<property name="data.set" value="AceDB XML (Expression Pattern)"/>
-		<property name="debug" value="false"/>
-	</source>
-
-	<source name="wb-acedb-anatomy_term" type="wormbase-acedb" dump="false">
-		<property name="src.data.dir" location="&datadir;/wormbase-acedb/anatomy_term/XML" />
-		<property name="mapping.file"
-				value = "&datadir;/wormbase-acedb/anatomy_term/mapping/anatomy_term_mapping.properties" />
-		<property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-		<property name="source.class" value="AnatomyTerm"/>
-		<property name="rejects.file"
-			value="&datadir;/wormbase-acedb/anatomy_term/wormbase-acedb-anatomy_term-rejects.xml"/>
-		<property name="data.set" value="AceDB XML (Anatomy Term)"/>
-	</source>
-
-	<source name="wb-acedb-life_stage" type="wormbase-acedb" dump="true">
-		<property name="src.data.dir" location="&datadir;/wormbase-acedb/life_stage/XML" />
-		<property name="mapping.file"
-				value = "&datadir;/wormbase-acedb/life_stage/mapping/life_stage_mapping.properties" />
-		<property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-		<property name="source.class" value="LifeStage"/>
-		<property name="rejects.file"
-			value="&datadir;/wormbase-acedb/life_stage/wormbase-acedb-life_stage-rejects.xml"/>
-		<property name="data.set" value="AceDB XML (Life Stage)"/>
-	</source>
-
-	<source name="wb-acedb-expr_cluster" type="wormbase-acedb" dump="false">
-		<property name="src.data.dir" location="&datadir;/wormbase-acedb/expr_cluster/XML" />
-		<property name="mapping.file"
-				value = "&datadir;/wormbase-acedb/expr_cluster/mapping/expr_cluster_mapping.properties" />
-		<property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-		<property name="source.class" value="ExpressionCluster"/>
-		<property name="rejects.file"
-			value="&datadir;/wormbase-acedb/expr_cluster/wormbase-acedb-expr_cluster-rejects.xml"/>
-		<property name="data.set" value="AceDB XML (Expression Cluster)"/>
-	</source>
-
-	<source name="wb-acedb-protein" type="wormbase-acedb" dump="true">
-		<property name="src.data.dir" location="&datadir;/wormbase-acedb/protein/XML" />
-		<property name="mapping.file"
-				value="&datadir;/wormbase-acedb/protein/mapping/protein_mapping.properties" />
-		<property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-		<property name="source.class" value="Protein"/>
-		<property name="rejects.file"
-				value="&datadir;/wormbase-acedb/protein/wormbase-acedb-protein-rejects.xml"/>
-		<property name="data.set" value="AceDB XML (Protein)"/>
-	</source>
-
-	<source name="wb-acedb-gene-class" type="wormbase-acedb" dump="false">
-          	<property name="src.data.dir" location="&datadir;/wormbase-acedb/gene_class/XML" />
-          	<property name="mapping.file" value="&datadir;/wormbase-acedb/gene_class/mapping/gene_class_mapping.properties" />
-	        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-	        <property name="source.class" value="GeneClass"/>
-        	<property name="rejects.file" value="&datadir;/wormbase-acedb-gene-class-rejects.xml"/>
-                <property name="data.set" value="AceDB XML (Gene Class)"/>
-       </source>
-
-
-
-       <source name="wb-acedb-RNAi" type="wormbase-acedb" dump="true">
-          	<property name="src.data.dir" location="&datadir;/wormbase-acedb/RNAi/XML" />
-          	<property name="mapping.file" value="&datadir;/wormbase-acedb/RNAi/mapping/RNAi_mapping.properties" />
-	        <property name="key.file"  value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-	        <property name="source.class" value="RNAi"/>
-                <property name="rejects.file" value="&datadir;/wormbase-acedb-RNAi-rejects.xml"/>
-	        <property name="data.set" value="AceDB XML (RNAi)"/>
-      </source>
-
-       <source name="wb-acedb-molecule" type="wormbase-acedb" dump="true">
-          	<property name="src.data.dir" location="&datadir;/wormbase-acedb/molecule/XML" />
-          	<property name="mapping.file" value="&datadir;/wormbase-acedb/molecule/mapping/molecule_mapping.properties" />
- 	        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-                <property name="source.class" value="Molecule"/>
-                <property name="rejects.file"  value="&datadir;/wormbase-acedb-molecule-rejects.xml"/>
-                <property name="data.set" value="AceDB XML (Molecule)"/>
-      </source>
-
-
-        <source name="wb-acedb-strain" type="wormbase-acedb" dump="true">
-       	        <property name="src.data.dir" location="&datadir;/wormbase-acedb/strain/XML" />
-        	<property name="mapping.file" value="&datadir;/wormbase-acedb/strain/mapping/strain_mapping.properties" />
-		<property name="key.file"  value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-	        <property name="source.class" value="Strain"/>
-        	<property name="rejects.file" value="&datadir;/wormbase-acedb/strain/wormbase-acedb-species-rejects.xml"/>
-	        <property name="data.set" value="AceDB XML (Species)"/>
-        </source> 
-
-
-
-       <source name="wb-acedb-operon" type="wormbase-acedb" dump="false">
-                <property name="src.data.dir" location="&datadir;/wormbase-acedb/operon/XML" />
-                <property name="mapping.file" value="&datadir;/wormbase-acedb/operon/mapping/operon_mapping.properties" />
-                <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-                <property name="source.class" value="Operon"/>
-                <property name="rejects.file"  value="&datadir;/wormbase-acedb-operon-rejects.xml"/>
-                <property name="data.set" value="AceDB XML (Operon)"/>
-      </source>
-
-
-
-<!--       <source name="wb-acedb-transgene" type="wormbase-acedb" dump="true">
-          <property name="src.data.dir" location="&datadir;/wormbase-acedb/transgene/XML" />
-          <property name="mapping.file"
-              value="&datadir;/wormbase-acedb/transgene/mapping/transgene_mapping.properties" />
-          <property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-          <property name="source.class" value="Transgene"/>
-          <property name="rejects.file"
-              value="&datadir;/wormbase-acedb-transgene-rejects.xml"/>
-          <property name="data.set" value="AceDB XML (Transgene)"/>
-      </source>
-
-       <source name="wb-acedb-construct" type="wormbase-acedb" dump="true">
-          <property name="src.data.dir" location="&datadir;/wormbase-acedb/construct/XML" />
-          <property name="mapping.file"
-              value="&datadir;/wormbase-acedb/construct/mapping/construct_mapping.properties" />
-          <property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-          <property name="source.class" value="Construct"/>
-          <property name="rejects.file"
-              value="&datadir;/wormbase-acedb-construct-rejects.xml"/>
-          <property name="data.set" value="AceDB XML (Construct)"/>
-      </source> -->
-
-<!--       <source name="wb-acedb-disease_model_annotation" type="wormbase-acedb" dump="true">
-          <property name="src.data.dir" location="&datadir;/wormbase-acedb/disease_model_annotation/XML" />
-          <property name="mapping.file"
-              value="&datadir;/wormbase-acedb/disease_model_annotation/mapping/disease_model_annotation_mapping.properties" />
-          <property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-          <property name="source.class" value="Disease_model_annotation"/>
-          <property name="rejects.file"
-              value="&datadir;/wormbase-acedb-disease_model_annotation-rejects.xml"/>
-          <property name="data.set" value="AceDB XML (Disease model annotation)"/>
-      </source> -->
-
-<!--       <source name="wb-acedb-so_term" type="wormbase-acedb" dump="true">
- 	         <property name="src.data.dir" location="&datadir;/wormbase-acedb/so_term/XML" />
-        	 <property name="mapping.file" value="&datadir;/wormbase-acedb/so_term/mapping/so_term_mapping.properties" />
-                 <property name="key.file"  value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-                 <property name="source.class" value="WBSOterm"/>
-                 <property name="rejects.file" value="&datadir;/wormbase-acedb-so_term-rejects.xml"/>
-                 <property name="data.set" value="AceDB XML (SO term)"/>
-      </source>
--->
-<!--       <source name="wb-acedb-wbprocess" type="wormbase-acedb" dump="true">
-          <property name="src.data.dir" location="&datadir;/wormbase-acedb/wbprocess/XML" />
-          <property name="mapping.file"
-              value="&datadir;/wormbase-acedb/wbprocess/mapping/wbprocess_mapping.properties" />
-          <property name="key.file"
-                            value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
-          <property name="source.class" value="WBProcess"/>
-          <property name="rejects.file"
-              value="&datadir;/wormbase-acedb-wbprocess-rejects.xml"/>
-          <property name="data.set" value="AceDB XML (WBProcess)"/>
-      </source>
--->
-
-   <source name="panther" type="panther" dump="false">
-      <property name="src.data.dir" location="&datadir;/panther"/>
-       <property name="panther.organisms" value="6239"/>
-       <property name="panther.homologues" value="10090 9606 7955 7227 4932 10116 6239 4932"/>
-    </source> 
-
-<!--
-    <source name="homologene" type="homologene">
-      <property name="src.data.dir" location="&datadir;/homologene"/>
-      <property name="homologene.organisms" value="10090 9606 7955 7227 4932 10116 6239 4932"/>
+    <source name="celegans-genome-fasta" type="fasta">
+        <property name="fasta.taxonId"         value="&c_elegans_taxon_id;"/>
+        <property name="fasta.className"       value="org.intermine.model.bio.Chromosome"/>
+        <property name="fasta.classAttribute"  value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"  value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"    value="WormBase C. elegans chromosome sequence (Fasta)"/>
+        <property name="fasta.sequenceType"    value="dna"/>
+        <property name="fasta.includes"        value="*.fa*"/>
+        <property name="src.data.dir"          location="&datadir;/fasta/c_elegans/genomic" />
     </source>
--->
 
+    <source name="celegans-transcript-fasta" type="fasta">
+        <property name="fasta.taxonId"         value="&c_elegans_taxon_id;"/>
+        <property name="fasta.className"       value="org.intermine.model.bio.Transcript"/>
+        <property name="fasta.classAttribute"  value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"  value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"    value="WormBase C. elegans transcript sequence (Fasta)"/>
+        <property name="fasta.sequenceType"    value="dna"/>
+        <property name="fasta.includes"        value="*.fa*"/>
+        <property name="src.data.dir"          location="&datadir;/fasta/c_elegans/transcript/final" />
+    </source>
 
-<!--     <source name="ensembl-compara-human" type="ensembl-compara">
-         <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
-         <property name="ensemblcompara.organisms" value="6239"/>
-         <property name="ensemblcompara.homologues" value="9606"/>
-     </source> 
+    <source name="celegans-cds-fasta" type="fasta">
+        <property name="fasta.taxonId"         value="&c_elegans_taxon_id;"/>
+        <property name="fasta.className"       value="org.intermine.model.bio.CDS"/>
+        <property name="fasta.classAttribute"  value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"  value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"    value="WormBase C. elegans CDS sequence (Fasta)"/>
+        <property name="fasta.sequenceType"    value="dna"/>
+        <property name="fasta.includes"        value="*.fa*"/>
+        <property name="src.data.dir"          location="&datadir;/fasta/c_elegans/cds/final" />
+    </source>
+
+    <!-- ============================================================ -->
+    <!-- FASTA: Protein sequences                                     -->
+    <!-- ============================================================ -->
+
+    <source name="celegans-protein-fasta" type="fasta">
+        <property name="fasta.taxonId"          value="&c_elegans_taxon_id;"/>
+        <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
+        <property name="fasta.classAttribute"   value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"   value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"     value="WormBase C. elegans protein sequence (Fasta)"/>
+        <property name="fasta.sequenceType"     value="protein"/>
+        <property name="src.data.dir"           location="&datadir;/fasta/c_elegans/proteins/prepped" />
+        <property name="fasta.includes"         value="*.fa*"/>
+        <property name="fasta.PIDPrefix"        value="WP:"/>
+    </source>
+
+    <source name="ovolvulus-protein-fasta" type="fasta">
+        <property name="fasta.taxonId"          value="&o_volvulus_taxon_id;"/>
+        <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
+        <property name="fasta.classAttribute"   value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"   value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"     value="WormBase O. volvulus protein sequence (Fasta)"/>
+        <property name="fasta.sequenceType"     value="protein"/>
+        <property name="src.data.dir"           location="&datadir;/fasta/o_volvulus/proteins/prepped" />
+        <property name="fasta.includes"         value="*.fa*"/>
+    </source>
+
+    <source name="b_malayi-protein-fasta" type="fasta">
+        <property name="fasta.taxonId"          value="&b_malayi_taxon_id;"/>
+        <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
+        <property name="fasta.classAttribute"   value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"   value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"     value="WormBase B. malayi protein sequence (Fasta)"/>
+        <property name="fasta.sequenceType"     value="protein"/>
+        <property name="src.data.dir"           location="&datadir;/fasta/b_malayi/proteins/prepped" />
+        <property name="fasta.includes"         value="*.fa*"/>
+    </source>
+
+    <source name="c_brenneri-protein-fasta" type="fasta">
+        <property name="fasta.taxonId"          value="&c_brenneri_taxon_id;"/>
+        <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
+        <property name="fasta.classAttribute"   value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"   value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"     value="WormBase C. brenneri protein sequence (Fasta)"/>
+        <property name="fasta.sequenceType"     value="protein"/>
+        <property name="src.data.dir"           location="&datadir;/fasta/c_brenneri/proteins/prepped/" />
+        <property name="fasta.includes"         value="*.fa*"/>
+    </source>
+
+    <source name="c_briggsae-protein-fasta" type="fasta">
+        <property name="fasta.taxonId"          value="&c_briggsae_taxon_id;"/>
+        <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
+        <property name="fasta.classAttribute"   value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"   value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"     value="WormBase C. briggsae protein sequence (Fasta)"/>
+        <property name="fasta.sequenceType"     value="protein"/>
+        <property name="src.data.dir"           location="&datadir;/fasta/c_briggsae/proteins/prepped" />
+        <property name="fasta.includes"         value="*.fa*"/>
+    </source>
+
+    <source name="c_japonica-protein-fasta" type="fasta">
+        <property name="fasta.taxonId"          value="&c_japonica_taxon_id;"/>
+        <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
+        <property name="fasta.classAttribute"   value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"   value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"     value="WormBase C. japonica protein sequence (Fasta)"/>
+        <property name="fasta.sequenceType"     value="protein"/>
+        <property name="src.data.dir"           location="&datadir;/fasta/c_japonica/proteins/prepped" />
+        <property name="fasta.includes"         value="*.fa*"/>
+    </source>
+
+    <source name="c_remanei-protein-fasta" type="fasta">
+        <property name="fasta.taxonId"          value="&c_remanei_taxon_id;"/>
+        <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
+        <property name="fasta.classAttribute"   value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"   value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"     value="WormBase C. remanei protein sequence (Fasta)"/>
+        <property name="fasta.sequenceType"     value="protein"/>
+        <property name="src.data.dir"           location="&datadir;/fasta/c_remanei/proteins/prepped" />
+        <property name="fasta.includes"         value="*.fa*"/>
+    </source>
+
+    <source name="p_pacificus-protein-fasta" type="fasta">
+        <property name="fasta.taxonId"          value="&p_pacificus_taxon_id;"/>
+        <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
+        <property name="fasta.classAttribute"   value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"   value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"     value="WormBase P. pacificus protein sequence (Fasta)"/>
+        <property name="fasta.sequenceType"     value="protein"/>
+        <property name="src.data.dir"           location="&datadir;/fasta/p_pacificus/proteins/prepped" />
+        <property name="fasta.includes"         value="*.fa*"/>
+    </source>
+
+    <source name="s_ratti-protein-fasta" type="fasta">
+        <property name="fasta.taxonId"          value="&s_ratti_taxon_id;"/>
+        <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
+        <property name="fasta.classAttribute"   value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"   value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"     value="WormBase S. ratti protein sequence (Fasta)"/>
+        <property name="fasta.sequenceType"     value="protein"/>
+        <property name="src.data.dir"           location="&datadir;/fasta/s_ratti/proteins/prepped" />
+        <property name="fasta.includes"         value="*.fa*"/>
+    </source>
+
+    <source name="t_muris-protein-fasta" type="fasta">
+        <property name="fasta.taxonId"          value="&t_muris_taxon_id;"/>
+        <property name="fasta.className"        value="org.intermine.model.bio.Protein"/>
+        <property name="fasta.classAttribute"   value="primaryIdentifier"/>
+        <property name="fasta.dataSourceName"   value="WormBase FTP"/>
+        <property name="fasta.dataSetTitle"     value="WormBase T. muris protein sequence (Fasta)"/>
+        <property name="fasta.sequenceType"     value="protein"/>
+        <property name="src.data.dir"           location="&datadir;/fasta/t_muris/proteins/prepped" />
+        <property name="fasta.includes"         value="*.fa*"/>
+    </source>
+
+    <!-- ============================================================ -->
+    <!-- WormBase AceDB sources (continued)                           -->
+    <!-- ============================================================ -->
+
+    <source name="wb-acedb-variation" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/variation/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/variation/mapping/variation_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Allele"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/variation/wormbase-acedb-variation-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Variation)"/>
+    </source>
+
+    <source name="wb-acedb-gene" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/gene/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/gene/mapping/gene_mapping.properties"/>
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Gene"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/gene/wormbase-acedb-gene-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Gene)"/>
+    </source>
+
+    <source name="wb-acedb-transcript" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/transcript/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/transcript/mapping/transcript_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Transcript"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/transcript/wormbase-acedb-transcript-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Transcript)"/>
+    </source>
+
+    <source name="wb-acedb-cds" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/cds/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/cds/mapping/cds_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="CDS"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/cds/wormbase-acedb-cds-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (CDS)"/>
+    </source>
+
+    <source name="wb-acedb-interaction" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/interaction/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/interaction/mapping/interaction_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Interaction"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/interaction/wormbase-acedb-interaction-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Interaction)"/>
+    </source>
+
+    <source name="wb-acedb-phenotype" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/phenotype/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/phenotype/mapping/phenotype_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Phenotype"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/phenotype/wormbase-acedb-phenotype-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Phenotype)"/>
+    </source>
+
+    <source name="wb-acedb-expr_pattern" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/expr_pattern/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/expr_pattern/mapping/expr_pattern_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="ExpressionPattern"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/expr_pattern/wormbase-acedb-expr_pattern-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Expression Pattern)"/>
+    </source>
+
+    <source name="wb-acedb-anatomy_term" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/anatomy_term/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/anatomy_term/mapping/anatomy_term_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="AnatomyTerm"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/anatomy_term/wormbase-acedb-anatomy_term-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Anatomy Term)"/>
+    </source>
+
+    <source name="wb-acedb-life_stage" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/life_stage/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/life_stage/mapping/life_stage_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="LifeStage"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/life_stage/wormbase-acedb-life_stage-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Life Stage)"/>
+    </source>
+
+    <source name="wb-acedb-expr_cluster" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/expr_cluster/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/expr_cluster/mapping/expr_cluster_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="ExpressionCluster"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/expr_cluster/wormbase-acedb-expr_cluster-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Expression Cluster)"/>
+    </source>
+
+    <source name="wb-acedb-protein" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/protein/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/protein/mapping/protein_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Protein"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/protein/wormbase-acedb-protein-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Protein)"/>
+    </source>
+
+    <source name="wb-acedb-gene-class" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/gene_class/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/gene_class/mapping/gene_class_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="GeneClass"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/gene_class/wormbase-acedb-gene_class-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Gene Class)"/>
+    </source>
+
+    <source name="wb-acedb-RNAi" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/RNAi/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/RNAi/mapping/RNAi_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="RNAi"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/RNAi/wormbase-acedb-RNAi-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (RNAi)"/>
+    </source>
+
+    <source name="wb-acedb-molecule" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/molecule/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/molecule/mapping/molecule_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Molecule"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/molecule/wormbase-acedb-molecule-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Molecule)"/>
+    </source>
+
+    <source name="wb-acedb-strain" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/strain/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/strain/mapping/strain_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Strain"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/strain/wormbase-acedb-strain-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Strain)"/>
+    </source>
+
+    <source name="wb-acedb-operon" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/operon/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/operon/mapping/operon_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Operon"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/operon/wormbase-acedb-operon-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Operon)"/>
+    </source>
+
+    <source name="wb-acedb-transgene" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/transgene/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/transgene/mapping/transgene_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Transgene"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/transgene/wormbase-acedb-transgene-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Transgene)"/>
+    </source>
+
+    <source name="wb-acedb-construct" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/construct/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/construct/mapping/construct_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Construct"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/construct/wormbase-acedb-construct-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Construct)"/>
+    </source>
+
+    <source name="wb-acedb-disease_model_annotation" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/disease_model_annotation/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/disease_model_annotation/mapping/disease_model_annotation_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="DiseaseModelAnnotation"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/disease_model_annotation/wormbase-acedb-disease_model_annotation-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Disease Model Annotation)"/>
+    </source>
+
+    <source name="wb-acedb-so_term" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/so_term/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/so_term/mapping/so_term_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="WBSOterm"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/so_term/wormbase-acedb-so_term-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (SO term)"/>
+    </source>
+
+    <source name="wb-acedb-wbprocess" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/wbprocess/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/wbprocess/mapping/wbprocess_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="WBProcess"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/wbprocess/wormbase-acedb-wbprocess-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (WBProcess)"/>
+    </source>
+
+    <source name="wb-acedb-publication" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/publication/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/publication/mapping/publication_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Publication"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/publication/wormbase-acedb-publication-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Publication)"/>
+    </source>
+
+    <source name="wb-acedb-person" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/person/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/person/mapping/person_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Person"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/person/wormbase-acedb-person-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Person)"/>
+    </source>
+
+    <source name="wb-acedb-antibody" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/antibody/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/antibody/mapping/antibody_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Antibody"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/antibody/wormbase-acedb-antibody-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Antibody)"/>
+    </source>
+
+    <source name="wb-acedb-rearrangement" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/rearrangement/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/rearrangement/mapping/rearrangement_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="Rearrangement"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/rearrangement/wormbase-acedb-rearrangement-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Rearrangement)"/>
+    </source>
+
+    <source name="wb-acedb-homology_group" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/homology_group/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/homology_group/mapping/homology_group_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="HomologyGroup"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/homology_group/wormbase-acedb-homology_group-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Homology Group)"/>
+    </source>
+
+    <source name="wb-acedb-feature" type="wormbase-acedb" dump="true">
+        <property name="src.data.dir" location="&datadir;/wormbase-acedb/feature/XML" />
+        <property name="mapping.file" value="&datadir;/wormbase-acedb/feature/mapping/feature_mapping.properties" />
+        <property name="key.file" value="../wormmine-bio-sources/wormbase-acedb/src/main/resources/wormbase-acedb_keys.properties" />
+        <property name="source.class" value="SequenceFeature"/>
+        <property name="rejects.file" value="&datadir;/wormbase-acedb/feature/wormbase-acedb-feature-rejects.xml"/>
+        <property name="data.set" value="AceDB XML (Sequence Feature)"/>
+    </source>
+
+    <!-- ============================================================ -->
+    <!-- Homology / orthology                                         -->
+    <!-- ============================================================ -->
+
+    <source name="panther" type="panther" dump="false">
+        <property name="src.data.dir" location="&datadir;/panther"/>
+        <property name="panther.organisms" value="6239"/>
+        <property name="panther.homologues" value="10090 9606 7955 7227 4932 10116 6239 4932"/>
+    </source>
+
+<!--    <source name="homologene" type="homologene">
+        <property name="src.data.dir" location="&datadir;/homologene"/>
+        <property name="homologene.organisms" value="10090 9606 7955 7227 4932 10116 6239 4932"/>
+    </source> -->
+
+<!--    <source name="ensembl-compara-human" type="ensembl-compara">
+        <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
+        <property name="ensemblcompara.organisms" value="6239"/>
+        <property name="ensemblcompara.homologues" value="9606"/>
+    </source>
 
     <source name="ensembl-compara-zebra" type="ensembl-compara">
-         <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
-         <property name="ensemblcompara.organisms" value="6239"/>
-         <property name="ensemblcompara.homologues" value="7955"/>
-     </source>
+        <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
+        <property name="ensemblcompara.organisms" value="6239"/>
+        <property name="ensemblcompara.homologues" value="7955"/>
+    </source>
 
-      <source name="ensembl-compara-mouse" type="ensembl-compara">
-         <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
-         <property name="ensemblcompara.organisms" value="6239"/>
-         <property name="ensemblcompara.homologues" value="10090"/>
-     </source>
+    <source name="ensembl-compara-mouse" type="ensembl-compara">
+        <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
+        <property name="ensemblcompara.organisms" value="6239"/>
+        <property name="ensemblcompara.homologues" value="10090"/>
+    </source>
 
-	 <source name="ensembl-compara-drosophila" type="ensembl-compara">
-         <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
-         <property name="ensemblcompara.organisms" value="6239"/>
-         <property name="ensemblcompara.homologues" value="7227"/>
-     </source>
+    <source name="ensembl-compara-drosophila" type="ensembl-compara">
+        <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
+        <property name="ensemblcompara.organisms" value="6239"/>
+        <property name="ensemblcompara.homologues" value="7227"/>
+    </source>
 
-	<source name="ensembl-compara-rat" type="ensembl-compara">
-         <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
-         <property name="ensemblcompara.organisms" value="6239"/>
-         <property name="ensemblcompara.homologues" value="10116"/>
-     </source>
+    <source name="ensembl-compara-rat" type="ensembl-compara">
+        <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
+        <property name="ensemblcompara.organisms" value="6239"/>
+        <property name="ensemblcompara.homologues" value="10116"/>
+    </source>
 
-	<source name="ensembl-compara-yeast" type="ensembl-compara">
-         <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
-         <property name="ensemblcompara.organisms" value="6239"/>
-         <property name="ensemblcompara.homologues" value="4932"/>
-     </source>
--->
+    <source name="ensembl-compara-yeast" type="ensembl-compara">
+        <property name="src.data.dir" location="&datadir;/ensembl/compara"/>
+        <property name="ensemblcompara.organisms" value="6239"/>
+        <property name="ensemblcompara.homologues" value="4932"/>
+    </source> -->
 
-	<source name="entrez-organism" type="entrez-organism">
+    <source name="entrez-organism" type="entrez-organism">
         <property name="src.data.file" location="&datadir;/entrez-organism/organisms.xml"/>
     </source>
 
   </sources>
 
-<post-processing>
+  <post-processing>
+    <post-process name="create-chromosome-locations-and-lengths"/>
+    <post-process name="transfer-sequences"/>
+    <post-process name="do-sources"/>
+    <post-process name="make-spanning-locations"/>
+    <post-process name="create-intergenic-region-features"/>
+    <post-process name="create-gene-protein-links"/>
 
-	<post-process name="create-chromosome-locations-and-lengths"/>
-	<post-process name="transfer-sequences"/>
-	<post-process name="do-sources"/>
-	<post-process name="make-spanning-locations"/>
-	<post-process name="create-intergenic-region-features"/>
-	
-
-	<!-- Webapp post-processes -->
-	<post-process name="create-search-index"/>
-	<post-process name="summarise-objectstore"/>
-	<post-process name="create-autocomplete-index"/>
-	<post-process name="create-attribute-indexes"/>
-
+    <!-- Webapp post-processes -->
+    <post-process name="create-search-index"/>
+    <post-process name="summarise-objectstore"/>
+    <post-process name="create-autocomplete-index"/>
+    <post-process name="create-attribute-indexes"/>
   </post-processing>
 
 </project>
